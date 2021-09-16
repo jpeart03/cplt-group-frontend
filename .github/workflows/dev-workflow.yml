@@ -1,0 +1,24 @@
+# dev-workflow.yml
+name: CI Dev Workflow
+
+on:
+  push:
+    branches: [development]
+  pull_request:
+    branches: [development]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Node
+        uses: actions/setup-node@v2.4.0
+        with:
+          node-version: lts/*
+
+      - name: Install deps
+        run: npm ci
