@@ -1,8 +1,8 @@
 import { render, screen } from "@testing-library/react";
 import App from "./App";
 
-test("renders learn react link", () => {
+test("renders app layout", () => {
   render(<App />);
-  const cardTitle = screen.getByText(/Example react-bootstrap card/i);
-  expect(cardTitle).toBeInTheDocument();
+  const navTitle = screen.getByText(/Appreciation/i);
+  expect(navTitle).toBeInTheDocument();
 });
