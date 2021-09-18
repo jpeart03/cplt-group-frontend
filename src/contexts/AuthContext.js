@@ -18,7 +18,11 @@ export const AuthProvider = ({ children }) => {
     currentUser,
     login,
     logout,
+    register
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
+
+
+// const { authLoading, currentUser, login, logout, register} = useAuth();

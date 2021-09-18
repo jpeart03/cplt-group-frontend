@@ -1,4 +1,5 @@
 import {Button } from "react-bootstrap"
+import { Link } from "react-router-dom"
 
 
 const SendMessageButton = () => {
@@ -9,7 +10,7 @@ const SendMessageButton = () => {
 
   return (
     <div>
-      <Button onClick={handleSendMessage}>Send A Message</Button>
+      <Button><Link to={'/newmessage'} style={{color:"white"}}>Send A Message</Link></Button>
     </div>
   )
 }
