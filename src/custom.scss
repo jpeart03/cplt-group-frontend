@@ -1,4 +1,8 @@
 // override default bootstrap sass variables here...
-
 // import bootstrap and its default variables
-@import '~bootstrap/scss/bootstrap.scss'
+@import "~bootstrap/scss/bootstrap.scss";
+
+html,
+body {
+  height: 100%;
+}
