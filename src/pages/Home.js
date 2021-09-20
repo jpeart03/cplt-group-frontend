@@ -21,10 +21,10 @@ const Home = () => {
       </section>
       <section className="section section-data">
         <Row>
-          <Col lg={6}>
-            <div className="graphic">TODO: GRAPHIC HERE</div>
+          <Col lg={6} className="graphic">
+            <div>TODO: GRAPHIC HERE</div>
           </Col>
-          <Col lg={6}>
+          <Col lg={6} className="text">
             <h2>About the data</h2>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus

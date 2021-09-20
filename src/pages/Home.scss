@@ -32,5 +32,16 @@ $dark-gray: #9e9e9e;
       line-height: 20rem;
       height: 20rem;
     }
+    .text {
+      margin-top: 2rem;
+    }
+  }
+}
+
+@media (min-width: 992px) {
+  .section-data {
+    .text {
+      margin-top: 0;
+    }
   }
 }
