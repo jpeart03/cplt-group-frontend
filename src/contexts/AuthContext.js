@@ -4,6 +4,7 @@ import axios from "axios";
 const storageKey = "userToken";
 const apiUrl = process.env.REACT_APP_API_URL;
 const AuthContext = React.createContext();
+
 export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
@@ -11,8 +12,7 @@ export const AuthProvider = ({ children }) => {
   const [authToken, setAuthToken] = useState();
   const [currentUser, setCurrentUser] = useState();
 
-  const checkStorageToken = () => {
-    console.log("checkStorageToken fired!");
+  const getStorageToken = () => {
     const tokenString = localStorage.getItem(storageKey)
       ? `Token ${localStorage.getItem(storageKey)}`
       : null;
@@ -21,8 +21,9 @@ export const AuthProvider = ({ children }) => {
 
   // Adding useEffect to grab token from localstorage & set AuthProvider state
   useEffect(() => {
-    checkStorageToken();
+    getStorageToken();
     const getUserData = async () => {
+      setAuthLoading(true);
       if (authToken) {
         const { data } = await axios.get(`${apiUrl}/users/auth/user/`, {
           headers: {
@@ -32,6 +33,7 @@ export const AuthProvider = ({ children }) => {
         // TODO check for successful response... handle errors.
         setCurrentUser(data);
       }
+      setAuthLoading(false);
     };
     getUserData();
   }, [authToken]);
@@ -43,7 +45,8 @@ export const AuthProvider = ({ children }) => {
    * @param {string} password1
    * @param {string} password2
    */
-  const register = async (username, email, password1, password2) => {
+  const register = (username, email, password1, password2) => {
+    setAuthLoading(true);
     axios
       .post(`${apiUrl}/users/auth/register/`, {
         username: username,
@@ -57,6 +60,9 @@ export const AuthProvider = ({ children }) => {
       })
       .catch((error) => {
         console.log(error);
+      })
+      .finally(() => {
+        setAuthLoading(false);
       });
   };
 
@@ -65,8 +71,9 @@ export const AuthProvider = ({ children }) => {
    * @param {string} email user's email
    * @param {string} password user's password
    */
-  const login = async (email, password) => {
-    await axios
+  const login = (email, password) => {
+    setAuthLoading(true);
+    axios
       .post(`${apiUrl}/users/auth/login/`, {
         email: email,
         password: password,
@@ -77,15 +84,19 @@ export const AuthProvider = ({ children }) => {
       })
       .catch((error) => {
         console.log(error);
+      })
+      .finally(() => {
+        setAuthLoading(false);
       });
   };
 
   /**
    * Function to log user out
    */
-  const logout = async () => {
+  const logout = () => {
     if (authToken) {
-      await axios
+      setAuthLoading(true);
+      axios
         .post(`${apiUrl}/users/auth/logout/`, {
           headers: {
             Authorization: authToken,
@@ -95,6 +106,12 @@ export const AuthProvider = ({ children }) => {
           localStorage.removeItem(storageKey);
           setAuthToken();
           setCurrentUser();
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+        .finally(() => {
+          setAuthLoading(false);
         });
     }
   };

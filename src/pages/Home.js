@@ -1,9 +1,9 @@
-import { Button, Row, Col } from "react-bootstrap";
+import { Button, Row, Col, Spinner } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
 import "./Home.scss";
 
 const Home = () => {
-  const { register, login, logout, currentUser } = useAuth();
+  const { register, login, logout, currentUser, authLoading } = useAuth();
 
   return (
     <>
@@ -11,6 +11,11 @@ const Home = () => {
         <div>
           <h1>Appreciation App</h1>
           <p>{currentUser && currentUser.email}</p>
+          {authLoading && (
+            <Spinner animation="border" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </Spinner>
+          )}
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus eu
             varius est. Nunc libero urna, tincidunt eget enim quis, sollicitudin
@@ -19,8 +24,8 @@ const Home = () => {
           </p>
           <Button
             variant="primary"
-            // onClick={() => login("Test1@test.com", "Test123!")}
-            onClick={() => logout()}
+            onClick={() => login("Test1@test.com", "Test123!")}
+            // onClick={() => logout()}
           >
             Sign Up!
           </Button>
