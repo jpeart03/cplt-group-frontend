@@ -1,5 +1,6 @@
-import { Button, Row, Col, Spinner } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
+import LoadingButton from "../components/LoadingButton/LoadingButton";
 import "./Home.scss";
 
 const Home = () => {
@@ -11,24 +12,18 @@ const Home = () => {
         <div>
           <h1>Appreciation App</h1>
           <p>{currentUser && currentUser.email}</p>
-          {authLoading && (
-            <Spinner animation="border" role="status">
-              <span className="visually-hidden">Loading...</span>
-            </Spinner>
-          )}
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus eu
             varius est. Nunc libero urna, tincidunt eget enim quis, sollicitudin
             imperdiet eros. Morbi malesuada non ante ut eleifend. Suspendisse
             ultrices faucibus magna eget dictum. Aliquam a mi tellus.
           </p>
-          <Button
+          <LoadingButton
             variant="primary"
+            text="TEST BUTTON"
             onClick={() => login("Test1@test.com", "Test123!")}
-            // onClick={() => logout()}
-          >
-            Sign Up!
-          </Button>
+            isLoading={authLoading}
+          />
         </div>
       </section>
       <section className="section section-demo">
