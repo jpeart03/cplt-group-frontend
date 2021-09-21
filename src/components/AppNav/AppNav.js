@@ -1,6 +1,6 @@
 import { Container, Navbar } from "react-bootstrap";
-import LoadingButton from "../components/LoadingButton/LoadingButton";
-import { useAuth } from "../contexts/AuthContext";
+import LoadingButton from "../LoadingButton/LoadingButton";
+import { useAuth } from "../../contexts/AuthContext";
 const AppNav = () => {
   const { currentUser, authLoading, login, logout } = useAuth();
 
