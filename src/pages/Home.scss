@@ -1,0 +1,49 @@
+$dark-gray: #adb5bd;
+.section {
+  margin: 5rem 0;
+  &:not(:first-of-type) {
+    margin-bottom: 10rem;
+  }
+  &-hero {
+    max-width: 50rem;
+  }
+  &-demo {
+    position: relative;
+    height: 20rem;
+    background-color: $dark-gray;
+    color: white;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    &:before {
+      content: "";
+      background-color: $dark-gray;
+      position: absolute;
+      height: 2rem;
+      width: 2rem;
+      bottom: 0;
+      right: 0;
+      transform: translate(-100%, 50%) rotate(45deg);
+    }
+  }
+  &-data {
+    .graphic {
+      background-color: $dark-gray;
+      color: white;
+      text-align: center;
+      line-height: 20rem;
+      border-radius: 0.5rem;
+      height: 20rem;
+    }
+    .text {
+      margin-top: 2rem;
+    }
+  }
+}
+
+@media (min-width: 992px) {
+  .section-data {
+    .text {
+      margin-top: 0;
+    }
+  }
+}
