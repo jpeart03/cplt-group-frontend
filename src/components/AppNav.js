@@ -1,7 +1,7 @@
 import { Container, Navbar } from "react-bootstrap";
 const AppNav = () => {
   return (
-    <Navbar bg="light" variant="light" expand="lg">
+    <Navbar bg="light" variant="light" expand="lg" sticky="top">
       <Container>
         <Navbar.Brand>Appreciation</Navbar.Brand>
         <Navbar.Toggle />

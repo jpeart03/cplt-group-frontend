@@ -5,4 +5,21 @@
 html,
 body {
   height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  position: relative;
+  min-height: 100%;
+  padding-bottom: 7rem;
+  background-image: url("/images/layered-waves.svg");
+  background-repeat: no-repeat;
+  background-position-y: calc(100% - 7rem);
+}
+
+@media (min-width: 992px) {
+  #root {
+    background-size: contain;
+  }
 }
