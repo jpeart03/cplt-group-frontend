@@ -1,5 +1,6 @@
 import { Card, Form, Button } from "react-bootstrap";
 import { useState } from "react";
+import { useAuth } from "../../contexts/AuthContext";
 
 
 const RegistrationForm = () => {
@@ -11,6 +12,12 @@ const RegistrationForm = () => {
   const [emailValue, setEmailValue] = useState();
   const [phoneNumberValue, setPhoneNumberValue] = useState();
 
+  const { authLoading,
+    currentUser,
+    login,
+    logout,
+    register,} = useAuth();
+
   const handelChangeValue = (e, setStateFunction) => {
     // do I preventDefault for a func that isn't async?
     // e.preventDefault()
@@ -21,6 +28,8 @@ const RegistrationForm = () => {
   const handleFormSubmit = (e) =>{
     e.preventDefault()
     console.log("SUBMIT BUTTON CLICKED Register")
+    register(usernameValue, emailValue, passwordValue, password2Value, firstNameValue, lastNameValue, phoneNumberValue)
+
   }
 
 

@@ -4,7 +4,10 @@ import { Redirect } from "react-router";
 
 const SignedInAs = () => {
   
-  const { authLoading, currentUser, login, logout, register} = useAuth();
+  // const { authLoading, currentUser, login, logout, register} = useAuth();
+
+  const dummyUser = {"pk":1,"username":"pgrov02","email":"pj@appappmail.com","first_name":"Penny","last_name":"Grover"}
+  let currentUser = dummyUser
 
 
   if (currentUser) {

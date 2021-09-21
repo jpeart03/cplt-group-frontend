@@ -1,13 +1,14 @@
-const fetchAllUsersRecipients = async (userPK)  =>{
+const fetchRecipientsByUser = async (authToken)  =>{
+  console.log("in fetchRecByUser, authToken : ", authToken)
   let options = {
     method: 'GET', 
     headers: {
       'Content-Type': 'application/json',
-      // 'Authorization': `Token ${token}`  
+      'Authorization': `${authToken}`  
     },
     }
   try{
-    let response = await fetch(`http://127.0.0.1:8000/users/${userPK}/recipients`, options)
+    let response = await fetch(`http://127.0.0.1:8000/users/recipients`, options)
     let data = await response.json()
     console.log("Response in fetchUsers: ", data)
     return data
@@ -16,23 +17,25 @@ const fetchAllUsersRecipients = async (userPK)  =>{
   }
 }
 
-const fetchRecipientByPK = async (userPK, recipientPK)  =>{
+const fetchRecipientByID = async (recipientID, authToken)  =>{
   let options = {
     method: 'GET', 
     headers: {
       'Content-Type': 'application/json',
-      // 'Authorization': `Token ${token}`  
+      'Authorization': `${authToken}`  
     },
     }
   try{
-    let response = await fetch(`http://127.0.0.1:8000/users/${userPK}/recipients/${recipientPK}/`, options)
+    console.log("enter fetchRecipientByID")
+    console.log("enter fetchRecipientByID", authToken, recipientID)
+    let response = await fetch(`http://127.0.0.1:8000/users/recipients/${recipientID}/`, options)
     let data = await response.json()
-    console.log("Response in fetchUsers: ", data)
+    console.log("Response in fetchRecipientByID: ", data)
     return data
   } catch (error) {
-    console.log(error)
+    console.log("fetchRecbyIDerror:", error)
   }
 }
 
-export {fetchAllUsersRecipients, 
-        fetchRecipientByPK}
+export {fetchRecipientsByUser, 
+        fetchRecipientByID}

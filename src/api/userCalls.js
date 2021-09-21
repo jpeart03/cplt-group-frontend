@@ -1,13 +1,14 @@
-const fetchAllUsers = async ()  =>{
+const fetchAllUsers = async (token)  =>{
   let options = {
     method: 'GET', 
     headers: {
       'Content-Type': 'application/json',
-      // 'Authorization': `Token ${token}`  
+      'Authorization': `${token}`  
     },
     }
   try{
-    let response = await fetch(`http://127.0.0.1:8000/users/`, options)
+    console.log("FETCHALL ENTER TRY")
+    let response = await fetch('http://127.0.0.1:8000/users/recipients', options)
     let data = await response.json()
     console.log("Response in fetchUsers: ", data)
     return data

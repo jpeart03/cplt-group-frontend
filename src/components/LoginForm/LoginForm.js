@@ -1,10 +1,13 @@
 import { useState } from "react";
 import { Form, Button } from "react-bootstrap";
+import { useAuth } from "../../contexts/AuthContext";
 
 
 const LoginForm = () => {
   const [usernameValue, setUsernameValue] = useState();
   const [passwordValue, setPasswordValue] = useState();
+
+  const { login } = useAuth();
 
   const handelChangeValue = (e, setStateFunction) => {
     // do I preventDefault for a func that isn't async?
@@ -16,6 +19,7 @@ const LoginForm = () => {
   const handleFormSubmit = (e) =>{
     e.preventDefault()
     console.log("SUBMIT BUTTON CLICKED LOGIN")
+    login(usernameValue, passwordValue)
   }
 
   return(
