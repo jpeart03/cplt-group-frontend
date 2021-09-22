@@ -27,14 +27,12 @@ $dark-gray: #adb5bd;
   }
   &-data {
     .graphic {
-      background-color: $dark-gray;
-      color: white;
-      text-align: center;
-      line-height: 20rem;
-      border-radius: 0.5rem;
-      height: 20rem;
     }
     .text {
+      display: flex;
+      flex-wrap: wrap;
+      align-content: center;
+      justify-content: flex-start;
       margin-top: 2rem;
     }
   }

@@ -2,6 +2,7 @@ import { Row, Col } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
 import LoadingButton from "../components/LoadingButton/LoadingButton";
 import "./Home.scss";
+import HomeChart from "../components/HomeChart/HomeChart";
 
 const Home = () => {
   const { register, login, logout, currentUser, authLoading } = useAuth();
@@ -11,7 +12,6 @@ const Home = () => {
       <section className="section section-hero">
         <div>
           <h1>Appreciation App</h1>
-          <p>{currentUser && currentUser.email}</p>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus eu
             varius est. Nunc libero urna, tincidunt eget enim quis, sollicitudin
@@ -32,7 +32,7 @@ const Home = () => {
       <section className="section section-data">
         <Row>
           <Col lg={6} className="graphic">
-            <div>TODO: GRAPHIC HERE</div>
+            <HomeChart />
           </Col>
           <Col lg={6} className="text">
             <h2>About the data</h2>
