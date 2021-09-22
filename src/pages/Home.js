@@ -3,6 +3,7 @@ import { useAuth } from "../contexts/AuthContext";
 import LoadingButton from "../components/LoadingButton/LoadingButton";
 import "./Home.scss";
 import HomeChart from "../components/HomeChart/HomeChart";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const { register, login, logout, currentUser, authLoading } = useAuth();
@@ -18,11 +19,14 @@ const Home = () => {
             imperdiet eros. Morbi malesuada non ante ut eleifend. Suspendisse
             ultrices faucibus magna eget dictum. Aliquam a mi tellus.
           </p>
+          {/* <Link to="/register" className="btn btn-primary">
+            Sign up
+          </Link> */}
           <LoadingButton
-            variant="primary"
-            text="TEST BUTTON"
-            onClick={() => login("Test1@test.com", "Test123!")}
+            text="Login"
+            onClick={() => login("Test2@test.com", "Test123!")}
             isLoading={authLoading}
+            variant="primary"
           />
         </div>
       </section>
