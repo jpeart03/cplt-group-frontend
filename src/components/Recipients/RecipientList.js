@@ -1,4 +1,5 @@
 import { Button } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { useAuth } from '../../contexts/AuthContext'
 
@@ -24,12 +25,12 @@ const RecipientsList = () => {
         {recipients.map( recipient => {
         return (
           <div>
-            <p>{recipient.first_name} {recipient.last_name} <Button>Write {recipient.first_name} a new Message</Button></p>
+            <p>{recipient.first_name} {recipient.last_name} <Button variant="info"><Link to="/newmessage">Write {recipient.first_name} a new Message</Link></Button></p>
           </div>
         )
       }
       )}
-      <Button> Create a New Recipient</Button>
+      <Button variant="info"><Link to="/recipients"> Edit/Create Recipient</Link></Button>
       </div>
     )
   }

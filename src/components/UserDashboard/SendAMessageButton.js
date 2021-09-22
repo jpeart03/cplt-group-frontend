@@ -10,7 +10,7 @@ const SendMessageButton = () => {
 
   return (
     <div>
-      <Button><Link to={'/newmessage'} style={{color:"white"}}>Send A Message</Link></Button>
+      <Button variant="info"><Link to='/newmessage' >Send A Message</Link></Button>
     </div>
   )
 }

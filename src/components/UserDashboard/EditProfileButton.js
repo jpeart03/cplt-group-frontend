@@ -13,7 +13,7 @@ const EditProfileButton = () => {
 
   return (
     <div>
-      <Button><Link style={{color:"white"}} to={'/'}>Edit Profile</Link></Button>
+      <Button variant="info"><Link to={'/'}>Edit Profile</Link></Button>
     </div>
   )
 }

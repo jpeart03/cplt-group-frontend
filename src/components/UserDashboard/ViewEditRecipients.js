@@ -10,7 +10,7 @@ const ViewEditRecipientsButton = () => {
 
   return (
     <div>
-      <Button><Link to={'/recipients'} style={{color:"white"}}>View/Edit Recipients</Link></Button>
+      <Button variant="info"><Link to={'/recipients'} >View/Edit Recipients</Link></Button>
     </div>
   )
 }
