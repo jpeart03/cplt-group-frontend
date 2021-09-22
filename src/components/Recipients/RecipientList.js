@@ -1,24 +1,21 @@
 import { Button } from 'react-bootstrap'
 import { useState, useEffect } from 'react'
+import { useAuth } from '../../contexts/AuthContext'
+
 import { fetchRecipientsByUser } from "../../api/recipientCalls";
-import { fetchMessagesByUser } from "../../api/messageCalls";
-import { useAuth } from '../../contexts/AuthContext';
-
-const UserRecipients = () => {
+import { fetchMessagesByUser } from "../../api/messageCalls"
+const RecipientsList = () => {
   const [recipients, setRecipients] = useState();
-  // const {authToken, currentUser} = useAuth();
-
-  let authToken = 'Token 797a86821008410ca65c556f43de38ef7233514b'
+  const { authToken } = useAuth();
   
-  
-  const getUserRecords = async (authToken) => {
-    let userRecipients = await fetchRecipientsByUser(authToken)
-    setRecipients(userRecipients)
-  }
-
   useEffect( () => {
-    getUserRecords(authToken)
-  }, [])
+    const getUserRecords = async () => {
+      let userRecipients = await fetchRecipientsByUser(authToken)
+      setRecipients(userRecipients)
+    }
+    console.log("useEffect", authToken)
+    getUserRecords()
+  }, [authToken])
 
   if (recipients){
     return (
@@ -46,4 +43,4 @@ const UserRecipients = () => {
   }
 }
 
-export {UserRecipients} 
+export {RecipientsList} 

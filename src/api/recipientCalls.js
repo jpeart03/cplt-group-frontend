@@ -26,11 +26,8 @@ const fetchRecipientByID = async (recipientID, authToken)  =>{
     },
     }
   try{
-    console.log("enter fetchRecipientByID")
-    console.log("enter fetchRecipientByID", authToken, recipientID)
     let response = await fetch(`http://127.0.0.1:8000/users/recipients/${recipientID}/`, options)
     let data = await response.json()
-    console.log("Response in fetchRecipientByID: ", data)
     return data
   } catch (error) {
     console.log("fetchRecbyIDerror:", error)

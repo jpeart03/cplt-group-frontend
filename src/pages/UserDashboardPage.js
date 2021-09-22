@@ -7,20 +7,16 @@ import { useAuth } from "../contexts/AuthContext.js";
 import { fetchAllUsers } from "../api/userCalls.js";
 import { fetchRecipientsByUser } from "../api/recipientCalls";
 import { fetchMessagesByUser } from "../api/messageCalls";
-import { UserRecipients } from "../components/Recipients/RecipientList";
+import { RecipientsList } from "../components/Recipients/RecipientList";
 import { AllUsersList } from "../components/AllUsersList";
 import { UserMessages } from "../components/Messages/MessagetList.js"
 
 
 const UserDashboardPage = () => {
-  // Add this when Jim has Context set up
   const { authLoading, currentUser, login, logout, register, authToken} = useAuth();
   const [allUsers, setAllUsers] = useState();
   const [recipients, setRecipients] = useState();
   const [messages, setMessages] = useState();
-
-  // const userID = currentUser.id
-  const userID = 1
 
   // const getUserRecords = async (userID) => {
   //   let usersList = await fetchAllUsers()
@@ -42,9 +38,8 @@ const UserDashboardPage = () => {
   return (
     <div style={{maxWidth:'75%',  margin:'auto'}}>
       <p>UserDashboardPage Placeholder</p>
-      {/* < AllUsersList users={allUsers}/> */}
       <SignedInAs/>
-      <UserRecipients />
+      <RecipientsList />
       <ActionsSection/>
       <RecentMessagesList/>
     </div>

@@ -3,10 +3,24 @@ import { useEffect, useState } from "react"
 import SelectRecipient from "../components/Messages/SelectRecipient"
 import NewRecipientForm from "../components/Recipients/NewRecipientForm.js"
 import EditRecipientForm from "../components/Recipients/EditRecipient"
+import { useAuth } from '../contexts/AuthContext'
+import { fetchRecipientsByUser } from "../api/recipientCalls";
+
 
 const RecipientsPage = () => {
   const [selectedRecipient, setSelectedRecipient] = useState();
   const [recEmail, setRecEmail] = useState();
+  const [recipients, setRecipients] = useState();
+  const { authToken } = useAuth();
+  
+  useEffect( () => {
+    const getUserRecords = async () => {
+      let userRecipients = await fetchRecipientsByUser(authToken)
+      setRecipients(userRecipients)
+    }
+    console.log("useEffect", authToken)
+    getUserRecords()
+  }, [authToken])
 
   const RecipientInfo = () => {
     if (selectedRecipient) {

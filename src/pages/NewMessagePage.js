@@ -5,7 +5,7 @@ import SelectDeliveryMethod from "../components/Messages/SelectDelivMethod.js";
 import MessageTextBox from "../components/Messages/MessageTextBox.js";
 
 const NewMessagePage = () => {
-  // const { authLoading, currentUser, login, logout, register} = useAuth();
+  const { authToken } = useAuth();
 
   return (
     <div>

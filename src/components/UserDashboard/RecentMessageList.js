@@ -1,28 +1,24 @@
 import RecentMessageDetail from "./RecentMessageDetail";
 import { useState, useEffect } from 'react'
 import { fetchMessagesByUser } from "../../api/messageCalls";
+import { useAuth } from "../../contexts/AuthContext.js"
 
 const RecentMessagesList = () => {
   const [messageArray, setMessageArray] = useState();
-  // const {authToken, currentUser} = useAuth();
+  const { authToken } = useAuth();
+  console.log("RECENT MESSAGES AUTHTOKEN", authToken)
   
   // dummy token
-  let authToken = 'Token 797a86821008410ca65c556f43de38ef7233514b'
-
-  const getUserRecords = async (authToken) => {
-    let userRecipients = await fetchMessagesByUser(authToken)
-    setMessageArray(userRecipients)
-  }
-
-  useEffect( () => {
-    getUserRecords(authToken)
-  }, [])
+  // let authToken = 'Token 797a86821008410ca65c556f43de38ef7233514b'
 
   
-
-
-
-
+  useEffect( () => {
+    const getUserRecords = async ( authToken ) => {
+      let userRecipients = await fetchMessagesByUser(authToken)
+      setMessageArray(userRecipients)
+    }
+    getUserRecords(authToken)
+  }, [authToken])
 
   const Messages = () => {
     if (messageArray){
