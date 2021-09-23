@@ -22,7 +22,13 @@ const AppNav = () => {
         </Navbar>
       )}
 
-      <Navbar bg="light" variant="light" expand="lg" sticky="top">
+      <Navbar
+        bg="light"
+        variant="light"
+        expand="lg"
+        sticky="top"
+        className="nav-shadow"
+      >
         <Container>
           <Navbar.Brand>Appreciation</Navbar.Brand>
           <Navbar.Toggle />

@@ -1,6 +1,6 @@
 import { Row, Col } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
-import LoadingButton from "../components/LoadingButton/LoadingButton";
+import { Link } from "react-router-dom";
 import "./Home.scss";
 import HomeChart from "../components/HomeChart/HomeChart";
 import mobileDemoImg from "../images/mobile-demo.svg";
@@ -12,28 +12,26 @@ const Home = () => {
   return (
     <>
       <section className="section section-hero">
-        <div>
-          <h1>Appreciation App</h1>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus eu
-            varius est. Nunc libero urna, tincidunt eget enim quis, sollicitudin
-            imperdiet eros. Morbi malesuada non ante ut eleifend. Suspendisse
-            ultrices faucibus magna eget dictum. Aliquam a mi tellus.
-          </p>
-          {/* <Link to="/register" className="btn btn-primary">
-            Sign up
-          </Link> */}
-          <LoadingButton
-            text="Login"
-            onClick={() => login("Test2@test.com", "Test123!")}
-            isLoading={authLoading}
-            variant="primary"
-          />
-        </div>
+        <Row>
+          <Col lg={12}>
+            <h1>Appreciation App</h1>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
+              eu varius est. Nunc libero urna, tincidunt eget enim quis,
+              sollicitudin imperdiet eros. Morbi malesuada non ante ut eleifend.
+              Suspendisse ultrices faucibus magna eget dictum. Aliquam a mi
+              tellus. Nunc libero urna, tincidunt eget enim quis, sollicitudin
+              imperdiet eros. Morbi malesuada non ante ut eleifend.
+            </p>
+            <Link to="/register" className="btn btn-primary">
+              Sign up
+            </Link>
+          </Col>
+        </Row>
       </section>
       <section className="section section-demo">
         <Row>
-          <Col lg={4}>
+          <Col lg={6}>
             <h2>How the app works</h2>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
@@ -41,7 +39,7 @@ const Home = () => {
               sollicitudin imperdiet eros. Morbi malesuada non ante ut eleifend.
             </p>
           </Col>
-          <Col lg={8} className="graphic">
+          <Col lg={6} className="graphic">
             <picture>
               <source media="(min-width: 992px)" srcSet={webDemoImg} />
               <source media="(max-width: 993px)" srcSet={mobileDemoImg} />
@@ -55,16 +53,16 @@ const Home = () => {
       </section>
       <section className="section section-data">
         <Row>
-          <Col lg={4} className="text">
+          <Col lg={6} className="chart">
+            <HomeChart />
+          </Col>
+          <Col lg={6} className="text">
             <h2>About the data</h2>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
               eu varius est. Nunc libero urna, tincidunt eget enim quis,
               sollicitudin imperdiet eros. Morbi malesuada non ante ut eleifend.
             </p>
-          </Col>
-          <Col lg={8} className="chart">
-            <HomeChart />
           </Col>
         </Row>
       </section>

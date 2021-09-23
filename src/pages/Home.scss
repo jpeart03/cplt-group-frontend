@@ -1,11 +1,9 @@
-$gray-200: #e9ecef;
 .section {
   margin: 7rem 0;
   &:not(:first-of-type) {
     margin: 10rem 0;
   }
   &-hero {
-    max-width: 50rem;
   }
   &-demo {
     .graphic {

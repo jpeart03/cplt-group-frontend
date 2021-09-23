@@ -6,53 +6,57 @@ import {
   Radar,
   Legend,
   ResponsiveContainer,
+  Tooltip,
 } from "recharts";
 
 const HomeChart = () => {
   const data = [
     {
-      day: "Monday",
+      day: "Mon",
       pos: 120,
       neg: 110,
     },
     {
-      day: "Tuesday",
+      day: "Tue",
       pos: 98,
       neg: 90,
     },
     {
-      day: "Wednesday",
+      day: "Wed",
       pos: 86,
       neg: 70,
     },
     {
-      day: "Thursday",
+      day: "Thu",
       pos: 99,
       neg: 70,
     },
     {
-      day: "Friday",
+      day: "Fri",
       pos: 85,
       neg: 50,
     },
     {
-      day: "Saturday",
+      day: "Sat",
       pos: 65,
       neg: 40,
     },
     {
-      day: "Sunday",
+      day: "Sun",
       pos: 150,
       neg: 70,
     },
   ];
 
   return (
-    <ResponsiveContainer width="100%" height={320}>
-      <RadarChart outerRadius={90} data={data}>
+    <ResponsiveContainer height={500} width="100%">
+      <RadarChart
+        outerRadius="80%"
+        data={data}
+        margin={{ top: 0, right: 10, bottom: 0, left: 10 }}
+      >
         <PolarGrid />
         <PolarAngleAxis dataKey="day" />
-        <PolarRadiusAxis angle={30} domain={[0, 150]} />
         <Radar
           name="Positive"
           dataKey="pos"
@@ -68,6 +72,7 @@ const HomeChart = () => {
           fillOpacity={0.6}
         />
         <Legend />
+        <Tooltip />
       </RadarChart>
     </ResponsiveContainer>
   );
