@@ -16,7 +16,7 @@
       width: 100%;
       display: block;
       margin: 0 auto;
-      max-width: 546px;
+      max-width: 318px;
     }
   }
   &-data {
@@ -31,9 +31,16 @@
 }
 
 @media (min-width: 992px) {
-  .section-data {
-    .text {
-      margin-top: 0;
+  .section {
+    &-data {
+      .text {
+        margin-top: 0;
+      }
+    }
+    &-demo {
+      img {
+        max-width: 546px;
+      }
     }
   }
 }
