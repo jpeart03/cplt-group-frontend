@@ -1,33 +1,26 @@
-$dark-gray: #adb5bd;
+$gray-200: #e9ecef;
 .section {
-  margin: 5rem 0;
+  margin: 7rem 0;
   &:not(:first-of-type) {
-    margin-bottom: 10rem;
+    margin: 10rem 0;
   }
   &-hero {
     max-width: 50rem;
   }
   &-demo {
-    position: relative;
-    height: 20rem;
-    background-color: $dark-gray;
-    color: white;
-    padding: 1rem;
-    border-radius: 0.5rem;
-    &:before {
-      content: "";
-      background-color: $dark-gray;
-      position: absolute;
-      height: 2rem;
-      width: 2rem;
-      bottom: 0;
-      right: 0;
-      transform: translate(-100%, 50%) rotate(45deg);
+    .graphic {
+      background-image: url("/images/chat-bubble.svg");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+    }
+    img {
+      display: block;
+      margin: 0 auto;
+      max-width: 546px;
     }
   }
   &-data {
-    .graphic {
-    }
     .text {
       display: flex;
       flex-wrap: wrap;
