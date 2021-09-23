@@ -1,8 +1,7 @@
 import React from "react";
 import { render, unmountComponentAtNode } from "react-dom";
 import { act } from "react-dom/test-utils";
-import { AuthProvider } from "../../contexts/AuthContext";
-import AppNav from "./AppNav";
+import App from "../App";
 
 let container = null;
 beforeEach(() => {
@@ -20,13 +19,8 @@ afterEach(() => {
 
 it("renders login button", () => {
   act(() => {
-    render(
-      <AuthProvider>
-        <AppNav />
-      </AuthProvider>,
-      container
-    );
+    render(<App />, container);
   });
   // With no currentUser set, should conditionally render "Log in" button.
-  expect(container.textContent).toContain("Log in");
+  expect(container.textContent).toContain("Login");
 });
