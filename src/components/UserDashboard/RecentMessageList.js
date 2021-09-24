@@ -6,7 +6,6 @@ import { useAuth } from "../../contexts/AuthContext.js"
 const RecentMessagesList = () => {
   const [messageArray, setMessageArray] = useState();
   const { authToken } = useAuth();
-  console.log("RECENT MESSAGES AUTHTOKEN", authToken)
   
   // dummy token
   // let authToken = 'Token 797a86821008410ca65c556f43de38ef7233514b'
@@ -15,9 +14,13 @@ const RecentMessagesList = () => {
   useEffect( () => {
     const getUserRecords = async ( authToken ) => {
       let userRecipients = await fetchMessagesByUser(authToken)
+      // console.log("getUserRecord runs from useEffect in RecentMessagesList")
       setMessageArray(userRecipients)
     }
-    getUserRecords(authToken)
+    if(authToken){
+      getUserRecords(authToken)
+    }
+    // else{console.log("useEffect in RecentMessagesList has no token ")}
   }, [authToken])
 
   const Messages = () => {

@@ -18,8 +18,10 @@ const RecipientsPage = () => {
       let userRecipients = await fetchRecipientsByUser(authToken)
       setRecipients(userRecipients)
     }
-    console.log("useEffect", authToken)
-    getUserRecords()
+    // console.log("useEffect", authToken)
+    if(authToken){
+      getUserRecords()
+    }
   }, [authToken])
 
   const RecipientInfo = () => {
@@ -29,7 +31,7 @@ const RecipientsPage = () => {
       setRecEmail(thisRec.email)
       return (
         <div>
-          <p>Name: {thisRec.recname}</p>
+          <p>Name: {thisRec.first_name} {thisRec.last_name}</p>
           <p>Email: {thisRec.email}</p>
           <p>Phone: {thisRec.phone}</p>
         </div>

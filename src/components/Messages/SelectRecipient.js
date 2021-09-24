@@ -15,8 +15,9 @@ const SelectRecipient = ({setRec}) =>{
       let userRecipients = await fetchRecipientsByUser(authToken)
       setRecipients(userRecipients)
     }
-    console.log("useEffect", authToken)
-    getUserRecords()
+    if(authToken){
+      getUserRecords()
+    }
   }, [authToken])
   
   // // Dummy Data
@@ -65,7 +66,7 @@ const SelectRecipient = ({setRec}) =>{
       <Form.Select aria-label="Default select example" 
           onChange={(e) => {
             let recipientSelected = e.target.value
-            console.log("in SelectRecipient: ", recipientSelected)
+            // console.log("in SelectRecipient: ", recipientSelected)
             setMessageRecipient(recipientSelected)
             setRec(recipientSelected)
             }}>
