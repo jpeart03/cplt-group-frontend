@@ -100,7 +100,7 @@ const EditRecipientForm = (props) => {
     
           <Form.Group className="mb-3" controlId="formPhoneNum">
             <Form.Label>Phone Number</Form.Label>
-            <Form.Control type="text" placeholder="Recipient's phone/text number" onChange={(e) => {
+            <Form.Control type="text" placeholder={phone} onChange={(e) => {
           let value = e.target.value
           setPhone(value)
           }}/>

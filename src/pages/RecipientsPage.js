@@ -34,7 +34,6 @@ const RecipientsPage = () => {
     if (selectedRecipient) {
       let thisRec = JSON.parse(selectedRecipient)
       console.log("thisRec: ", thisRec)
-      setRecEmail(thisRec.email)
       return (
         <div>
           <p>Name: {thisRec.first_name} {thisRec.last_name}</p>
@@ -55,7 +54,9 @@ const RecipientsPage = () => {
         <Accordion.Item eventKey="0">
           <Accordion.Header>Create a New Recipient</Accordion.Header>
           <Accordion.Body>
-            <NewRecipientForm/>
+            <NewRecipientForm 
+            setRefreshRecCall={setRefreshRecCall}
+            refreshRecCall= {refreshRecCall}/>
           </Accordion.Body>
         </Accordion.Item>
         <Accordion.Item eventKey="1">
@@ -63,7 +64,9 @@ const RecipientsPage = () => {
           <Accordion.Body>
             <RecipientInfo/>
             <SelectRecipient setRec={setSelectedRecipient} refreshRecCall = {refreshRecCall}/>
-            <EditRecipientForm recEmail={recEmail} selectedRecipient={selectedRecipient} resetRecDropDown={resetRecDropDown}
+            <EditRecipientForm 
+            selectedRecipient={selectedRecipient}
+            resetRecDropDown={resetRecDropDown}
             setSelectedRecipient={setSelectedRecipient}
             refreshRecCall= {refreshRecCall}
             setRefreshRecCall={setRefreshRecCall}/>

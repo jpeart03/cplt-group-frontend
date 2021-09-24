@@ -1,20 +1,32 @@
 import { Form, Button } from "react-bootstrap"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { createNewRecipient } from "../../api/recipientCalls";
 import { useAuth } from "../../contexts/AuthContext";
 
-const NewRecipientForm = () => {
-  const [firstName, setFirstName]= useState();
-  const [lastName, setLastName]= useState();
-  const [relationshipType, setRelationshipType ]= useState();
-  const [email, setEmail]= useState();
-  const [phone, setPhone]= useState();
 
-  const { authToken } = useAuth();
+const NewRecipientForm = (props) => {
+  const [firstName, setFirstName]= useState("Recipient's First Name");
+  const [lastName, setLastName]= useState("Recipient's Last Name"
+  );
+  const [relationshipType, setRelationshipType ]= useState("Personal");
+  const [email, setEmail]= useState("Recipient's email address"
+  );
+  const [phone, setPhone]= useState("Recipient's phone/text number"
+  );
 
+  const { authToken, currentUser } = useAuth();
+
+  useEffect( () =>
+  {
+    setFirstName("Recipient's First Name")
+    setLastName("Recipient's Last Name")
+    setRelationshipType("Personal")
+    setEmail("Recipient's email address")
+    setPhone("Recipient's phone/text number")
+  }, [props.refreshRecCall])
 
   return (
-    <Form method="POST" onSubmit={(e)=> 
+    <Form id="newRecForm" method="POST" onSubmit={(e)=> 
         {e.preventDefault()
           let recipientValues = {
             "first_name": firstName,
@@ -22,13 +34,17 @@ const NewRecipientForm = () => {
             "relationship_type": relationshipType,
             "email": email,
             "phone": phone, 
+            "user": currentUser.pk
           }
           console.log("NewRecForm onsubmit recipientValues: ", recipientValues)
           createNewRecipient(recipientValues, authToken)
+          props.setRefreshRecCall(!props.refreshRecCall)
+          // toast successmessage here
+          document.getElementById("newRecForm").reset();
         }}>
       <Form.Group className="mb-3" controlId="formFirstName">
         <Form.Label>First Name</Form.Label>
-        <Form.Control type="text" placeholder="Recipient's First Name" onChange={(e) => {
+        <Form.Control type="text" placeholder={firstName} onChange={(e) => {
       let value = e.target.value
       setFirstName(value)
       }}/>
@@ -36,7 +52,7 @@ const NewRecipientForm = () => {
 
       <Form.Group className="mb-3" controlId="formLastName">
         <Form.Label>Last Name</Form.Label>
-        <Form.Control type="text" placeholder="Recipient's Last Name" onChange={(e) => {
+        <Form.Control type="text" placeholder={lastName} onChange={(e) => {
       let value = e.target.value
       setLastName(value)
       }} />
@@ -44,7 +60,7 @@ const NewRecipientForm = () => {
 
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Email address</Form.Label>
-        <Form.Control type="email" placeholder="Recipient's email address" onChange={(e) => {
+        <Form.Control type="email" placeholder={email} onChange={(e) => {
       let value = e.target.value
       setEmail(value)
       }}/>
@@ -70,7 +86,7 @@ const NewRecipientForm = () => {
 
       <Form.Group className="mb-3" controlId="formPhoneNum">
         <Form.Label>Phone Number</Form.Label>
-        <Form.Control type="text" placeholder="Recipient's phone/text number" onChange={(e) => {
+        <Form.Control type="text" placeholder={phone} onChange={(e) => {
       let value = e.target.value
       setPhone(value)
       }}/>
