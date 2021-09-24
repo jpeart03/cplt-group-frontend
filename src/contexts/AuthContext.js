@@ -45,7 +45,17 @@ export const AuthProvider = ({ children }) => {
    * @param {string} password1
    * @param {string} password2
    */
-  const register = (username, email, password1, password2) => {
+
+  // username, email, password1, password2, first_name, last_name, phone_number
+  const register = (username, email, password1, password2, first_name, last_name, phone_number) => {
+    console.log("username: ", username,
+      "email: ", email,
+      "password1: ", password1,
+      "password2: ", password2,
+      "first_name: ", first_name,
+      "last_name: ", last_name,
+      "phone_number: ", phone_number)
+      console.log("apiURL...", `${apiUrl}/users/auth/register/`)
     setAuthLoading(true);
     axios
       .post(`${apiUrl}/users/auth/register/`, {
@@ -53,6 +63,9 @@ export const AuthProvider = ({ children }) => {
         email: email,
         password1: password1,
         password2: password2,
+        first_name: first_name,
+        last_name: last_name,
+        phone_number: phone_number
       })
       .then((response) => {
         localStorage.setItem(storageKey, response.data.key);
@@ -72,6 +85,8 @@ export const AuthProvider = ({ children }) => {
    * @param {string} password user's password
    */
   const login = (email, password) => {
+    console.log("login goes with email: ", email, " PASSWORD: ", password, "URL ", `${apiUrl}/users/auth/login/`)
+
     setAuthLoading(true);
     axios
       .post(`${apiUrl}/users/auth/login/`, {
@@ -87,6 +102,7 @@ export const AuthProvider = ({ children }) => {
       })
       .finally(() => {
         setAuthLoading(false);
+
       });
   };
 
@@ -122,7 +138,11 @@ export const AuthProvider = ({ children }) => {
     login,
     logout,
     register,
+    authToken
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
+
+
+// const { authLoading, currentUser, login, logout, register} = useAuth();

@@ -1,7 +1,7 @@
 import { Button, Spinner } from "react-bootstrap";
 import "./LoadingButton.scss";
 
-const LoadingButton = ({ isLoading, text, variant, onClick }) => {
+const LoadingButton = ({ isLoading, type, text, variant, onClick }) => {
   if (isLoading) {
     return (
       <Button variant={variant} disabled>
@@ -18,8 +18,8 @@ const LoadingButton = ({ isLoading, text, variant, onClick }) => {
     );
   } else {
     return (
-      <Button variant={variant} onClick={onClick}>
-        {text}
+      <Button variant={variant} onClick={onClick} type={type}>
+        {text} 
       </Button>
     );
   }

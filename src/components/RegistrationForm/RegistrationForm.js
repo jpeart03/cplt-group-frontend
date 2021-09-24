@@ -1,6 +1,8 @@
 import { Card, Form, Button } from "react-bootstrap";
 import { useState } from "react";
-
+import { useAuth } from "../../contexts/AuthContext";
+import { Redirect, useHistory } from "react-router-dom";
+import LoadingButton from "../LoadingButton/LoadingButton.js"
 
 const RegistrationForm = () => {
   const [usernameValue, setUsernameValue] = useState();
@@ -10,6 +12,14 @@ const RegistrationForm = () => {
   const [lastNameValue, setLastNameValue] = useState();
   const [emailValue, setEmailValue] = useState();
   const [phoneNumberValue, setPhoneNumberValue] = useState();
+  const [submitted, setSubmitted] = useState(false);
+
+  const { authLoading,
+    currentUser,
+    login,
+    logout,
+    register,} = useAuth();
+  let history = useHistory();
 
   const handelChangeValue = (e, setStateFunction) => {
     // do I preventDefault for a func that isn't async?
@@ -21,18 +31,22 @@ const RegistrationForm = () => {
   const handleFormSubmit = (e) =>{
     e.preventDefault()
     console.log("SUBMIT BUTTON CLICKED Register")
-  }
+    register(usernameValue, emailValue, passwordValue, password2Value, firstNameValue, lastNameValue, phoneNumberValue)
+    history.push("/dashboard")
 
+  }
 
   return(
     <div>
         <Form method='POST' onSubmit={(e) => handleFormSubmit(e)}>
           <Form.Group className="mb-3" controlId="regFormUsername">
             <Form.Label>Email address</Form.Label>
-            <Form.Control type="text" placeholder="Choose a Username" onChange={(e) => handelChangeValue(e, setUsernameValue)}/>
-            <Form.Text className="text-muted">
-              We'll never share your email with anyone else.
-            </Form.Text>
+            <Form.Control type="text" placeholder="Choose a Username" onChange={(e) => handelChangeValue(e, setEmailValue)}/>
+          </Form.Group>
+
+          <Form.Group className="mb-3" controlId="regFormUsername">
+            <Form.Label>Username</Form.Label>
+            <Form.Control type="text" placeholder="Choose a username" onChange={(e) => handelChangeValue(e, setUsernameValue)}/>
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="regFormPassword">
@@ -51,21 +65,14 @@ const RegistrationForm = () => {
             <Form.Label>Last Name</Form.Label>
             <Form.Control type="text" placeholder="Last Name" onChange={(e) => handelChangeValue(e, setLastNameValue)}/>
           </Form.Group>
-          <Form.Group className="mb-3" controlId="regFormEmail">
-            <Form.Label>Email</Form.Label>
-            <Form.Control type="text" placeholder="Email" onChange={(e) => handelChangeValue(e, setEmailValue)}/>
-          </Form.Group>
           <Form.Group className="mb-3" controlId="regFormPhoneNumber">
             <Form.Label>Phone Number</Form.Label>
             <Form.Control type="text" placeholder="Phone Number" onChange={(e) => handelChangeValue(e, setPhoneNumberValue)}/>
           </Form.Group>
-          <Button variant="primary" type="submit">
-            Submit
-          </Button>
+          <LoadingButton variant="primary" type="submit" text="Submit" isLoading={authLoading}/>
         </Form>
     </div>
   )
-
 }
 
 export default RegistrationForm
