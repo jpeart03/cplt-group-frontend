@@ -25,6 +25,7 @@ const RecipientsPage = () => {
   }, [authToken])
 
   const RecipientInfo = () => {
+
     if (selectedRecipient) {
       let thisRec = JSON.parse(selectedRecipient)
       console.log("thisRec: ", thisRec)
@@ -34,6 +35,7 @@ const RecipientsPage = () => {
           <p>Name: {thisRec.first_name} {thisRec.last_name}</p>
           <p>Email: {thisRec.email}</p>
           <p>Phone: {thisRec.phone}</p>
+          <p>Relationship Type: {thisRec.relationship_type}</p>
         </div>
       )
     }

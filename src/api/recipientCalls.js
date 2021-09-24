@@ -56,7 +56,29 @@ const createNewRecipient = async(recipientValues, authToken) => {
   }
 }
 
-export {  fetchRecipientsByUser, 
-          fetchRecipientByID,
-          createNewRecipient 
+      const editRecipient = async(recipientValues, authToken) => {
+        console.log("enter editRecipient function recipientValues: ", recipientValues, authToken)
+        // console.log(recipientValues)
+        let options = {
+          method: 'PUT', 
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `${authToken}`
+          },
+          body: JSON.stringify(recipientValues)}
+          
+        try{
+          let response = await fetch(`http://127.0.0.1:8000/users/recipients/`, options)
+          let data = await response.json()
+          // console.log("Response in fetchUsers: ", data)
+          return data
+        } catch (error) {
+          console.log(error)
+        }
       }
+      
+      export {  fetchRecipientsByUser, 
+                fetchRecipientByID,
+                createNewRecipient,
+                editRecipient 
+            }

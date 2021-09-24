@@ -1,7 +1,7 @@
-import { Card, Form, Button } from "react-bootstrap";
+import { Form,  } from "react-bootstrap";
 import { useState } from "react";
 import { useAuth } from "../../contexts/AuthContext";
-import { Redirect, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import LoadingButton from "../LoadingButton/LoadingButton.js"
 
 const RegistrationForm = () => {
@@ -12,12 +12,7 @@ const RegistrationForm = () => {
   const [lastNameValue, setLastNameValue] = useState();
   const [emailValue, setEmailValue] = useState();
   const [phoneNumberValue, setPhoneNumberValue] = useState();
-  const [submitted, setSubmitted] = useState(false);
-
   const { authLoading,
-    currentUser,
-    login,
-    logout,
     register,} = useAuth();
   let history = useHistory();
 

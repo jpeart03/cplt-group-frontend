@@ -20,25 +20,6 @@ const SelectRecipient = ({setRec}) =>{
     }
   }, [authToken])
   
-  // // Dummy Data
-  // const mySampleRecs = [
-  //   {'id':4, 
-  //   'recname':"Martha",
-  //   'email': "martha@email.com",
-  //   'phone': 1235551234},
-  //   {'id':7, 
-  //   'recname':"Lolly",
-  //   'email': "lolly@email.com",
-  //   'phone': 4565551234},
-  //   {'id':11, 
-  //   'recname':"Tony",
-  //   'email': "tony@email.com",
-  //   'phone': 7895551234}
-  // ]
-  // const myRecipients = mySampleRecs
-  // // END Dummy Data
-
-  
   const makeDDVaues = () => {
     if(recipients){
       return (
@@ -70,7 +51,7 @@ const SelectRecipient = ({setRec}) =>{
             setMessageRecipient(recipientSelected)
             setRec(recipientSelected)
             }}>
-        <option>Select A Recipient</option>
+        <option value="">Select A Recipient</option>
         {menuItems}
       </Form.Select>
     </div>

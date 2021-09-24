@@ -53,7 +53,7 @@ const NewRecipientForm = () => {
         </Form.Text>
       </Form.Group>
 
-      <Form.Group className="mb-3" controlId="formBasicEmail">
+      <Form.Group className="mb-3" controlId="formRelationshipType">
         <Form.Label>Relationship Type</Form.Label>
         {/* <Form.Control type="email" placeholder="Relationship Type" /> */}
         <Form.Select aria-label="Default select example" 
