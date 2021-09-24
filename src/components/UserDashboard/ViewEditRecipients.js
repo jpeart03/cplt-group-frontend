@@ -1,4 +1,5 @@
 import {Button } from "react-bootstrap"
+import {Link} from "react-router-dom"
 
 
 const ViewEditRecipientsButton = () => {
@@ -9,7 +10,7 @@ const ViewEditRecipientsButton = () => {
 
   return (
     <div>
-      <Button onClick={handleViewEditRecipients}>View/Edit Recipients</Button>
+      <Button variant="info"><Link to={'/recipients'} >View/Edit Recipients</Link></Button>
     </div>
   )
 }
