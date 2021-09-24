@@ -9,6 +9,7 @@ const EditRecipientForm = (props) => {
   const [relationshipType, setRelationshipType ]= useState();
   const [email, setEmail]= useState();
   const [phone, setPhone]= useState();
+  const [recipientID, setRecipientID] = useState();
 
   const { authToken, currentUser } = useAuth();
 
@@ -22,8 +23,10 @@ const EditRecipientForm = (props) => {
         setRelationshipType(parsedRec.relationship_type)
         setEmail(parsedRec.email)
         setPhone(parsedRec.phone)
+        setRecipientID(parsedRec.id)
       }
     }, [props.selectedRecipient]
+    // needs to make a new API Fetch when any recipient is updated
   )
 
   if (props.selectedRecipient){
@@ -43,14 +46,19 @@ const EditRecipientForm = (props) => {
             "last_name": lastName,
             "relationship_type": relationshipType,
             "email": email,
-            "phone": phone
+            "phone": phone,
+            "id": recipientID
             }
           console.log("recipientValues in Form: ", recipientValues)
           editRecipient(recipientValues, authToken)
+          props.setSelectedRecipient(null)
+          document.getElementById("select-recipient-dropdown").selectedIndex = "0";
+            // make new API call to get fresh/updated info on recipients
+          props.setRefreshRecCall(!props.refreshRecCall)
         }}>
           <Form.Group className="mb-3" controlId="formFirstName">
             <Form.Label>First Name</Form.Label>
-            <Form.Control type="text" placeholder="Recipient's First Name" 
+            <Form.Control type="text" placeholder={firstName} 
             onChange={(e) => {
               let value = e.target.value
               setFirstName(value)
@@ -59,7 +67,7 @@ const EditRecipientForm = (props) => {
 
           <Form.Group className="mb-3" controlId="formLastName">
             <Form.Label>Last Name</Form.Label>
-            <Form.Control type="text" placeholder="Recipient's Last Name" onChange={(e) => {
+            <Form.Control type="text" placeholder={lastName} onChange={(e) => {
             let value = e.target.value
             setLastName(value)
             }} />
@@ -67,7 +75,7 @@ const EditRecipientForm = (props) => {
     
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
-            <Form.Control type="email" placeholder="Recipient's email address" onChange={(e) => {
+            <Form.Control type="email" placeholder={email} onChange={(e) => {
           let value = e.target.value
           setEmail(value)
           }}/>
@@ -79,7 +87,7 @@ const EditRecipientForm = (props) => {
           <Form.Group className="mb-3" controlId="formRelationshipType">
             <Form.Label>Relationship Type</Form.Label>
             {/* <Form.Control type="email" placeholder="Relationship Type" /> */}
-            <Form.Select aria-label="Default select example" 
+            <Form.Select aria-label="Default select example" value={relationshipType}
                 onChange={(e) => {
                   let relationshipSelected = e.target.value
                   // console.log("in SelectRecipient: ", recipientSelected)

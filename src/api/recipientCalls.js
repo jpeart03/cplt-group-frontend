@@ -58,7 +58,8 @@ const createNewRecipient = async(recipientValues, authToken) => {
 
       const editRecipient = async(recipientValues, authToken) => {
         console.log("enter editRecipient function recipientValues: ", recipientValues, authToken)
-        // console.log(recipientValues)
+        let recID = recipientValues.id
+        console.log("recValues id= ", recID)
         let options = {
           method: 'PUT', 
           headers: {
@@ -68,7 +69,8 @@ const createNewRecipient = async(recipientValues, authToken) => {
           body: JSON.stringify(recipientValues)}
           
         try{
-          let response = await fetch(`http://127.0.0.1:8000/users/recipients/`, options)
+          console.log(recID, options, "IN THE editRecipient call")
+          let response = await fetch(`http://127.0.0.1:8000/users/recipients/${recID}/`, options)
           let data = await response.json()
           // console.log("Response in fetchUsers: ", data)
           return data

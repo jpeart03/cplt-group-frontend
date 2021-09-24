@@ -12,6 +12,7 @@ const RecipientsPage = () => {
   const [recEmail, setRecEmail] = useState();
   const [recipients, setRecipients] = useState();
   const { authToken } = useAuth();
+  const [refreshRecCall, setRefreshRecCall] = useState(false);
   
   useEffect( () => {
     const getUserRecords = async () => {
@@ -23,6 +24,10 @@ const RecipientsPage = () => {
       getUserRecords()
     }
   }, [authToken])
+
+  const resetRecDropDown = () => {
+    document.getElementById("select-recipient-dropdown").selectedIndex = "0";
+  }
 
   const RecipientInfo = () => {
 
@@ -57,8 +62,11 @@ const RecipientsPage = () => {
           <Accordion.Header>Edit Recipients</Accordion.Header>
           <Accordion.Body>
             <RecipientInfo/>
-            <SelectRecipient setRec={setSelectedRecipient}/>
-            <EditRecipientForm recEmail={recEmail} selectedRecipient={selectedRecipient}/>
+            <SelectRecipient setRec={setSelectedRecipient} refreshRecCall = {refreshRecCall}/>
+            <EditRecipientForm recEmail={recEmail} selectedRecipient={selectedRecipient} resetRecDropDown={resetRecDropDown}
+            setSelectedRecipient={setSelectedRecipient}
+            refreshRecCall= {refreshRecCall}
+            setRefreshRecCall={setRefreshRecCall}/>
           </Accordion.Body>
         </Accordion.Item>
       </Accordion>

@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import { useAuth } from "../../contexts/AuthContext";
 import { fetchRecipientsByUser } from "../../api/recipientCalls";
 
-const SelectRecipient = ({setRec}) =>{
+const SelectRecipient = ({setRec, refreshRecCall}) =>{
   // SELECT RECIPIENT USES THE currentUser to create a dropdown selection of that user's recipients
   // The value set by the dropdown is the recipient ID. 
   const [recipients, setRecipients] = useState();
@@ -18,7 +18,7 @@ const SelectRecipient = ({setRec}) =>{
     if(authToken){
       getUserRecords()
     }
-  }, [authToken])
+  }, [authToken, refreshRecCall])
   
   const makeDDVaues = () => {
     if(recipients){
@@ -44,14 +44,14 @@ const SelectRecipient = ({setRec}) =>{
 
   return (
     <div>
-      <Form.Select aria-label="Default select example" 
+      <Form.Select id="select-recipient-dropdown" aria-label="Default select example" 
           onChange={(e) => {
             let recipientSelected = e.target.value
             // console.log("in SelectRecipient: ", recipientSelected)
             setMessageRecipient(recipientSelected)
             setRec(recipientSelected)
             }}>
-        <option value="">Select A Recipient</option>
+        <option  value="">Select A Recipient</option>
         {menuItems}
       </Form.Select>
     </div>
