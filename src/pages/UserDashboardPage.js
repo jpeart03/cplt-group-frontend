@@ -7,7 +7,6 @@ import { useAuth } from "../contexts/AuthContext.js";
 import { fetchRecipientsByUser } from "../api/recipientCalls";
 import { fetchMessagesByUser } from "../api/messageCalls";
 import { RecipientsList } from "../components/Recipients/RecipientList";
-import { AllUsersList } from "../components/AllUsersList";
 import { UserMessages } from "../components/Messages/MessagetList.js"
 
 
