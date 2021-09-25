@@ -47,15 +47,33 @@ export const AuthProvider = ({ children }) => {
    */
 
   // username, email, password1, password2, first_name, last_name, phone_number
-  const register = (username, email, password1, password2, first_name, last_name, phone_number) => {
-    // console.log("username: ", username,
-    //   "email: ", email,
-    //   "password1: ", password1,
-    //   "password2: ", password2,
-    //   "first_name: ", first_name,
-    //   "last_name: ", last_name,
-    //   "phone_number: ", phone_number)
-    //   console.log("apiURL...", `${apiUrl}/users/auth/register/`)
+  const register = (
+    username,
+    email,
+    password1,
+    password2,
+    first_name,
+    last_name,
+    phone_number
+  ) => {
+    console.log(
+      "username: ",
+      username,
+      "email: ",
+      email,
+      "password1: ",
+      password1,
+      "password2: ",
+      password2,
+      "first_name: ",
+      first_name,
+      "last_name: ",
+      last_name,
+      "phone_number: ",
+      phone_number
+    );
+    console.log("apiURL...", `${apiUrl}/users/auth/register/`);
+
     setAuthLoading(true);
     axios
       .post(`${apiUrl}/users/auth/register/`, {
@@ -65,7 +83,7 @@ export const AuthProvider = ({ children }) => {
         password2: password2,
         first_name: first_name,
         last_name: last_name,
-        phone_number: phone_number
+        phone_number: phone_number,
       })
       .then((response) => {
         localStorage.setItem(storageKey, response.data.key);
@@ -85,7 +103,14 @@ export const AuthProvider = ({ children }) => {
    * @param {string} password user's password
    */
   const login = (email, password) => {
-    console.log("login goes with email: ", email, " PASSWORD: ", password, "URL ", `${apiUrl}/users/auth/login/`)
+    console.log(
+      "login goes with email: ",
+      email,
+      " PASSWORD: ",
+      password,
+      "URL ",
+      `${apiUrl}/users/auth/login/`
+    );
 
     setAuthLoading(true);
     axios
@@ -102,7 +127,6 @@ export const AuthProvider = ({ children }) => {
       })
       .finally(() => {
         setAuthLoading(false);
-
       });
   };
 
@@ -132,17 +156,41 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  /**
+   * Function to deactivate user and log them out.
+   */
+  const deactivate = () => {
+    if (authToken) {
+      setAuthLoading(true);
+      axios
+        .put(
+          `${apiUrl}/users/auth/user/`,
+          { is_active: false },
+          { headers: { Authorization: authToken } }
+        )
+        .then(() => {
+          logout();
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+        .finally(() => {
+          setAuthLoading(false);
+        });
+    }
+  };
+
   const value = {
+    authToken,
     authLoading,
     currentUser,
     login,
     logout,
+    deactivate,
     register,
-    authToken
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
-
 
 // const { authLoading, currentUser, login, logout, register} = useAuth();
