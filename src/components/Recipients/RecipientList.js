@@ -31,7 +31,6 @@ const RecipientsList = () => {
         )
       }
       )}
-      <Button variant="info"><Link to="/recipients"> Edit/Create Recipient</Link></Button>
       </div>
     )
   }

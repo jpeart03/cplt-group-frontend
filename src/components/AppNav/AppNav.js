@@ -6,6 +6,19 @@ import "./AppNav.scss";
 const AppNav = () => {
   const { currentUser, authLoading, logout } = useAuth();
 
+  const UserLinks = () => {
+    if (currentUser){
+      return(
+        <>
+          <Link to="/dashboard">My Dashboard</Link>
+          <Link to="/recipients">My Recipients</Link>
+          <Link to="/newmessage">New Message</Link>
+        </>
+      )
+    }
+    else return null
+  }
+
   return (
     <>
       {!currentUser && (
@@ -31,9 +44,7 @@ const AppNav = () => {
       >
         <Container>
           <Navbar.Brand>Appreciation</Navbar.Brand>
-          <Link to="/dashboard">My Dashboard</Link>
-          <Link to="/recipients">My Recipients</Link>
-          <Link to="/newmessage">New Message</Link>
+          <UserLinks/>
           <Navbar.Toggle />
           <Navbar.Collapse className="justify-content-end">
             {currentUser ? (
