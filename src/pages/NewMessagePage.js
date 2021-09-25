@@ -1,29 +1,35 @@
 import { useAuth } from "../contexts/AuthContext.js";
-import { useState } from "react"
-import { Form } from 'react-bootstrap'
+import { useEffect, useState } from "react"
+import { Form, Button } from 'react-bootstrap'
 import SelectRecipient from "../components/Messages/SelectRecipient.js";
 import SelectDeliveryMethod from "../components/Messages/SelectDelivMethod.js";
 import MessageTextBox from "../components/Messages/MessageTextBox.js";
 import { sendNewMessage } from "../api/messageCalls.js"
 
-const NewMessagePage = () => {
-  const { authToken } = useAuth();
+const NewMessagePage = (props) => {
+  const { authToken, currentUser } = useAuth();
   const [content, setContentValue] = useState("default content");
   const [recipient, setRecipientValue] = useState();
+  const [refreshRecCall, setRefreshRecCall] = useState(false);
   // const [deliveryMethod, SelectDeliveryMethod] = useState();
-
   
+  useEffect( () => {
+    if (props.location.recipientParamObj){
+    let linkedRecipient = props.location.recipientParamObj
+    setRecipientValue(linkedRecipient)
+    }
+    }, []
+  )
   
   const handleSubmit = (e, authToken) => {
     let recipientParsed = JSON.parse(recipient)
     let recipientID = recipientParsed.id 
-    console.log("recipientID in handleSubmit", recipientID)
     let messageValues ={
       "content": content,
-      "recipient": recipientID
+      "recipient": recipientID,
+      "user": currentUser.pk,
       // "delivery_method": deliveryMethod,
     }
-    console.log("###", messageValues)
     e.preventDefault()
     sendNewMessage(authToken, messageValues)
 
@@ -32,11 +38,11 @@ const NewMessagePage = () => {
   return (
     <div>
       <h5>Send an Appreciation Message</h5>
-      <Form method="POST" onSubmit={(e) => {handleSubmit(e, authToken)}}>
-        <SelectRecipient setRec={setRecipientValue}/>
+      <Form onSubmit={(e) => {handleSubmit(e, authToken)}}>
+        <SelectRecipient refreshRecCall={refreshRecCall} passedRecipient={recipient} setRec={setRecipientValue}/>
         <SelectDeliveryMethod/>
         <MessageTextBox setContentValue={setContentValue}/>
-        <input type="submit" value="Send"/>
+        <Button type="submit">Send</Button>
       </Form>
       {/* Future Version: GetAPrompt*/}
       {/* Message section (textbox-- Future Version:  sentiment border, sentiment icon and text) */}

@@ -1,7 +1,6 @@
 const apiUrl = process.env.REACT_APP_API_URL;
 
 const fetchRecipientsByUser = async (token)  =>{
-  console.log("fetchRecByUser")
   let options = {
     method: 'GET', 
     headers: {
@@ -12,7 +11,6 @@ const fetchRecipientsByUser = async (token)  =>{
   try{
     let response = await fetch(`${apiUrl}/users/recipients`, options)
     let data = await response.json()
-    // console.log("Response in fetchUsers: ", data)
     return data
   } catch (error) {
     console.log(error)
@@ -39,7 +37,6 @@ const fetchRecipientByID = async (recipientID, token)  =>{
 
 const createNewRecipient = async(recipientValues, authToken) => {
   console.log("enterCreateNewRecipient function recipientValues: ", recipientValues, authToken)
-  // console.log(recipientValues)
   let options = {
     method: 'POST', 
     headers: {
@@ -51,7 +48,6 @@ const createNewRecipient = async(recipientValues, authToken) => {
   try{
     let response = await fetch(`${apiUrl}/users/recipients/`, options)
     let data = await response.json()
-    // console.log("Response in fetchUsers: ", data)
     return data
   } catch (error) {
     console.log(error)
@@ -74,7 +70,6 @@ const editRecipient = async(recipientValues, authToken) => {
     console.log(recID, options, "IN THE editRecipient call")
     let response = await fetch(`${apiUrl}/users/recipients/${recID}/`, options)
     let data = await response.json()
-    // console.log("Response in fetchUsers: ", data)
     return data
   } catch (error) {
     console.log(error)

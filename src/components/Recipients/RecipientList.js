@@ -24,9 +24,13 @@ const RecipientsList = () => {
       <div>
         <h5>Your Recipients: </h5>
         {recipients.map( recipient => {
+          const newTo = {
+            pathname: "/newmessage", 
+            recipientParamObj: recipient 
+          }
         return (
           <div>
-            <p>{recipient.first_name} {recipient.last_name} <Button variant="info"><Link to="/newmessage">Write {recipient.first_name} a new Message</Link></Button></p>
+            <p>{recipient.first_name} {recipient.last_name} <Button variant="info"><Link to={newTo}>Write {recipient.first_name} a new Message</Link></Button></p>
           </div>
         )
       }

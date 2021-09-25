@@ -3,28 +3,39 @@ import { useState, useEffect } from 'react'
 import { useAuth } from "../../contexts/AuthContext";
 import { fetchRecipientsByUser } from "../../api/recipientCalls";
 
-const SelectRecipient = ({setRec, refreshRecCall}) =>{
+const SelectRecipient = ({setRec, passedRecipient, refreshRecCall}) =>{
   // SELECT RECIPIENT USES THE currentUser to create a dropdown selection of that user's recipients
   // The value set by the dropdown is the recipient ID. 
   const [recipients, setRecipients] = useState();
   const [messageRecipient, setMessageRecipient]  = useState();
   const { authToken, currentUser } = useAuth();
+  const [ selectDefaultValue, setSelectDefaultValue ] = useState();
+  const [selectDefaultText, setSelectDefaultText ] = useState("Select A Recipient");
 
   useEffect( () => {
+
     const getUserRecords = async () => {
       let userRecipients = await fetchRecipientsByUser(authToken)
       setRecipients(userRecipients)
+
+        if(passedRecipient){
+        let jsonRec = JSON.stringify(passedRecipient)
+        setSelectDefaultValue(jsonRec)
+        setSelectDefaultText(passedRecipient.first_name)
+        setMessageRecipient(jsonRec)
+      }
+
     }
     if(authToken){
       getUserRecords()
     }
-  }, [authToken, refreshRecCall])
-  
+  }, [authToken, refreshRecCall, passedRecipient])
+
+
   const makeDDVaues = () => {
     if(recipients){
       return (
           recipients.map((recipient, index) => {
-            // console.log("inside map",  recipient.recname, recipient,)
             let jsonrec = JSON.stringify(recipient)
             return(
               <option key ={`recip-${index}`} value={jsonrec}>{recipient.first_name}</option>
@@ -47,11 +58,10 @@ const SelectRecipient = ({setRec, refreshRecCall}) =>{
       <Form.Select id="select-recipient-dropdown" aria-label="Default select example" 
           onChange={(e) => {
             let recipientSelected = e.target.value
-            // console.log("in SelectRecipient: ", recipientSelected)
             setMessageRecipient(recipientSelected)
             setRec(recipientSelected)
             }}>
-        <option  value="">Select A Recipient</option>
+        <option  value={selectDefaultValue}>{selectDefaultText}</option>
         {menuItems}
       </Form.Select>
     </div>
