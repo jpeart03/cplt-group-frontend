@@ -14,8 +14,9 @@ const RecipientsList = () => {
       let userRecipients = await fetchRecipientsByUser(authToken)
       setRecipients(userRecipients)
     }
-    console.log("useEffect", authToken)
-    getUserRecords()
+    if(authToken){
+      getUserRecords()
+    }
   }, [authToken])
 
   if (recipients){

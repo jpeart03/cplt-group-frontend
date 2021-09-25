@@ -31,6 +31,9 @@ const AppNav = () => {
       >
         <Container>
           <Navbar.Brand>Appreciation</Navbar.Brand>
+          <Link to="/dashboard">My Dashboard</Link>
+          <Link to="/recipients">My Recipients</Link>
+          <Link to="/newmessage">New Message</Link>
           <Navbar.Toggle />
           <Navbar.Collapse className="justify-content-end">
             {currentUser ? (

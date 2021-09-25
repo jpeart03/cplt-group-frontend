@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import { useAuth } from "../../contexts/AuthContext";
 import { fetchRecipientsByUser } from "../../api/recipientCalls";
 
-const SelectRecipient = ({setRec}) =>{
+const SelectRecipient = ({setRec, refreshRecCall}) =>{
   // SELECT RECIPIENT USES THE currentUser to create a dropdown selection of that user's recipients
   // The value set by the dropdown is the recipient ID. 
   const [recipients, setRecipients] = useState();
@@ -15,28 +15,10 @@ const SelectRecipient = ({setRec}) =>{
       let userRecipients = await fetchRecipientsByUser(authToken)
       setRecipients(userRecipients)
     }
-    console.log("useEffect", authToken)
-    getUserRecords()
-  }, [authToken])
-  
-  // // Dummy Data
-  // const mySampleRecs = [
-  //   {'id':4, 
-  //   'recname':"Martha",
-  //   'email': "martha@email.com",
-  //   'phone': 1235551234},
-  //   {'id':7, 
-  //   'recname':"Lolly",
-  //   'email': "lolly@email.com",
-  //   'phone': 4565551234},
-  //   {'id':11, 
-  //   'recname':"Tony",
-  //   'email': "tony@email.com",
-  //   'phone': 7895551234}
-  // ]
-  // const myRecipients = mySampleRecs
-  // // END Dummy Data
-
+    if(authToken){
+      getUserRecords()
+    }
+  }, [authToken, refreshRecCall])
   
   const makeDDVaues = () => {
     if(recipients){
@@ -62,14 +44,14 @@ const SelectRecipient = ({setRec}) =>{
 
   return (
     <div>
-      <Form.Select aria-label="Default select example" 
+      <Form.Select id="select-recipient-dropdown" aria-label="Default select example" 
           onChange={(e) => {
             let recipientSelected = e.target.value
-            console.log("in SelectRecipient: ", recipientSelected)
+            // console.log("in SelectRecipient: ", recipientSelected)
             setMessageRecipient(recipientSelected)
             setRec(recipientSelected)
             }}>
-        <option>Select A Recipient</option>
+        <option  value="">Select A Recipient</option>
         {menuItems}
       </Form.Select>
     </div>

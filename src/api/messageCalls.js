@@ -11,7 +11,7 @@ const fetchMessagesByUser = async (token)  =>{
   try{
     let response = await fetch(`${apiUrl}/users/messages/`, options)
     let data = await response.json()
-    console.log("Response in fetchUsers: ", data)
+    // console.log("Response in fetchUsers: ", data)
     return data
   } catch (error) {
     console.log(error)
@@ -20,7 +20,7 @@ const fetchMessagesByUser = async (token)  =>{
 
 const sendNewMessage = async(token, messageValues) => {
   
-  console.log(messageValues)
+  // console.log(messageValues)
   let options = {
     method: 'POST', 
     headers: {
@@ -32,7 +32,7 @@ const sendNewMessage = async(token, messageValues) => {
   try{
     let response = await fetch(`${apiUrl}/users/messages/`, options)
     let data = await response.json()
-    console.log("Response in fetchUsers: ", data)
+    // console.log("Response in fetchUsers: ", data)
     return data
   } catch (error) {
     console.log(error)

@@ -12,26 +12,34 @@ const RecipientsPage = () => {
   const [recEmail, setRecEmail] = useState();
   const [recipients, setRecipients] = useState();
   const { authToken } = useAuth();
+  const [refreshRecCall, setRefreshRecCall] = useState(false);
   
   useEffect( () => {
     const getUserRecords = async () => {
       let userRecipients = await fetchRecipientsByUser(authToken)
       setRecipients(userRecipients)
     }
-    console.log("useEffect", authToken)
-    getUserRecords()
+    // console.log("useEffect", authToken)
+    if(authToken){
+      getUserRecords()
+    }
   }, [authToken])
 
+  const resetRecDropDown = () => {
+    document.getElementById("select-recipient-dropdown").selectedIndex = "0";
+  }
+
   const RecipientInfo = () => {
+
     if (selectedRecipient) {
       let thisRec = JSON.parse(selectedRecipient)
       console.log("thisRec: ", thisRec)
-      setRecEmail(thisRec.email)
       return (
         <div>
-          <p>Name: {thisRec.recname}</p>
+          <p>Name: {thisRec.first_name} {thisRec.last_name}</p>
           <p>Email: {thisRec.email}</p>
           <p>Phone: {thisRec.phone}</p>
+          <p>Relationship Type: {thisRec.relationship_type}</p>
         </div>
       )
     }
@@ -46,15 +54,22 @@ const RecipientsPage = () => {
         <Accordion.Item eventKey="0">
           <Accordion.Header>Create a New Recipient</Accordion.Header>
           <Accordion.Body>
-            <NewRecipientForm/>
+            <NewRecipientForm 
+            setRefreshRecCall={setRefreshRecCall}
+            refreshRecCall= {refreshRecCall}/>
           </Accordion.Body>
         </Accordion.Item>
         <Accordion.Item eventKey="1">
           <Accordion.Header>Edit Recipients</Accordion.Header>
           <Accordion.Body>
             <RecipientInfo/>
-            <SelectRecipient setRec={setSelectedRecipient}/>
-            <EditRecipientForm recEmail={recEmail} selectedRecipient={selectedRecipient}/>
+            <SelectRecipient setRec={setSelectedRecipient} refreshRecCall = {refreshRecCall}/>
+            <EditRecipientForm 
+            selectedRecipient={selectedRecipient}
+            resetRecDropDown={resetRecDropDown}
+            setSelectedRecipient={setSelectedRecipient}
+            refreshRecCall= {refreshRecCall}
+            setRefreshRecCall={setRefreshRecCall}/>
           </Accordion.Body>
         </Accordion.Item>
       </Accordion>
