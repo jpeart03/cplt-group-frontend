@@ -28,7 +28,6 @@ const getSentimentAnalysis = async (text) => {
     negative: 0,
     neutral: 0,
   };
-  console.log("function called!", endpoint, key);
 
   const textAnalysisClient = new TextAnalyticsClient(
     endpoint,
