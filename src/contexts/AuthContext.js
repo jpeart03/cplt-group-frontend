@@ -73,6 +73,7 @@ export const AuthProvider = ({ children }) => {
       phone_number
     );
     console.log("apiURL...", `${apiUrl}/users/auth/register/`);
+
     setAuthLoading(true);
     axios
       .post(`${apiUrl}/users/auth/register/`, {

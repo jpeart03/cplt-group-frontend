@@ -36,7 +36,7 @@ const RegistrationForm = () => {
         <Form method='POST' onSubmit={(e) => handleFormSubmit(e)}>
           <Form.Group className="mb-3" controlId="regFormUsername">
             <Form.Label>Email address</Form.Label>
-            <Form.Control type="text" placeholder="Choose a Username" onChange={(e) => handelChangeValue(e, setEmailValue)}/>
+            <Form.Control type="text" placeholder="Enter your email" onChange={(e) => handelChangeValue(e, setEmailValue)}/>
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="regFormUsername">

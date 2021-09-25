@@ -1,13 +1,15 @@
-const fetchAllUsers = async (token)  =>{
+const apiUrl = process.env.REACT_APP_API_URL;
+
+const deleteUser = async (token)  =>{
   let options = {
-    method: 'GET', 
+    method: 'DELETE', 
     headers: {
       'Content-Type': 'application/json',
       'Authorization': `${token}`  
     },
     }
   try{
-    let response = await fetch('http://127.0.0.1:8000/users/recipients', options)
+    let response = await fetch(`${apiUrl}/users/recipients`, options)
     let data = await response.json()
     return data
   } catch (error) {
@@ -15,4 +17,4 @@ const fetchAllUsers = async (token)  =>{
   }
 }
 
-export {fetchAllUsers}
+export { deleteUser }

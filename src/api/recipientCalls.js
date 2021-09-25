@@ -49,7 +49,7 @@ const createNewRecipient = async(recipientValues, authToken) => {
     body: JSON.stringify(recipientValues)}
     
   try{
-    let response = await fetch(`http://127.0.0.1:8000/users/recipients/`, options)
+    let response = await fetch(`${apiUrl}/users/recipients/`, options)
     let data = await response.json()
     // console.log("Response in fetchUsers: ", data)
     return data
@@ -72,7 +72,7 @@ const editRecipient = async(recipientValues, authToken) => {
     
   try{
     console.log(recID, options, "IN THE editRecipient call")
-    let response = await fetch(`http://127.0.0.1:8000/users/recipients/${recID}/`, options)
+    let response = await fetch(`${apiUrl}/users/recipients/${recID}/`, options)
     let data = await response.json()
     // console.log("Response in fetchUsers: ", data)
     return data
@@ -80,9 +80,27 @@ const editRecipient = async(recipientValues, authToken) => {
     console.log(error)
   }
 }
+
+const deleteRecipient = async (recipientID, authToken) => {
+  let options = {
+    method: 'DELETE', 
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: authToken
+    },
+    }
+  try{
+    let response = await fetch(`${apiUrl}/users/recipients/${recipientID}/`, options)
+    let data = await response.json()
+    return data
+  } catch (error) {
+    console.log("fetchRecbyIDerror:", error)
+  }
+}
       
       export {  fetchRecipientsByUser, 
                 fetchRecipientByID,
                 createNewRecipient,
-                editRecipient 
+                editRecipient,
+                deleteRecipient,
             }
