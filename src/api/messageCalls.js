@@ -1,12 +1,11 @@
 const apiUrl = process.env.REACT_APP_API_URL;
-const storageKey = "userToken";
 
 const fetchMessagesByUser = async (token)  =>{
   let options = {
     method: 'GET', 
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Token ${localStorage.getItem(storageKey)}` 
+      Authorization: token 
     },
     }
   try{
@@ -26,7 +25,7 @@ const sendNewMessage = async(token, messageValues) => {
     method: 'POST', 
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Token ${localStorage.getItem(storageKey)}`
+      Authorization: token
     },
     body: JSON.stringify(messageValues)}
     

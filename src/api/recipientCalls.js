@@ -1,13 +1,12 @@
 const apiUrl = process.env.REACT_APP_API_URL;
-const storageKey = "userToken";
 
-const fetchRecipientsByUser = async (authToken)  =>{
+const fetchRecipientsByUser = async (token)  =>{
   console.log("fetchRecByUser")
   let options = {
     method: 'GET', 
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Token ${localStorage.getItem(storageKey)}`
+      Authorization: token
     },
     }
   try{
@@ -20,12 +19,12 @@ const fetchRecipientsByUser = async (authToken)  =>{
   }
 }
 
-const fetchRecipientByID = async (recipientID, authToken)  =>{
+const fetchRecipientByID = async (recipientID, token)  =>{
   let options = {
     method: 'GET', 
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Token ${localStorage.getItem(storageKey)}`
+      Authorization: token
     },
     }
   try{
