@@ -1,14 +1,16 @@
-const fetchRecipientsByUser = async (authToken)  =>{
-  // console.log("in fetchRecByUser, authToken : ", authToken)
+const apiUrl = process.env.REACT_APP_API_URL;
+
+const fetchRecipientsByUser = async (token)  =>{
+  console.log("fetchRecByUser")
   let options = {
     method: 'GET', 
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `${authToken}`  
+      Authorization: token
     },
     }
   try{
-    let response = await fetch(`http://127.0.0.1:8000/users/recipients`, options)
+    let response = await fetch(`${apiUrl}/users/recipients`, options)
     let data = await response.json()
     // console.log("Response in fetchUsers: ", data)
     return data
@@ -17,16 +19,16 @@ const fetchRecipientsByUser = async (authToken)  =>{
   }
 }
 
-const fetchRecipientByID = async (recipientID, authToken)  =>{
+const fetchRecipientByID = async (recipientID, token)  =>{
   let options = {
     method: 'GET', 
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `${authToken}`  
+      Authorization: token
     },
     }
   try{
-    let response = await fetch(`http://127.0.0.1:8000/users/recipients/${recipientID}/`, options)
+    let response = await fetch(`${apiUrl}/users/recipients/${recipientID}/`, options)
     let data = await response.json()
     return data
   } catch (error) {
