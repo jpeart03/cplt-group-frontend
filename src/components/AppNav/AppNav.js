@@ -1,23 +1,49 @@
-import { Container, Navbar } from "react-bootstrap";
+import { Container, Nav, Navbar } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import LoadingButton from "../LoadingButton/LoadingButton";
 import { useAuth } from "../../contexts/AuthContext";
 import "./AppNav.scss";
+
 const AppNav = () => {
   const { currentUser, authLoading, logout } = useAuth();
 
   const UserLinks = () => {
-    if (currentUser){
-      return(
+    if (currentUser) {
+      return (
         <>
-          <Link to="/dashboard">My Dashboard</Link>
-          <Link to="/recipients">My Recipients</Link>
-          <Link to="/newmessage">New Message</Link>
+          <Nav className="me-auto">
+            <Nav.Link as={Link} to="/dashboard">
+              My Dashboard
+            </Nav.Link>
+            <Nav.Link as={Link} to="/recipients">
+              My Recipients
+            </Nav.Link>
+            <Nav.Link as={Link} to="/newmessage">
+              New Message
+            </Nav.Link>
+          </Nav>
+          <Nav>
+            <Navbar.Text className="me-3">
+              Welcome, {currentUser.email}
+            </Navbar.Text>
+            <LoadingButton
+              text="Log out"
+              variant="outline-primary"
+              isLoading={authLoading}
+              onClick={() => logout()}
+            />
+          </Nav>
         </>
-      )
-    }
-    else return null
-  }
+      );
+    } else
+      return (
+        <Nav>
+          <Link className="btn btn-outline-primary" to="/login">
+            Login
+          </Link>
+        </Nav>
+      );
+  };
 
   return (
     <>
@@ -44,26 +70,11 @@ const AppNav = () => {
       >
         <Container>
           <Navbar.Brand>Appreciation</Navbar.Brand>
-          <UserLinks/>
           <Navbar.Toggle />
-          <Navbar.Collapse className="justify-content-end">
-            {currentUser ? (
-              <>
-                <Navbar.Text className="me-3">
-                  Welcome, {currentUser.email}
-                </Navbar.Text>
-                <LoadingButton
-                  text="Log out"
-                  variant="outline-primary"
-                  isLoading={authLoading}
-                  onClick={() => logout()}
-                />
-              </>
-            ) : (
-              <Link className="btn btn-outline-primary" to="/login">
-                Login
-              </Link>
-            )}
+          <Navbar.Collapse
+            className={!currentUser ? "justify-content-end" : ""}
+          >
+            <UserLinks />
           </Navbar.Collapse>
         </Container>
       </Navbar>
