@@ -1,6 +1,7 @@
 // import { useAuth } from "../../context/AuthContext.js";
 import { useAuth } from "../../contexts/AuthContext.js"
 import { Redirect } from "react-router";
+import { useEffect } from "react";
 
 const SignedInAs = () => {
   
@@ -8,6 +9,7 @@ const SignedInAs = () => {
 
   // const dummyUser = {"pk":1,"username":"pgrov02","email":"pj@appappmail.com","first_name":"Penny","last_name":"Grover"}
   // let currentUser = dummyUser
+
 
 
   if (currentUser) {

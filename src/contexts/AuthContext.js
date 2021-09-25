@@ -180,6 +180,26 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+
+const edit = async (userValues)  =>{
+  let options = {
+    method: 'PUT', 
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': authToken
+    },
+    body: JSON.stringify(userValues)}
+    
+  try{
+    console.log("edit called")
+    let response = await fetch(`${apiUrl}/users/auth/user/`, options)
+    let data = await response.json()
+    setCurrentUser(data)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
   const value = {
     authToken,
     authLoading,
@@ -188,6 +208,7 @@ export const AuthProvider = ({ children }) => {
     logout,
     deactivate,
     register,
+    edit
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
