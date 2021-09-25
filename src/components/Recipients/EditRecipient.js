@@ -2,6 +2,7 @@ import { Form, Button } from "react-bootstrap"
 import { useState, useEffect } from 'react'
 import { editRecipient } from "../../api/recipientCalls";
 import { useAuth } from "../../contexts/AuthContext";
+import { deleteRecipient  } from "../../api/recipientCalls";
 
 const EditRecipientForm = (props) => {
   const [firstName, setFirstName]= useState();
@@ -49,7 +50,7 @@ const EditRecipientForm = (props) => {
             "phone": phone,
             "id": recipientID
             }
-          console.log("recipientValues in Form: ", recipientValues)
+          // console.log("recipientValues in Form: ", recipientValues)
           editRecipient(recipientValues, authToken)
           props.setSelectedRecipient(null)
           document.getElementById("select-recipient-dropdown").selectedIndex = "0";
@@ -108,7 +109,14 @@ const EditRecipientForm = (props) => {
               We'll never share your recipient's phone number with anyone else.
             </Form.Text>
           </Form.Group>
-
+          <Button variant="danger" 
+          onClick={(e) =>{
+            console.log("Delete ", recipientID)
+            deleteRecipient(recipientID, authToken)
+            props.setSelectedRecipient(null)
+            document.getElementById("select-recipient-dropdown").selectedIndex = "0";
+            props.setRefreshRecCall(!props.refreshRecCall)
+          }}>Delete {firstName} {lastName}</Button>
     
           <Button variant="primary" type="submit">
             Submit

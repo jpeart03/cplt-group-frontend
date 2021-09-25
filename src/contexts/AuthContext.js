@@ -48,14 +48,14 @@ export const AuthProvider = ({ children }) => {
 
   // username, email, password1, password2, first_name, last_name, phone_number
   const register = (username, email, password1, password2, first_name, last_name, phone_number) => {
-    console.log("username: ", username,
-      "email: ", email,
-      "password1: ", password1,
-      "password2: ", password2,
-      "first_name: ", first_name,
-      "last_name: ", last_name,
-      "phone_number: ", phone_number)
-      console.log("apiURL...", `${apiUrl}/users/auth/register/`)
+    // console.log("username: ", username,
+    //   "email: ", email,
+    //   "password1: ", password1,
+    //   "password2: ", password2,
+    //   "first_name: ", first_name,
+    //   "last_name: ", last_name,
+    //   "phone_number: ", phone_number)
+    //   console.log("apiURL...", `${apiUrl}/users/auth/register/`)
     setAuthLoading(true);
     axios
       .post(`${apiUrl}/users/auth/register/`, {
