@@ -181,7 +181,7 @@ export const AuthProvider = ({ children }) => {
   };
 
 
-const edit = async (userValues)  =>{
+const editUser= async (userValues)  =>{
   let options = {
     method: 'PUT', 
     headers: {
@@ -191,7 +191,7 @@ const edit = async (userValues)  =>{
     body: JSON.stringify(userValues)}
     
   try{
-    console.log("edit called")
+    console.log("editUsercalled")
     let response = await fetch(`${apiUrl}/users/auth/user/`, options)
     let data = await response.json()
     setCurrentUser(data)
@@ -208,7 +208,7 @@ const edit = async (userValues)  =>{
     logout,
     deactivate,
     register,
-    edit
+    editUser
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

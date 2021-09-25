@@ -10,7 +10,7 @@ const EditProfileForm = (props) => {
   const [lastName, setLastName]= useState();
   const [phone, setPhone]= useState();
 
-  const { authToken, currentUser, edit } = useAuth();
+  const { authToken, currentUser, editUser, deactivate } = useAuth();
 
   useEffect( () => 
     {
@@ -35,7 +35,7 @@ const EditProfileForm = (props) => {
         "email": email,
         "phone": phone,
         }
-      edit(userValues)
+      editUser(userValues)
     }}>
       <Form.Group className="mb-3" controlId="formFirstName">
         <Form.Label>First Name</Form.Label>
@@ -85,6 +85,7 @@ const EditProfileForm = (props) => {
       <Button variant="danger" 
         onClick={(e) =>{
           console.log("Delete Profile")
+          deactivate()
         }}>Delete User Profile 
       </Button>
 
