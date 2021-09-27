@@ -3,6 +3,8 @@ import { Form } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
 import LoadingButton from "../components/LoadingButton/LoadingButton";
 import { useAuth } from "../contexts/AuthContext";
+import { fetchRecipientsByUser } from "../api/recipientCalls";
+import { sendNewMessage } from "../api/messageCalls";
 import "./NewMessage.scss";
 
 const NewMessage = () => {
@@ -10,9 +12,7 @@ const NewMessage = () => {
   const location = useLocation();
   const historyStateRecipient = location.state?.recipient;
 
-  const [recipients, setRecipients] = useState([
-    { id: 1, first_name: "Jim", last_name: "Peart" },
-  ]);
+  const [recipients, setRecipients] = useState();
   const [selectedRecipient, setSelectedRecipient] = useState();
   const [messageContent, setMessageContent] = useState();
   const [sendEmail, setSendEmail] = useState(false);
@@ -20,18 +20,36 @@ const NewMessage = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    const getRecipients = async () => {
+      const data = await fetchRecipientsByUser(authToken);
+      setRecipients(data);
+    };
     if (historyStateRecipient) {
       setSelectedRecipient(historyStateRecipient.id);
     }
-    // TODO: get recipients from API and setRecipients
-  }, [historyStateRecipient]);
+    if (authToken) {
+      getRecipients();
+    }
+  }, [authToken, historyStateRecipient]);
 
-  const handleSendMessage = (e) => {
+  const handleSendMessage = async (e) => {
     e.preventDefault();
     setLoading(true);
-    // TODO: call api to post message
     console.log({ selectedRecipient, messageContent, sendEmail, sendSMS });
-    setLoading(false);
+    sendNewMessage(authToken, {
+      content: messageContent,
+      user: currentUser.id,
+      recipient: selectedRecipient,
+      send_email: false, // CHANGE THIS TO STATE VALUE TO SEND
+      send_sms: false, // CHANGE THIS TO STATE VALUE TO SEND
+    })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        setLoading(false);
+        // maybe redirect here
+      });
   };
 
   return (
@@ -47,11 +65,12 @@ const NewMessage = () => {
             onChange={(e) => setSelectedRecipient(e.currentTarget.value)}
           >
             <option>Select a message recipient</option>
-            {recipients.map((recipient) => (
-              <option key={recipient.id} value={recipient.id}>
-                {recipient.first_name} {recipient.last_name}
-              </option>
-            ))}
+            {recipients &&
+              recipients.map((recipient) => (
+                <option key={recipient.id} value={recipient.id}>
+                  {recipient.first_name} {recipient.last_name}
+                </option>
+              ))}
           </Form.Select>
         </Form.Group>
         {/* Delivery Method */}
