@@ -13,7 +13,7 @@ const NewMessage = () => {
   const historyStateRecipient = location.state?.recipient;
 
   const [recipients, setRecipients] = useState();
-  const [selectedRecipient, setSelectedRecipient] = useState();
+  const [selectedRecipientId, setSelectedRecipientId] = useState();
   const [messageContent, setMessageContent] = useState();
   const [sendEmail, setSendEmail] = useState(false);
   const [sendSMS, setSendSMS] = useState(false);
@@ -25,7 +25,7 @@ const NewMessage = () => {
       setRecipients(data);
     };
     if (historyStateRecipient) {
-      setSelectedRecipient(historyStateRecipient.id);
+      setSelectedRecipientId(historyStateRecipient.id);
     }
     if (authToken) {
       getRecipients();
@@ -35,11 +35,11 @@ const NewMessage = () => {
   const handleSendMessage = async (e) => {
     e.preventDefault();
     setLoading(true);
-    console.log({ selectedRecipient, messageContent, sendEmail, sendSMS });
+    // Consider sending raw state data and building object in api file.
     sendNewMessage(authToken, {
       content: messageContent,
       user: currentUser.id,
-      recipient: selectedRecipient,
+      recipient: selectedRecipientId,
       send_email: false, // CHANGE THIS TO STATE VALUE TO SEND
       send_sms: false, // CHANGE THIS TO STATE VALUE TO SEND
     })
@@ -61,8 +61,8 @@ const NewMessage = () => {
           <Form.Label>Recipient</Form.Label>
           <Form.Select
             aria-label="Recipient select"
-            value={selectedRecipient}
-            onChange={(e) => setSelectedRecipient(e.currentTarget.value)}
+            value={selectedRecipientId}
+            onChange={(e) => setSelectedRecipientId(e.currentTarget.value)}
           >
             <option>Select a message recipient</option>
             {recipients &&
