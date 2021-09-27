@@ -10,7 +10,6 @@ const MessageTextBox = ({setContentValue}) => {
       <Form.Label>Write your Appreciation Message</Form.Label>
       <Form.Control as="textarea" rows={3} onChange={(e) => {
       let messageText = e.target.value
-      console.log("in MessageTextBox: ", messageText)
       setContent(messageText)
       setContentValue(messageText)
       }}/>

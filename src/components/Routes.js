@@ -5,6 +5,7 @@ import UserDashboardPage from "../pages/UserDashboardPage";
 import NewMessagePage from "../pages/NewMessagePage.js";
 import RecipientsPage from "../pages/RecipientsPage";
 import Layout from "./Layout";
+import NewMessage from "../pages/NewMessagePage";
 import NotFoundPage from "../pages/NotFoundPage";
 import ProtectedRoute from "./ProtectedRoute/ProtectedRoute";
 
