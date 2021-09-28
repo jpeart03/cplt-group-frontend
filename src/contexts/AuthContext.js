@@ -163,7 +163,7 @@ export const AuthProvider = ({ children }) => {
     if (authToken) {
       setAuthLoading(true);
       axios
-        .put(
+        .patch(
           `${apiUrl}/users/auth/user/`,
           { is_active: false },
           { headers: { Authorization: authToken } }

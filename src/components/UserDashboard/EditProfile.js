@@ -1,6 +1,7 @@
 import { Accordion, Form, Button } from "react-bootstrap"
 import { useEffect, useState } from "react"
 import { useAuth } from "../../contexts/AuthContext";
+import { useHistory } from "react-router-dom";
 
 
 const EditProfileForm = (props) => {
@@ -11,6 +12,7 @@ const EditProfileForm = (props) => {
   const [phone, setPhone]= useState();
 
   const { authToken, currentUser, editUser, deactivate } = useAuth();
+  let history = useHistory();
 
   useEffect( () => 
     {
@@ -86,7 +88,8 @@ const EditProfileForm = (props) => {
         onClick={(e) =>{
           console.log("Delete Profile")
           deactivate()
-        }}>Delete User Profile 
+          history.push("/login")
+        }}>Delete User Account 
       </Button>
 
     </Form>
