@@ -29,8 +29,7 @@ const RecentMessagesList = () => {
       // )
 
       // Sort message Array by ID, decending
-      messageArray.sort((a,b) =>  
-      b.id - a.id)
+      messageArray.sort((a,b) => b.id - a.id)
 
       // truncate the array to the most recent 4 messages
       const slicedArray = messageArray.slice(0, 4)

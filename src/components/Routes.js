@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Home from "../pages/Home";
 import RegisterLoginPage from "../pages/RegisterLoginPage";
 import UserDashboardPage from "../pages/UserDashboardPage";
-import NewMessagePage from "../pages/NewMessagePage.js";
+import NewMessage from "../pages/NewMessagePage.js";
 import RecipientsPage from "../pages/RecipientsPage";
 import AllMessagesPage from "../pages/AllMessagesPage";
 import EditMyAccountPage from "../pages/EditMyAccountPage"
@@ -24,7 +24,7 @@ const Routes = () => {
             path="/dashboard"
             component={UserDashboardPage}
           />
-          <ProtectedRoute exact path="/newmessage" component={NewMessagePage} />
+          <ProtectedRoute exact path="/newmessage" component={NewMessage} />
           <ProtectedRoute exact path="/recipients" component={RecipientsPage} />
           <ProtectedRoute exact path="/allmessages" component={AllMessagesPage} />
           <Route component={NotFoundPage} />
