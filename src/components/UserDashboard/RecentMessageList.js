@@ -1,4 +1,4 @@
-import RecentMessageDetail from "./RecentMessageDetail";
+import MessageDetail from "./MessageDetail";
 import { Button } from "react-bootstrap"
 import { Link } from "react-router-dom"
 import { useState, useEffect } from 'react'
@@ -35,7 +35,7 @@ const RecentMessagesList = () => {
       const slicedArray = messageArray.slice(0, 4)
       return slicedArray.map((message, index) => {
         return (
-            <RecentMessageDetail key={`recent-mess-${index}`} messageObj={message}/>
+            <MessageDetail key={`recent-mess-${index}`} messageObj={message}/>
           )})
         }
     else return null

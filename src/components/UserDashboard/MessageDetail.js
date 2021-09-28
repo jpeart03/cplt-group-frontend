@@ -3,7 +3,7 @@ import { fetchRecipientByID } from '../../api/recipientCalls.js';
 import { useState,  useEffect } from "react"
 import { useAuth } from "../../contexts/AuthContext.js";
 
-const RecentMessageDetail = ({messageObj}) => {
+const MessageDetail = ({messageObj}) => {
   const { authToken } = useAuth();
 
   const [recipientName, setRecipientName] = useState()
@@ -39,4 +39,4 @@ const RecentMessageDetail = ({messageObj}) => {
     )
 }
 
-export default RecentMessageDetail
+export default MessageDetail
