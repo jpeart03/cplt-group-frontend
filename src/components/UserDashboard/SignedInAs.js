@@ -13,10 +13,10 @@ const SignedInAs = () => {
 
 
   if (currentUser) {
-    let username = currentUser.username
+    let userFirstname = currentUser.first_name
     return (
       <div style={{display: 'flex',  justifyContent:'center'}}>
-        <h3>Signed in as {username}</h3>
+        <h3>Signed in as {userFirstname}</h3>
       </div>
     )  
   }
