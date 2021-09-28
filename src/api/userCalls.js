@@ -17,4 +17,7 @@ const deleteUser = async (token)  =>{
   }
 }
 
-export { deleteUser }
+
+export { 
+  deleteUser,
+}

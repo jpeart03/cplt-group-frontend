@@ -4,7 +4,11 @@ import RegisterLoginPage from "../pages/RegisterLoginPage";
 import UserDashboardPage from "../pages/UserDashboardPage";
 import NewMessagePage from "../pages/NewMessagePage.js";
 import RecipientsPage from "../pages/RecipientsPage";
+<<<<<<< HEAD
 import AllMessagesPage from "../pages/AllMessagesPage";
+=======
+import EditMyAccountPage from "../pages/EditMyAccountPage"
+>>>>>>> development
 import Layout from "./Layout";
 // import NewMessage from "../pages/NewMessagePage";
 import NotFoundPage from "../pages/NotFoundPage";
