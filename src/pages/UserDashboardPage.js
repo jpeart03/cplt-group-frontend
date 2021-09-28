@@ -6,7 +6,7 @@ import { useAuth } from "../contexts/AuthContext.js";
 import { fetchRecipientsByUser } from "../api/recipientCalls";
 import { fetchMessagesByUser } from "../api/messageCalls";
 import { RecipientsList } from "../components/Recipients/RecipientList";
-import { UserMessages } from "../components/Messages/MessagetList.js"
+
 
 
 const UserDashboardPage = () => {
