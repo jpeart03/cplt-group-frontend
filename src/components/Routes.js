@@ -4,8 +4,9 @@ import RegisterLoginPage from "../pages/RegisterLoginPage";
 import UserDashboardPage from "../pages/UserDashboardPage";
 import NewMessagePage from "../pages/NewMessagePage.js";
 import RecipientsPage from "../pages/RecipientsPage";
+import AllMessagesPage from "../pages/AllMessagesPage";
 import Layout from "./Layout";
-import NewMessage from "../pages/NewMessagePage";
+// import NewMessage from "../pages/NewMessagePage";
 import NotFoundPage from "../pages/NotFoundPage";
 import ProtectedRoute from "./ProtectedRoute/ProtectedRoute";
 
@@ -24,6 +25,7 @@ const Routes = () => {
           />
           <ProtectedRoute exact path="/newmessage" component={NewMessagePage} />
           <ProtectedRoute exact path="/recipients" component={RecipientsPage} />
+          <ProtectedRoute exact path="/allmessages" component={AllMessagesPage} />
           <Route component={NotFoundPage} />
         </Switch>
       </Layout>

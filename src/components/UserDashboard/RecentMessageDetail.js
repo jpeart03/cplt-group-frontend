@@ -4,18 +4,10 @@ import { useState,  useEffect } from "react"
 import { useAuth } from "../../contexts/AuthContext.js";
 
 const RecentMessageDetail = ({messageObj}) => {
-// const {authToken, currentUser} = useAuth();
-  
-  // dummy token
-  let authToken = 'Token 797a86821008410ca65c556f43de38ef7233514b'
+  const { authToken } = useAuth();
 
   const [recipientName, setRecipientName] = useState()
   const [recLastName, setRecLastName] = useState()
-
-
-  // const date = "May 14, 2021"
-  // const MessageBody = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ultricies est laoreet, auctor ex id, tristique velit."
-  // const recipientName = "Recipient NamePlaceholder"
   
   let recipientID = messageObj.recipient
 
@@ -27,7 +19,7 @@ const RecentMessageDetail = ({messageObj}) => {
 
   useEffect( () => {
     getRecipientInfo(recipientID, authToken)
-  }, [recipientName])
+  }, [recipientName, authToken])
   
 
   let date = messageObj.send_date

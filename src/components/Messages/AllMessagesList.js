@@ -1,14 +1,15 @@
-import RecentMessageDetail from "./RecentMessageDetail";
-import { Button } from "react-bootstrap"
-import { Link } from "react-router-dom"
+import { Button } from 'react-bootstrap'
 import { useState, useEffect } from 'react'
-import { fetchMessagesByUser } from "../../api/messageCalls";
-import { useAuth } from "../../contexts/AuthContext.js"
+import { useAuth } from '../../contexts/AuthContext'
+import { fetchMessagesByUser } from '../../api/messageCalls'
+import { Link } from 'react-router-dom'
+import RecentMessageDetail from '../UserDashboard/RecentMessageDetail'
 
-const RecentMessagesList = () => {
+
+const AllMessagesList = ({messages}) => {
   const [messageArray, setMessageArray] = useState();
   const { authToken } = useAuth();
-  
+
   useEffect( () => {
     const getUserRecords = async ( authToken ) => {
       let userRecipients = await fetchMessagesByUser(authToken)
@@ -21,6 +22,7 @@ const RecentMessagesList = () => {
 
   }, [authToken])
 
+
   const Messages = () => {
     if (messageArray){
       // sort the message array by date (not including time):
@@ -31,10 +33,9 @@ const RecentMessagesList = () => {
       // Sort message Array by ID, decending
       messageArray.sort((a,b) =>  
       b.id - a.id)
+    
 
-      // truncate the array to the most recent 4 messages
-      const slicedArray = messageArray.slice(0, 4)
-      return slicedArray.map((message, index) => {
+      return messageArray.map((message, index) => {
         return (
             <RecentMessageDetail key={`recent-mess-${index}`} messageObj={message}/>
           )})
@@ -44,12 +45,11 @@ const RecentMessagesList = () => {
 
   return(
     <div style={{display: 'flex', flexDirection:'column', justifyContent: 'center'}}>
-      <Button as={Link} to={'/allmessages'}>View All Messages</Button>
-      <h4>Recent Messages</h4>
-      <Messages />
+
+      < Messages />
     </div>
 
   )
 }
 
-export default RecentMessagesList
+export { AllMessagesList } 
