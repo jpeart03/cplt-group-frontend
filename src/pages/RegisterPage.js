@@ -1,4 +1,4 @@
-import RegistrationForm from "../components/RegistrationForm/RegistrationFormNew";
+import RegistrationForm from "../components/RegistrationForm/RegistrationForm";
 import { Redirect, Link } from "react-router-dom";
 import { Card, ListGroup } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
