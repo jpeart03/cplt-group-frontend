@@ -11,6 +11,7 @@ const NewMessageForm = ({
   isLoading,
 }) => {
   const formik = useFormik({
+    enableReinitialize: true,
     initialValues: {
       recipientId: historyStateRecipientId,
       email: false,
@@ -18,7 +19,7 @@ const NewMessageForm = ({
       message: "",
     },
     validationSchema: Yup.object({
-      recipientId: Yup.string().required("You must choose a recipient"),
+      recipientId: Yup.number().required("You must choose a recipient"),
       email: Yup.boolean(),
       sms: Yup.boolean(),
       message: Yup.string()
@@ -57,7 +58,6 @@ const NewMessageForm = ({
           isInvalid={!!formik.errors.recipientId && formik.touched.recipientId}
         >
           <option value="">Select a message recipient</option>
-          <option value="1">Jim Peart</option>
           {recipients &&
             recipients.map((recipient) => (
               <option key={recipient.id} value={recipient.id}>
