@@ -34,6 +34,40 @@ const fetchRecipientByID = async (recipientID, token)  =>{
   }
 }
 
+const fetchRecipientsByIDs = async (idArray, token) => {
+  let options = {
+    method: 'GET', 
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: token
+    },
+    }
+    
+    try {
+      let objArray = await Promise.all(
+          idArray.map(async (recipientID) => {
+            const response = await fetch(`${apiUrl}/users/recipients/${recipientID}/`, options)
+            const data = await response.json()
+            return data
+          })
+          )
+          return objArray
+        }catch (error) {
+          console.log("fetchRecsbyIDserror:", error)
+        }
+  
+//   let objArray = idArray.map(async recipientID => {
+//     try{
+//       let response = await fetch(`${apiUrl}/users/recipients/${recipientID}/`, options)
+//       let data = await response.json()
+//       console.log("fetchRecSbyidS data", data)
+//       return data
+//     } catch (error) {
+//     console.log("fetchRecsbyIDserror:", error)
+//   }
+// })
+//   console.log("objArray: ...... ", objArray)
+  }
 
 const createNewRecipient = async(recipientValues, authToken) => {
   console.log("enterCreateNewRecipient function recipientValues: ", recipientValues, authToken)
@@ -95,6 +129,7 @@ const deleteRecipient = async (recipientID, authToken) => {
       
       export {  fetchRecipientsByUser, 
                 fetchRecipientByID,
+                fetchRecipientsByIDs,
                 createNewRecipient,
                 editRecipient,
                 deleteRecipient,

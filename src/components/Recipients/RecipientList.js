@@ -12,6 +12,7 @@ const RecipientsList = () => {
     const getUserRecords = async () => {
       let userRecipients = await fetchRecipientsByUser(authToken);
       setRecipients(userRecipients);
+      
     };
     if (authToken) {
       getUserRecords();
