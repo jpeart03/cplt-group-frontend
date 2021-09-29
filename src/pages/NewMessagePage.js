@@ -7,7 +7,7 @@ import { fetchRecipientsByUser } from "../api/recipientCalls";
 import { sendNewMessage } from "../api/messageCalls";
 import "./NewMessagePage.scss";
 
-const NewMessage = () => {
+const NewMessagePage = () => {
   const { authToken, currentUser } = useAuth();
   const location = useLocation();
   const historyStateRecipient = location.state?.recipient;
@@ -109,4 +109,4 @@ const NewMessage = () => {
   );
 };
 
-export default NewMessage;
+export default NewMessagePage;
