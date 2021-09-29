@@ -1,4 +1,4 @@
-import RegistrationForm from "../components/RegistrationForm/RegistrationForm";
+import RegistrationForm from "../components/RegistrationForm/RegistrationFormNew";
 import { Redirect, Link } from "react-router-dom";
 import { Card, ListGroup } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
@@ -15,7 +15,7 @@ const RegisterPage = () => {
         <Card className="auth-card">
           <Card.Body>
             <Card.Title>
-              <h4>Register as a New User</h4>
+              <h4>Register as a new User</h4>
             </Card.Title>
             <RegistrationForm />
           </Card.Body>
