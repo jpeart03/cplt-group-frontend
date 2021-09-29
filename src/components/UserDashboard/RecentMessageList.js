@@ -1,4 +1,6 @@
-import RecentMessageDetail from "./RecentMessageDetail";
+import MessageDetail from "./MessageDetail";
+import { Button } from "react-bootstrap"
+import { Link } from "react-router-dom"
 import { useState, useEffect } from 'react'
 import { fetchMessagesByUser } from "../../api/messageCalls";
 import { useAuth } from "../../contexts/AuthContext.js"
@@ -7,36 +9,33 @@ const RecentMessagesList = () => {
   const [messageArray, setMessageArray] = useState();
   const { authToken } = useAuth();
   
-  // dummy token
-  // let authToken = 'Token 797a86821008410ca65c556f43de38ef7233514b'
-
-  
   useEffect( () => {
     const getUserRecords = async ( authToken ) => {
       let userRecipients = await fetchMessagesByUser(authToken)
-      // console.log("getUserRecord runs from useEffect in RecentMessagesList")
+
       setMessageArray(userRecipients)
     }
     if(authToken){
       getUserRecords(authToken)
     }
-    // else{console.log("useEffect in RecentMessagesList has no token ")}
+
   }, [authToken])
 
   const Messages = () => {
     if (messageArray){
-      // sort the array (untested):
-            // messageArray.sort(function(a,b){
-            //   var c = new Date(a.date);
-            //   var d = new Date(b.date);
-            //   return c-d;
-            //   });
+      // sort the message array by date (not including time):
+      // messageArray.sort((a,b) =>  
+      //   Date.parse(b.send_date.split(' ')[0]) - Date.parse(a.send_date.split(' ')[0])
+      // )
+
+      // Sort message Array by ID, decending
+      messageArray.sort((a,b) => b.id - a.id)
 
       // truncate the array to the most recent 4 messages
       const slicedArray = messageArray.slice(0, 4)
       return slicedArray.map((message, index) => {
         return (
-            <RecentMessageDetail key={`recent-mess-${index}`} messageObj={message}/>
+            <MessageDetail key={`recent-mess-${index}`} messageObj={message}/>
           )})
         }
     else return null
@@ -44,6 +43,7 @@ const RecentMessagesList = () => {
 
   return(
     <div style={{display: 'flex', flexDirection:'column', justifyContent: 'center'}}>
+      <Button as={Link} to={'/allmessages'}>View All Messages</Button>
       <h4>Recent Messages</h4>
       <Messages />
     </div>
