@@ -65,6 +65,9 @@ const NewMessageForm = ({
               </option>
             ))}
         </Form.Select>
+        <Form.Control.Feedback type="invalid">
+          {formik.errors.recipientId}
+        </Form.Control.Feedback>
       </Form.Group>
       {/* Delivery Method */}
       <Form.Group className="mb-3">
