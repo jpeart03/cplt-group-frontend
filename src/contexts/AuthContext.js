@@ -8,6 +8,7 @@ const AuthContext = React.createContext();
 export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
+  const [authError, setAuthError] = useState();
   const [authLoading, setAuthLoading] = useState(false);
   const [authToken, setAuthToken] = useState();
   const [currentUser, setCurrentUser] = useState();
@@ -72,7 +73,7 @@ export const AuthProvider = ({ children }) => {
         setAuthToken(`Token ${response.data.key}`);
       })
       .catch((error) => {
-        console.log(error);
+        setAuthError(error);
       })
       .finally(() => {
         setAuthLoading(false);
@@ -96,7 +97,7 @@ export const AuthProvider = ({ children }) => {
         setAuthToken(`Token ${response.data.key}`);
       })
       .catch((error) => {
-        console.log(error);
+        setAuthError(error);
       })
       .finally(() => {
         setAuthLoading(false);
@@ -121,7 +122,7 @@ export const AuthProvider = ({ children }) => {
           setCurrentUser();
         })
         .catch((error) => {
-          console.log(error);
+          setAuthError(error);
         })
         .finally(() => {
           setAuthLoading(false);
@@ -147,7 +148,7 @@ export const AuthProvider = ({ children }) => {
           logout();
         })
         .catch((error) => {
-          console.log(error);
+          setAuthError(error);
         })
         .finally(() => {
           setAuthLoading(false);
@@ -169,11 +170,12 @@ export const AuthProvider = ({ children }) => {
       let data = await response.json();
       setCurrentUser(data);
     } catch (error) {
-      console.log(error);
+      setAuthError(error);
     }
   };
 
   const value = {
+    authError,
     authToken,
     authLoading,
     currentUser,

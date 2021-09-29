@@ -1,8 +1,8 @@
-import LoginForm from "../components/LoginForm/LoginForm";
 import { Redirect, Link } from "react-router-dom";
 import { Card } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
 import "./RegisterLogin.scss";
+import LoginForm from "../components/LoginForm/LoginForm";
 
 const LoginPage = () => {
   const { currentUser } = useAuth();
