@@ -8,6 +8,7 @@ const AuthContext = React.createContext();
 export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
+  const [authError, setAuthError] = useState();
   const [authLoading, setAuthLoading] = useState(false);
   const [authToken, setAuthToken] = useState();
   const [currentUser, setCurrentUser] = useState();
@@ -56,7 +57,6 @@ export const AuthProvider = ({ children }) => {
     last_name,
     phone_number
   ) => {
-
     setAuthLoading(true);
     axios
       .post(`${apiUrl}/users/auth/register/`, {
@@ -73,7 +73,7 @@ export const AuthProvider = ({ children }) => {
         setAuthToken(`Token ${response.data.key}`);
       })
       .catch((error) => {
-        console.log(error);
+        setAuthError(error);
       })
       .finally(() => {
         setAuthLoading(false);
@@ -86,15 +86,6 @@ export const AuthProvider = ({ children }) => {
    * @param {string} password user's password
    */
   const login = (email, password) => {
-    console.log(
-      "login goes with email: ",
-      email,
-      " PASSWORD: ",
-      password,
-      "URL ",
-      `${apiUrl}/users/auth/login/`
-    );
-
     setAuthLoading(true);
     axios
       .post(`${apiUrl}/users/auth/login/`, {
@@ -106,7 +97,7 @@ export const AuthProvider = ({ children }) => {
         setAuthToken(`Token ${response.data.key}`);
       })
       .catch((error) => {
-        console.log(error);
+        setAuthError(error);
       })
       .finally(() => {
         setAuthLoading(false);
@@ -131,7 +122,7 @@ export const AuthProvider = ({ children }) => {
           setCurrentUser();
         })
         .catch((error) => {
-          console.log(error);
+          setAuthError(error);
         })
         .finally(() => {
           setAuthLoading(false);
@@ -157,7 +148,7 @@ export const AuthProvider = ({ children }) => {
           logout();
         })
         .catch((error) => {
-          console.log(error);
+          setAuthError(error);
         })
         .finally(() => {
           setAuthLoading(false);
@@ -165,27 +156,26 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-
-const editUser= async (userValues)  =>{
-  let options = {
-    method: 'PUT', 
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': authToken
-    },
-    body: JSON.stringify(userValues)}
-    
-  try{
-    console.log("editUsercalled")
-    let response = await fetch(`${apiUrl}/users/auth/user/`, options)
-    let data = await response.json()
-    setCurrentUser(data)
-  } catch (error) {
-    console.log(error)
-  }
-}
+  const editUser = async (userValues) => {
+    let options = {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: authToken,
+      },
+      body: JSON.stringify(userValues),
+    };
+    try {
+      let response = await fetch(`${apiUrl}/users/auth/user/`, options);
+      let data = await response.json();
+      setCurrentUser(data);
+    } catch (error) {
+      setAuthError(error);
+    }
+  };
 
   const value = {
+    authError,
     authToken,
     authLoading,
     currentUser,
@@ -193,10 +183,8 @@ const editUser= async (userValues)  =>{
     logout,
     deactivate,
     register,
-    editUser
+    editUser,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
-
-// const { authLoading, currentUser, login, logout, register} = useAuth();
