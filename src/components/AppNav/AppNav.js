@@ -69,7 +69,7 @@ const AppNav = () => {
         className="nav-shadow"
       >
         <Container>
-          <Navbar.Brand>Appreciation</Navbar.Brand>
+          <Navbar.Brand href="/">Appreciation</Navbar.Brand>
           <Navbar.Toggle />
           <Navbar.Collapse
             className={!currentUser ? "justify-content-end" : ""}
