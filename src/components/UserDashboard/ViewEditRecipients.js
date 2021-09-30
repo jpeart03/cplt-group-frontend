@@ -10,7 +10,7 @@ const ViewEditRecipientsButton = () => {
 
   return (
     <div>
-      <Button variant="info"><Link to={'/recipients'} >View/Edit Recipients</Link></Button>
+      <Button variant="success" as={Link} to={'/recipients'} >View/Edit Recipients</Button>
     </div>
   )
 }

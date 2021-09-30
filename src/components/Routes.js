@@ -10,6 +10,7 @@ import NotFoundPage from "../pages/NotFoundPage";
 import ProtectedRoute from "./ProtectedRoute/ProtectedRoute";
 import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
+import { RecentRecipients } from "./Recipients/RecentRecipients";
 
 const Routes = () => {
   return (
@@ -26,16 +27,8 @@ const Routes = () => {
           />
           <ProtectedRoute exact path="/newmessage" component={NewMessagePage} />
           <ProtectedRoute exact path="/recipients" component={RecipientsPage} />
-          <ProtectedRoute
-            exact
-            path="/allmessages"
-            component={AllMessagesPage}
-          />
-          <ProtectedRoute
-            exact
-            path="/editProfile"
-            component={EditMyAccountPage}
-          />
+          <ProtectedRoute exact path="/allmessages" component={AllMessagesPage} />
+          <ProtectedRoute exact path="/editProfile" component={EditMyAccountPage} />
           <Route component={NotFoundPage} />
         </Switch>
       </Layout>
