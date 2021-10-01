@@ -1,11 +1,19 @@
 import { Container, Nav, Navbar } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import LoadingButton from "../LoadingButton/LoadingButton";
+import { useHistory } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import "./AppNav.scss";
 
 const AppNav = () => {
   const { currentUser, authLoading, logout } = useAuth();
+  let history = useHistory();
+
+  const handleLogout = () => {
+    // TODO: consider adding a dialog box to prevent accidentally logging out
+    logout();
+    history.push("/");
+  };
 
   const UserLinks = () => {
     if (currentUser) {
@@ -30,7 +38,7 @@ const AppNav = () => {
               text="Log out"
               variant="outline-primary"
               isLoading={authLoading}
-              onClick={() => logout()}
+              onClick={handleLogout}
             />
           </Nav>
         </>

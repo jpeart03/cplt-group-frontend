@@ -101,7 +101,7 @@ const RegistrationForm = () => {
       <Form.Group className="mb-3" controlId="username">
         <Form.Label>Username</Form.Label>
         <Form.Control
-          name="username"
+          name="userName"
           type="text"
           placeholder="Enter a Username"
           onChange={formik.handleChange}
