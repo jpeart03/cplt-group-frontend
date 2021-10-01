@@ -19,9 +19,6 @@ const RecentRecipients = () => {
     setRecipientIDs(slicedIDArray)
     // get the user objects by id
 
-    let testObj = await fetchRecipientByID(12, authToken)
-    console.log(testObj)
-
     let recentRecipientObjs = await fetchRecipientsByIDs(slicedIDArray, authToken)
     setRecRecObjs(recentRecipientObjs)
   }
