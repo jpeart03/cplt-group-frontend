@@ -46,7 +46,7 @@ const MessageDetail = ({messageObj}) => {
 
   return (
     <div>
-      <Card style={{display:"flex", flexDirection:"row"}}>
+      <Card style={{display:"flex", flexDirection:"row", padding:'2em', margin:'.5em'}}>
         <div style={{width:"18%", marginLeft:"10%"}}><h6>{dateOnly}</h6></div>
         <div style={{width:"45%"}}>
           <h6>To: {recipientName} {recLastName}</h6>
