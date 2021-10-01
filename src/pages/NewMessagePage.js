@@ -1,23 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { Form } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
-import LoadingButton from "../components/LoadingButton/LoadingButton";
 import { useAuth } from "../contexts/AuthContext";
 import { fetchRecipientsByUser } from "../api/recipientCalls";
 import { sendNewMessage } from "../api/messageCalls";
+import NewMessageForm from "../components/NewMessageForm/NewMessageForm";
 import "./NewMessagePage.scss";
 
-const NewMessage = () => {
+const NewMessagePage = () => {
   const { authToken, currentUser } = useAuth();
   const location = useLocation();
   const historyStateRecipient = location.state?.recipient;
 
   const [recipients, setRecipients] = useState();
-  const [selectedRecipientId, setSelectedRecipientId] = useState();
-  const [messageContent, setMessageContent] = useState();
-  const [sendEmail, setSendEmail] = useState(false);
-  const [sendSMS, setSendSMS] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [historyStateRecipientId, setHistoryStateRecipientId] = useState();
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const getRecipients = async () => {
@@ -25,29 +21,28 @@ const NewMessage = () => {
       setRecipients(data);
     };
     if (historyStateRecipient) {
-      setSelectedRecipientId(historyStateRecipient.id);
+      setHistoryStateRecipientId(historyStateRecipient.id);
     }
     if (authToken) {
       getRecipients();
     }
   }, [authToken, historyStateRecipient]);
 
-  const handleSendMessage = async (e) => {
-    e.preventDefault();
-    setLoading(true);
+  const handleSubmit = (recipientId, message, email, sms) => {
+    setIsLoading(true);
     // Consider sending raw state data and building object in api file.
     sendNewMessage(authToken, {
-      content: messageContent,
-      user: currentUser.id,
-      recipient: selectedRecipientId,
+      recipient: recipientId,
+      content: message,
       send_email: false, // CHANGE THIS TO STATE VALUE TO SEND
       send_sms: false, // CHANGE THIS TO STATE VALUE TO SEND
+      user: currentUser.id,
     })
       .catch((error) => {
         console.log(error);
       })
       .finally(() => {
-        setLoading(false);
+        setIsLoading(false);
         // maybe redirect here
       });
   };
@@ -55,58 +50,14 @@ const NewMessage = () => {
   return (
     <div className="message">
       <h1>Send an Appreciation Message</h1>
-      <Form onSubmit={(e) => handleSendMessage(e)}>
-        {/* Recipient Select */}
-        <Form.Group className="mb-3">
-          <Form.Label>Recipient</Form.Label>
-          <Form.Select
-            aria-label="Recipient select"
-            value={selectedRecipientId}
-            onChange={(e) => setSelectedRecipientId(e.currentTarget.value)}
-          >
-            <option>Select a message recipient</option>
-            {recipients &&
-              recipients.map((recipient) => (
-                <option key={recipient.id} value={recipient.id}>
-                  {recipient.first_name} {recipient.last_name}
-                </option>
-              ))}
-          </Form.Select>
-        </Form.Group>
-        {/* Delivery Method */}
-        <Form.Group className="mb-3">
-          <Form.Check
-            type="checkbox"
-            label="Email"
-            checked={sendEmail}
-            onChange={(e) => setSendEmail(e.currentTarget.checked)}
-          />
-          <Form.Check
-            type="checkbox"
-            label="Text Message"
-            checked={sendSMS}
-            onChange={(e) => setSendSMS(e.currentTarget.checked)}
-          />
-        </Form.Group>
-        {/* Message */}
-        <Form.Group className="mb-3">
-          <Form.Label>Write your Appreciation Message</Form.Label>
-          <Form.Control
-            as="textarea"
-            rows={3}
-            value={messageContent}
-            onChange={(e) => setMessageContent(e.currentTarget.value)}
-          />
-        </Form.Group>
-        <LoadingButton
-          variant="primary"
-          type="submit"
-          loading={loading}
-          text="Send"
-        />
-      </Form>
+      <NewMessageForm
+        recipients={recipients}
+        historyStateRecipientId={historyStateRecipientId}
+        handleSubmit={handleSubmit}
+        isLoading={isLoading}
+      />
     </div>
   );
 };
 
-export default NewMessage;
+export default NewMessagePage;
