@@ -53,8 +53,8 @@ const HomeChart = () => {
         <Radar
           name="Message Count"
           dataKey="count"
-          stroke="#20c997"
-          fill="#20c997"
+          stroke="#0d6efd"
+          fill="#0d6efd"
           fillOpacity={0.6}
         />
         <Legend />
