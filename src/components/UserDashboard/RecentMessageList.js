@@ -11,9 +11,9 @@ const RecentMessagesList = () => {
   
   useEffect( () => {
     const getUserRecords = async ( authToken ) => {
-      let userRecipients = await fetchMessagesByUser(authToken)
+      let userMessArray = await fetchMessagesByUser(authToken)
 
-      setMessageArray(userRecipients)
+      setMessageArray(userMessArray)
     }
     if(authToken){
       getUserRecords(authToken)

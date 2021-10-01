@@ -10,6 +10,7 @@ import Layout from "./Layout";
 // import NewMessage from "../pages/NewMessagePage";
 import NotFoundPage from "../pages/NotFoundPage";
 import ProtectedRoute from "./ProtectedRoute/ProtectedRoute";
+import { RecentRecipients } from "./Recipients/RecentRecipients";
 
 const Routes = () => {
   return (
@@ -28,6 +29,7 @@ const Routes = () => {
           <ProtectedRoute exact path="/recipients" component={RecipientsPage} />
           <ProtectedRoute exact path="/allmessages" component={AllMessagesPage} />
           <ProtectedRoute exact path="/editProfile" component={EditMyAccountPage} />
+          
           <Route component={NotFoundPage} />
         </Switch>
       </Layout>

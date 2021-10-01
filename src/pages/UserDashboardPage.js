@@ -6,15 +6,15 @@ import { useAuth } from "../contexts/AuthContext.js";
 import { fetchRecipientsByUser } from "../api/recipientCalls";
 import { fetchMessagesByUser } from "../api/messageCalls";
 import { RecipientsList } from "../components/Recipients/RecipientList";
+import { RecentRecipients } from "../components/Recipients/RecentRecipients.js"
 import { UserMessages } from "../components/Messages/AllMessagesList.js"
 
 
 const UserDashboardPage = () => {
   return (
     <div style={{maxWidth:'75%',  margin:'auto'}}>
-      <p>UserDashboardPage Placeholder</p>
       <SignedInAs/>
-      <RecipientsList />
+      <RecentRecipients />
       <ActionsSection/>
       <RecentMessagesList/>
     </div>
