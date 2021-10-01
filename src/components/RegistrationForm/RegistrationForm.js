@@ -12,12 +12,8 @@ const RegistrationForm = () => {
   const formik = useFormik({
     initialValues: {
       email: "",
-      userName: "",
       password: "",
       confirmPassword: "",
-      firstName: "",
-      lastName: "",
-      phone: "",
     },
     validationSchema: Yup.object({
       email: Yup.string().email("Invalid email address").required("Required"),
@@ -27,20 +23,12 @@ const RegistrationForm = () => {
       confirmPassword: Yup.string()
         .oneOf([Yup.ref("password"), null], "Passwords do not match")
         .required("Required"),
-      phone: Yup.string().matches(
-        /[+]\d{11}/,
-        "Phone number is not the correct format."
-      ),
     }),
     onSubmit: (values) => {
       register(
-        values.userName,
         values.email,
         values.password,
         values.confirmPassword,
-        values.firstName,
-        values.lastName,
-        values.phone
       );
       setIsSubmitted(true);
     },
@@ -95,59 +83,6 @@ const RegistrationForm = () => {
         />
         <Form.Control.Feedback type="invalid">
           {formik.errors.confirmPassword}
-        </Form.Control.Feedback>
-      </Form.Group>
-
-      <Form.Group className="mb-3" controlId="username">
-        <Form.Label>Username</Form.Label>
-        <Form.Control
-          name="username"
-          type="text"
-          placeholder="Enter a Username"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.userName}
-        />
-      </Form.Group>
-
-      <Form.Group className="mb-3" controlId="firstName">
-        <Form.Label>First Name</Form.Label>
-        <Form.Control
-          name="firstName"
-          type="text"
-          placeholder="First Name"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.firstName}
-        />
-      </Form.Group>
-
-      <Form.Group className="mb-3" controlId="lastName">
-        <Form.Label>Last Name</Form.Label>
-        <Form.Control
-          name="lastName"
-          type="text"
-          placeholder="Last Name"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.lastName}
-        />
-      </Form.Group>
-
-      <Form.Group className="mb-3" controlId="phone">
-        <Form.Label>Mobile Number</Form.Label>
-        <Form.Control
-          name="phone"
-          type="text"
-          placeholder="Mobile Number"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.phone}
-          isInvalid={!!formik.errors.phone && formik.touched.phone}
-        />
-        <Form.Text>Please use the following format: +11231231234</Form.Text>
-        <Form.Control.Feedback type="invalid">
-          {formik.errors.phone}
         </Form.Control.Feedback>
       </Form.Group>
 
