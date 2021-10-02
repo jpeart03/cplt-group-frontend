@@ -59,7 +59,7 @@ const Home = () => {
           </Col>
         </Row>
       </section>
-      <section className="section section-cloud">
+      <section className="section section-data">
         <Row>
           <Col lg={6} className="chart">
             <HomeChart />
