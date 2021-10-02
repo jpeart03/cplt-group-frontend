@@ -3,23 +3,30 @@ import { Form } from "react-bootstrap";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useAuth } from "../../contexts/AuthContext";
-import { createNewRecipient } from "../../api/recipientCalls";
+import { createNewRecipient, editRecipient } from "../../api/recipientCalls";
 import LoadingButton from "../LoadingButton/LoadingButton";
 
-const RecipientForm = () => {
+const RecipientForm = ({ recipient, onRefresh, onDeleteRecipient }) => {
   const { authToken, currentUser } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
 
+  const initialRecipientValues = recipient
+    ? recipient
+    : {
+        email: "",
+        phone: "",
+        firstName: "",
+        lastName: "",
+        relationshipType: "Personal",
+      };
+
   const formik = useFormik({
-    initialValues: {
-      email: "",
-      phone: "",
-      firstName: "",
-      lastName: "",
-      relationshipType: "Personal",
-    },
+    initialValues: initialRecipientValues,
+    enableReinitialize: true,
     validationSchema: Yup.object({
-      email: Yup.string().email().required("Required"),
+      email: Yup.string()
+        .email("Must be a valid email address")
+        .required("Required"),
       phone: Yup.string()
         .matches(/[+]\d{11}/, "Phone number is not the correct format")
         .required("Required"),
@@ -37,7 +44,12 @@ const RecipientForm = () => {
         phone: values.phone,
         user: currentUser.id,
       };
-      await createNewRecipient(recipientValues, authToken);
+
+      if (recipient) {
+        recipientValues.id = recipient.id;
+        await editRecipient(recipientValues, authToken);
+      } else await createNewRecipient(recipientValues, authToken);
+      onRefresh();
       setIsLoading(false);
     },
   });
@@ -51,6 +63,7 @@ const RecipientForm = () => {
           type="email"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
+          value={formik.values.email}
           isInvalid={!!formik.errors.email && formik.touched.email}
         />
         <Form.Text className="text-muted">
@@ -60,7 +73,6 @@ const RecipientForm = () => {
           {formik.errors.email}
         </Form.Control.Feedback>
       </Form.Group>
-
       <Form.Group className="mb-3" controlId="phone">
         <Form.Label>Phone Number *</Form.Label>
         <Form.Control
@@ -68,6 +80,7 @@ const RecipientForm = () => {
           type="text"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
+          value={formik.values.phone}
           isInvalid={!!formik.errors.phone && formik.touched.phone}
         />
         <Form.Text className="text-muted">
@@ -77,7 +90,6 @@ const RecipientForm = () => {
           {formik.errors.phone}
         </Form.Control.Feedback>
       </Form.Group>
-
       <Form.Group className="mb-3" controlId="firstName">
         <Form.Label>First Name</Form.Label>
         <Form.Control
@@ -85,10 +97,10 @@ const RecipientForm = () => {
           type="text"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
+          value={formik.values.firstName}
           isInvalid={!!formik.errors.firstName && formik.touched.firstName}
         />
       </Form.Group>
-
       <Form.Group className="mb-3" controlId="lastName">
         <Form.Label>Last Name</Form.Label>
         <Form.Control
@@ -96,16 +108,17 @@ const RecipientForm = () => {
           type="text"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
+          value={formik.values.lastName}
           isInvalid={!!formik.errors.lastName && formik.touched.lastName}
         />
       </Form.Group>
-
       <Form.Group className="mb-3" controlId="relationshipType">
         <Form.Label>Relationship Type</Form.Label>
         <Form.Select
           name="relationshipType"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
+          value={formik.values.relationshipType}
           isInvalid={
             !!formik.errors.relationshipType && formik.touched.relationshipType
           }
@@ -114,13 +127,22 @@ const RecipientForm = () => {
           <option value="Professional">Professional</option>
         </Form.Select>
       </Form.Group>
-
       <LoadingButton
+        className="me-2"
         variant="primary"
         type="submit"
         text="Submit"
         isLoading={isLoading}
       />
+      {!!recipient && (
+        <LoadingButton
+          variant="danger"
+          type="button"
+          text="Delete Recipient"
+          onClick={onDeleteRecipient}
+          isLoading={isLoading}
+        />
+      )}
     </Form>
   );
 };

@@ -1,81 +1,79 @@
 import { Accordion } from "react-bootstrap";
 import { useEffect, useState } from "react";
-import SelectRecipient from "../components/Messages/SelectRecipient";
-import NewRecipientForm from "../components/Recipients/NewRecipientForm.js";
-import EditRecipientForm from "../components/Recipients/EditRecipient";
 import RecipientForm from "../components/Recipients/RecipientForm";
+import SelectRecipient from "../components/Recipients/SelectRecipient";
 import { useAuth } from "../contexts/AuthContext";
-import { fetchRecipientsByUser } from "../api/recipientCalls";
+import { fetchRecipientsByUser, deleteRecipient } from "../api/recipientCalls";
 
 const RecipientsPage = () => {
-  const [selectedRecipient, setSelectedRecipient] = useState();
-  const [recEmail, setRecEmail] = useState();
+  const [selectedRecipient, setSelectedRecipient] = useState(0);
   const [recipients, setRecipients] = useState();
-  const { authToken, currentUser } = useAuth();
-  const [refreshRecCall, setRefreshRecCall] = useState(false);
+  const { authToken } = useAuth();
+
+  const getRecipients = async () => {
+    let userRecipients = await fetchRecipientsByUser(authToken);
+    setRecipients(userRecipients);
+  };
 
   useEffect(() => {
-    const getUserRecords = async () => {
-      let userRecipients = await fetchRecipientsByUser(authToken);
-      setRecipients(userRecipients);
-    };
-    // console.log("useEffect", authToken)
     if (authToken) {
-      getUserRecords();
+      getRecipients();
     }
   }, [authToken]);
 
-  const resetRecDropDown = () => {
-    document.getElementById("select-recipient-dropdown").selectedIndex = "0";
+  const handleSelectRecipient = (event) => {
+    let selectedRecipientId = parseInt(event.target.value);
+    let foundRecipient = recipients.find(
+      (recipient) => recipient.id === selectedRecipientId
+    );
+    let formattedRecipient = foundRecipient
+      ? {
+          id: foundRecipient.id,
+          email: foundRecipient.email,
+          phone: foundRecipient.phone,
+          firstName: foundRecipient.first_name,
+          lastName: foundRecipient.last_name,
+          relationshipType: foundRecipient.relationship_type,
+        }
+      : null;
+
+    setSelectedRecipient(formattedRecipient);
   };
 
-  const RecipientInfo = () => {
-    if (selectedRecipient) {
-      let thisRec = JSON.parse(selectedRecipient);
-      console.log("thisRec: ", thisRec);
-      return (
-        <div>
-          <p>
-            Name: {thisRec.first_name} {thisRec.last_name}
-          </p>
-          <p>Email: {thisRec.email}</p>
-          <p>Phone: {thisRec.phone}</p>
-          <p>Relationship Type: {thisRec.relationship_type}</p>
-        </div>
-      );
-    } else return null;
+  const refreshRecipients = () => {
+    getRecipients();
+  };
+
+  const handleDeleteRecipient = async () => {
+    await deleteRecipient(selectedRecipient.id, authToken);
+    setSelectedRecipient(0);
+    refreshRecipients();
   };
 
   return (
     <div>
-      <h3>Recipients</h3>
-      {/* REVEAL:: New Recipient Form */}
-      <Accordion defaultActiveKey="1">
+      <h1>Recipients</h1>
+      <Accordion defaultActiveKey="0">
         <Accordion.Item eventKey="0">
-          <Accordion.Header>Create a New Recipient</Accordion.Header>
+          <Accordion.Header>Create a new recipient</Accordion.Header>
           <Accordion.Body>
-            {/* <NewRecipientForm
-              setRefreshRecCall={setRefreshRecCall}
-              refreshRecCall={refreshRecCall}
-            /> */}
-            <RecipientForm />
+            <RecipientForm onRefresh={refreshRecipients} />
           </Accordion.Body>
         </Accordion.Item>
         <Accordion.Item eventKey="1">
-          <Accordion.Header>Edit Recipients</Accordion.Header>
+          <Accordion.Header>Edit a recipient</Accordion.Header>
           <Accordion.Body>
-            <RecipientInfo />
             <SelectRecipient
-              setRec={setSelectedRecipient}
-              refreshRecCall={refreshRecCall}
+              recipients={recipients}
+              handleSelect={handleSelectRecipient}
             />
-            <EditRecipientForm
-              selectedRecipient={selectedRecipient}
-              resetRecDropDown={resetRecDropDown}
-              setSelectedRecipient={setSelectedRecipient}
-              refreshRecCall={refreshRecCall}
-              setRefreshRecCall={setRefreshRecCall}
-            />
+            {!!selectedRecipient && (
+              <RecipientForm
+                recipient={selectedRecipient}
+                onDeleteRecipient={handleDeleteRecipient}
+                onRefresh={refreshRecipients}
+              />
+            )}
           </Accordion.Body>
         </Accordion.Item>
       </Accordion>
