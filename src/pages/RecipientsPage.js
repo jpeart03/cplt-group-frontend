@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import SelectRecipient from "../components/Messages/SelectRecipient";
 import NewRecipientForm from "../components/Recipients/NewRecipientForm.js";
 import EditRecipientForm from "../components/Recipients/EditRecipient";
+import RecipientForm from "../components/Recipients/RecipientForm";
 import { useAuth } from "../contexts/AuthContext";
 import { fetchRecipientsByUser } from "../api/recipientCalls";
 
@@ -53,10 +54,11 @@ const RecipientsPage = () => {
         <Accordion.Item eventKey="0">
           <Accordion.Header>Create a New Recipient</Accordion.Header>
           <Accordion.Body>
-            <NewRecipientForm
+            {/* <NewRecipientForm
               setRefreshRecCall={setRefreshRecCall}
               refreshRecCall={refreshRecCall}
-            />
+            /> */}
+            <RecipientForm />
           </Accordion.Body>
         </Accordion.Item>
         <Accordion.Item eventKey="1">

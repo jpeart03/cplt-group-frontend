@@ -1,11 +1,15 @@
-import React from "react";
-import { Form, Button } from "react-bootstrap";
+import { useState } from "react";
+import { Form } from "react-bootstrap";
 import { useFormik } from "formik";
-import { useAuth } from "../../contexts/AuthContext";
 import * as Yup from "yup";
+import { useAuth } from "../../contexts/AuthContext";
+import { createNewRecipient } from "../../api/recipientCalls";
+import LoadingButton from "../LoadingButton/LoadingButton";
 
 const RecipientForm = () => {
-  const { currentUser } = useAuth();
+  const { authToken, currentUser } = useAuth();
+  const [isLoading, setIsLoading] = useState(false);
+
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -14,103 +18,109 @@ const RecipientForm = () => {
       lastName: "",
       relationshipType: "Personal",
     },
-    validationSchema: Yup.object({}),
+    validationSchema: Yup.object({
+      email: Yup.string().email().required("Required"),
+      phone: Yup.string()
+        .matches(/[+]\d{11}/, "Phone number is not the correct format")
+        .required("Required"),
+      firstName: Yup.string().max(100, "Must be fewer than 100 characters"),
+      lastName: Yup.string().max(100, "Must be fewer than 100 characters"),
+      relationshipType: Yup.string().required("Required"),
+    }),
+    onSubmit: async (values) => {
+      setIsLoading(true);
+      let recipientValues = {
+        first_name: values.firstName,
+        last_name: values.lastName,
+        relationship_type: values.relationshipType,
+        email: values.email,
+        phone: values.phone,
+        user: currentUser.id,
+      };
+      await createNewRecipient(recipientValues, authToken);
+      setIsLoading(false);
+    },
   });
 
   return (
-    <Form
-      id="newRecForm"
-      method="POST"
-      onSubmit={(e) => {
-        e.preventDefault();
-        let recipientValues = {
-          first_name: firstName,
-          last_name: lastName,
-          relationship_type: relationshipType,
-          email: email,
-          phone: phone,
-          user: currentUser.id,
-        };
-        console.log("NewRecForm onsubmit recipientValues: ", recipientValues);
-        createNewRecipient(recipientValues, authToken);
-        props.setRefreshRecCall(!props.refreshRecCall);
-        // toast successmessage here
-        document.getElementById("newRecForm").reset();
-      }}
-    >
-      <Form.Group className="mb-3" controlId="formFirstName">
-        <Form.Label>First Name</Form.Label>
+    <Form id="newRecForm" onSubmit={formik.handleSubmit}>
+      <Form.Group className="mb-3" controlId="email">
+        <Form.Label>Email address *</Form.Label>
         <Form.Control
-          type="text"
-          placeholder={firstName}
-          onChange={(e) => {
-            let value = e.target.value;
-            setFirstName(value);
-          }}
-        />
-      </Form.Group>
-
-      <Form.Group className="mb-3" controlId="formLastName">
-        <Form.Label>Last Name</Form.Label>
-        <Form.Control
-          type="text"
-          placeholder={lastName}
-          onChange={(e) => {
-            let value = e.target.value;
-            setLastName(value);
-          }}
-        />
-      </Form.Group>
-
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Email address</Form.Label>
-        <Form.Control
+          name="email"
           type="email"
-          placeholder={email}
-          onChange={(e) => {
-            let value = e.target.value;
-            setEmail(value);
-          }}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          isInvalid={!!formik.errors.email && formik.touched.email}
         />
         <Form.Text className="text-muted">
           We'll never share your recipient's email with anyone else.
         </Form.Text>
+        <Form.Control.Feedback type="invalid">
+          {formik.errors.email}
+        </Form.Control.Feedback>
       </Form.Group>
 
-      <Form.Group className="mb-3" controlId="formRelationshipType">
-        <Form.Label>Relationship Type</Form.Label>
-        {/* <Form.Control type="email" placeholder="Relationship Type" /> */}
-        <Form.Select
-          aria-label="Default select example"
-          onChange={(e) => {
-            let relationshipSelected = e.target.value;
-            // console.log("in SelectRecipient: ", recipientSelected)
-            setRelationshipType(relationshipSelected);
-          }}
-        >
-          <option>Personal</option>
-          <option>Professional</option>
-        </Form.Select>
-      </Form.Group>
-
-      <Form.Group className="mb-3" controlId="formPhoneNum">
-        <Form.Label>Phone Number</Form.Label>
+      <Form.Group className="mb-3" controlId="phone">
+        <Form.Label>Phone Number *</Form.Label>
         <Form.Control
+          name="phone"
           type="text"
-          placeholder={phone}
-          onChange={(e) => {
-            let value = e.target.value;
-            setPhone(value);
-          }}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          isInvalid={!!formik.errors.phone && formik.touched.phone}
         />
         <Form.Text className="text-muted">
           We'll never share your recipient's phone number with anyone else.
         </Form.Text>
+        <Form.Control.Feedback type="invalid">
+          {formik.errors.phone}
+        </Form.Control.Feedback>
       </Form.Group>
 
-      <Button variant="primary" type="submit">
-        Submit
-      </Button>
+      <Form.Group className="mb-3" controlId="firstName">
+        <Form.Label>First Name</Form.Label>
+        <Form.Control
+          name="firstName"
+          type="text"
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          isInvalid={!!formik.errors.firstName && formik.touched.firstName}
+        />
+      </Form.Group>
+
+      <Form.Group className="mb-3" controlId="lastName">
+        <Form.Label>Last Name</Form.Label>
+        <Form.Control
+          name="lastName"
+          type="text"
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          isInvalid={!!formik.errors.lastName && formik.touched.lastName}
+        />
+      </Form.Group>
+
+      <Form.Group className="mb-3" controlId="relationshipType">
+        <Form.Label>Relationship Type</Form.Label>
+        <Form.Select
+          name="relationshipType"
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          isInvalid={
+            !!formik.errors.relationshipType && formik.touched.relationshipType
+          }
+        >
+          <option value="Personal">Personal</option>
+          <option value="Professional">Professional</option>
+        </Form.Select>
+      </Form.Group>
+
+      <LoadingButton
+        variant="primary"
+        type="submit"
+        text="Submit"
+        isLoading={isLoading}
+      />
     </Form>
   );
 };

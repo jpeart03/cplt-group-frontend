@@ -3,35 +3,39 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useAuth } from "../../contexts/AuthContext";
 import { fetchMessagesByUser } from "../../api/messageCalls";
-import { fetchRecipientByID, fetchRecipientsByIDs } from "../../api/recipientCalls";
-
+import {
+  fetchRecipientByID,
+  fetchRecipientsByIDs,
+} from "../../api/recipientCalls";
 
 const RecentRecipients = () => {
-  const [ recipientIDs, setRecipientIDs] = useState();
+  const [recipientIDs, setRecipientIDs] = useState();
   // RECent RECipient Objects (truncated list)
-  const [ recRecObjs, setRecRecObjs] = useState()
+  const [recRecObjs, setRecRecObjs] = useState();
   const { authToken } = useAuth();
 
   const findRecentRecipients = async (messages) => {
-    const unique = [...new Set(messages.map(item => item.recipient))]
-    const slicedIDArray = unique.slice(0, 4)
-    console.log("SLICED", slicedIDArray)
-    setRecipientIDs(slicedIDArray)
+    const unique = [...new Set(messages.map((item) => item.recipient))];
+    const slicedIDArray = unique.slice(0, 4);
+    console.log("SLICED", slicedIDArray);
+    setRecipientIDs(slicedIDArray);
     // get the user objects by id
 
-    let recentRecipientObjs = await fetchRecipientsByIDs(slicedIDArray, authToken)
-    setRecRecObjs(recentRecipientObjs)
-  }
+    let recentRecipientObjs = await fetchRecipientsByIDs(
+      slicedIDArray,
+      authToken
+    );
+    setRecRecObjs(recentRecipientObjs);
+  };
 
   useEffect(() => {
     const getUserRecords = async () => {
       // get all messages
       let userMessArray = await fetchMessagesByUser(authToken);
       // sort by ID (most recent -highestID- first in the array)
-      userMessArray.sort((a,b) => b.id - a.id)
+      userMessArray.sort((a, b) => b.id - a.id);
       // get the recipient IDs in order (newest to oldest)without any duplicates
-      await findRecentRecipients(userMessArray)
-      
+      await findRecentRecipients(userMessArray);
     };
     if (authToken) {
       getUserRecords();
@@ -43,22 +47,32 @@ const RecentRecipients = () => {
       <div>
         <h5>Recently Messaged Recipients: </h5>
         <ListGroup variant="flush">
-        {recRecObjs.map((recipient) => {
-          const newRecipientMessage = {
-            pathname: "/newmessage",
-            state: { recipient: recipient },
-          };
-          return (
-            // <div style={{display:"flex",  alignItems:"center"}}>
-            <ListGroup.Item style={{display:"flex",  alignItems:"center"}}>
-              <h6 style={{width:"20%"}}>{recipient.first_name} {recipient.last_name}{" "}</h6>
-                <Button size="sm" variant="primary" as={Link} to={newRecipientMessage}>
+          {recRecObjs.map((recipient) => {
+            const newRecipientMessage = {
+              pathname: "/newmessage",
+              state: { recipient: recipient },
+            };
+            return (
+              // <div style={{display:"flex",  alignItems:"center"}}>
+              <ListGroup.Item
+                key={recipient.id}
+                style={{ display: "flex", alignItems: "center" }}
+              >
+                <h6 style={{ width: "20%" }}>
+                  {recipient.first_name} {recipient.last_name}{" "}
+                </h6>
+                <Button
+                  size="sm"
+                  variant="primary"
+                  as={Link}
+                  to={newRecipientMessage}
+                >
                   Write {recipient.first_name} a new Message
                 </Button>
-            </ListGroup.Item>
-            // </div>
-          );
-        })}
+              </ListGroup.Item>
+              // </div>
+            );
+          })}
         </ListGroup>
       </div>
     );
