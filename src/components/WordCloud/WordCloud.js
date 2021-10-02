@@ -38,7 +38,7 @@ const WordCloud = () => {
     maxSize={100}
     tags={data}
     className="simple-cloud"
-    style={{ width: 800, textAlign: 'center' }}
+    style={{ width: 1000, textAlign: 'center' }}
   />
 )
 
