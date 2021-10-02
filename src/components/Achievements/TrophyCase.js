@@ -6,6 +6,8 @@ import "./TrophyCase.scss"
 import plainBronzeTrophyImg from "./achievementImages/plain-trophy-01.svg"
 import plainSilverTrophyImg from "./achievementImages/plain-trophy-02.svg"
 import plainGoldTrophyImg from "./achievementImages/plain-trophy-03.svg"
+import shortSweetShortImg from "./achievementImages/short-sweet-short-06.svg"
+import blueTrophy from "./achievementImages/blue-trophy-05.svg"
 import trophyObjsArray from "./trophyObjs"
 import { useAuth } from "../../contexts/AuthContext"
 import getTrophyBoolArray from "./getTrophyBoolArray"
@@ -13,37 +15,18 @@ import getTrophyBoolArray from "./getTrophyBoolArray"
 
 // grid of achievement trophies
 // View all available achievements -> modal
-let userAchBoolArrayDUMMY = [true
-  , false, true, false, true
-]
-
-// let trophyObjects=[
-  //   { achImage: plainBronzeTrophyImg,
-  //     achName : "First Achievement",
-  //     achDesc : "The description for Bronze Plain Achievement ONE"
-  //   },
-  //   { achImage: plainSilverTrophyImg,
-  //     achName : "Second Achievement",
-  //     achDesc : "The description for Silver Plain Achievement TWO"
-  //   },
-  //   { achImage: plainGoldTrophyImg,
-  //     achName : "Third Achievement",
-  //     achDesc : "The description for Gold Plain Achievement THREE"
-  //   },
-  //   { achImage: plainSilverTrophyImg,
-  //     achName : "Fourth Achievement",
-  //     achDesc : "The description for Silver Plain Achievement FOUR"
-  //   },
-  //   { achImage: plainSilverTrophyImg,
-  //     achName : "Fifth Achievement",
-  //     achDesc : "The description for Silver Plain Achievement FIVE"
-  //   },
-  // ]
   
   let Trophies = () => {
     const { currentUser } = useAuth();
-    let userAchBoolArray = getTrophyBoolArray(currentUser)
+    // let userAchBoolArray = getTrophyBoolArray(currentUser)
 
+    // dummy bool array
+    let userAchBoolArray = [
+      true, false, true, false, true,
+      true, true, true, false, true,
+      true, false, true, false, true,
+      true, false, true, false, true
+    ]
 
     return (
       userAchBoolArray.map((boolValue, index) => {

@@ -1,65 +1,62 @@
+plainSilverTrophyImg
+plainBronzeTrophyImg
+plainGoldTrophyImg
 
-    {"achName": "Cassanova 3",
-  "achImage": {},
+    
+
+  {"achName": "dickens",
+  "achImage": blueTrophy,
   "achDesc": "THIS IS THE PLACEHOLDER"},
 
-    {"achName": "short and sweet",
-  "achImage": {},
+  {"achName": "it takes committment 1",
+  "achImage": plainBronzeTrophyImg,
   "achDesc": "THIS IS THE PLACEHOLDER"},
 
-    {"achName": "dickens",
-  "achImage": {},
+  {"achName": "it takes committment 2",
+  "achImage": plainSilverTrophyImg,
   "achDesc": "THIS IS THE PLACEHOLDER"},
 
-    {"achName": "it takes committment 1",
-  "achImage": {},
+  {"achName": "it takes committment 3",
+  "achImage": plainGoldTrophyImg,
   "achDesc": "THIS IS THE PLACEHOLDER"},
 
-    {"achName": "it takes committment 2",
-  "achImage": {},
+  {"achName": "sleep mode",
+ " achImage":  blueTrophy,
   "achDesc": "THIS IS THE PLACEHOLDER"},
 
-    {"achName": "it takes committment 3",
-  "achImage": {},
+  {"achName": "lunch break",
+  "achImage":  blueTrophy,
   "achDesc": "THIS IS THE PLACEHOLDER"},
 
-    {"achName": "sleep mode",
- " achImage": {},
+  {"achName": "forget me not",
+  "achImage":  blueTrophy,
   "achDesc": "THIS IS THE PLACEHOLDER"},
 
-    {"achName": "lunch break",
-  "achImage": {},
+  {"achName": "networking 1",
+  "achImage": plainBronzeTrophyImg,
   "achDesc": "THIS IS THE PLACEHOLDER"},
 
-    {"achName": "forget me not",
-  "achImage": {},
+  {"achName": "networking 2",
+  "achImage": plainSilverTrophyImg,
   "achDesc": "THIS IS THE PLACEHOLDER"},
 
-    {"achName": "networking 1",
-  "achImage": {},
+  {"achName": "networking 3",
+  "achImage": plainGoldTrophyImg,
   "achDesc": "THIS IS THE PLACEHOLDER"},
 
-    {"achName": "networking 2",
-  "achImage": {},
+  {"achName": "sentimental",
+  "achImage":  blueTrophy,
   "achDesc": "THIS IS THE PLACEHOLDER"},
 
-    {"achName": "networking 3",
-  "achImage": {},
+  {"achName": "what year is it",
+  "achImage":  blueTrophy,
   "achDesc": "THIS IS THE PLACEHOLDER"},
 
-    {"achName": "sentimental",
-  "achImage": {},
+  {"achName": "nerd",
+  "achImage":  blueTrophy,
   "achDesc": "THIS IS THE PLACEHOLDER"},
 
-    {"achName": "what year is it",
-  "achImage": {},
-  "achDesc": "THIS IS THE PLACEHOLDER"},
-
-    {"achName": "nerd",
-  "achImage": {},
-  "achDesc": "THIS IS THE PLACEHOLDER"},
-
-    {"achName": "old school",
-  "achImage": {},
+  {"achName": "old school",
+  "achImage":  blueTrophy,
   "achDesc": "THIS IS THE PLACEHOLDER"}
 ]
