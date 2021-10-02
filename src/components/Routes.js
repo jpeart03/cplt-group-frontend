@@ -26,9 +26,17 @@ const Routes = () => {
             component={UserDashboardPage}
           />
           <ProtectedRoute exact path="/newmessage" component={NewMessagePage} />
-          <ProtectedRoute exact path="/recipients" component={RecipientsPage} />
-          <ProtectedRoute exact path="/allmessages" component={AllMessagesPage} />
-          <ProtectedRoute exact path="/editProfile" component={EditMyAccountPage} />
+          <Route exact path="/recipients" component={RecipientsPage} />
+          <ProtectedRoute
+            exact
+            path="/allmessages"
+            component={AllMessagesPage}
+          />
+          <ProtectedRoute
+            exact
+            path="/editProfile"
+            component={EditMyAccountPage}
+          />
           <Route component={NotFoundPage} />
         </Switch>
       </Layout>

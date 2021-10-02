@@ -8,17 +8,19 @@ import { fetchMessagesByUser } from "../api/messageCalls";
 import { RecipientsList } from "../components/Recipients/RecipientList";
 import { RecentRecipients } from "../components/Recipients/RecentRecipients.js"
 import { UserMessages } from "../components/Messages/AllMessagesList.js"
+import TrophyCase from "../components/Achievements/TrophyCase";
 
 
 const UserDashboardPage = () => {
   return (
-    <div style={{maxWidth:'75%',  margin:'0 auto 100px auto'}}>
+    <div style={{maxWidth:'75%',  margin:'0 auto 200px auto'}}>
       <SignedInAs/>
       <RecentRecipients />
       <ActionsSection/>
       <RecentMessagesList/>
+      <TrophyCase/>
     </div>
-  )
-}
+  );
+};
 
-export default UserDashboardPage
+export default UserDashboardPage;
