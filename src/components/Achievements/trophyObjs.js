@@ -3,6 +3,8 @@ import plainSilverTrophyImg from "./achievementImages/plain-trophy-02.svg"
 import plainGoldTrophyImg from "./achievementImages/plain-trophy-03.svg"
 import shortSweetShortImg from "./achievementImages/short-sweet-short-06.svg"
 import blueTrophy from "./achievementImages/blue-trophy-05.svg"
+import dickensTrophy from "./achievementImages/dickens-04.svg"
+import darkblueTrophy from "./achievementImages/dark-blue-trophy.svg"
 
 
 let trophyObjsArray = [
@@ -41,7 +43,7 @@ let trophyObjsArray = [
 
   // 8
   {"achName": "Dickens",
-  "achImage": blueTrophy,
+  "achImage": dickensTrophy,
   "achDesc": "Send a message with > 500 characters"},
 
   // 9
@@ -92,7 +94,7 @@ let trophyObjsArray = [
 
   // 18
   {"achName": "Sentimental",
-  "achImage":  blueTrophy,
+  "achImage":  darkblueTrophy,
   "achDesc": "Visit the message history page"},
 
   // 19

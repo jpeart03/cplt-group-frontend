@@ -8,6 +8,8 @@ import plainSilverTrophyImg from "./achievementImages/plain-trophy-02.svg"
 import plainGoldTrophyImg from "./achievementImages/plain-trophy-03.svg"
 import shortSweetShortImg from "./achievementImages/short-sweet-short-06.svg"
 import blueTrophy from "./achievementImages/blue-trophy-05.svg"
+
+import darkblueTrophy from "./achievementImages/dark-blue-trophy.svg"
 import trophyObjsArray from "./trophyObjs"
 import { useAuth } from "../../contexts/AuthContext"
 import getTrophyBoolArray from "./getTrophyBoolArray"
