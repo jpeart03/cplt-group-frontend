@@ -41,32 +41,23 @@ export const AuthProvider = ({ children }) => {
 
   /**
    * Function to register a new user
-   * @param {string} username
    * @param {string} email
    * @param {string} password1
    * @param {string} password2
    */
 
-  // username, email, password1, password2, first_name, last_name, phone_number
+  // email, password1, password2
   const register = (
-    username,
     email,
     password1,
     password2,
-    first_name,
-    last_name,
-    phone_number
   ) => {
     setAuthLoading(true);
     axios
       .post(`${apiUrl}/users/auth/register/`, {
-        username: username,
         email: email,
         password1: password1,
         password2: password2,
-        first_name: first_name,
-        last_name: last_name,
-        phone_number: phone_number,
       })
       .then((response) => {
         localStorage.setItem(storageKey, response.data.key);
