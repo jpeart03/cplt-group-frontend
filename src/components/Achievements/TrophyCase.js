@@ -36,7 +36,6 @@ import getTrophyBoolArray from "./getTrophyBoolArray"
           let xImage = xTrophy.achImage
           let xName = xTrophy.achName
           let xDesc = xTrophy.achDesc
-          console.log(xImage, xName, xDesc)
           return (
             <AchievementCard achImage={xImage} achName={xName} achDesc={xDesc}/>
             )

@@ -7,107 +7,108 @@ import blueTrophy from "./achievementImages/blue-trophy-05.svg"
 
 let trophyObjsArray = [
   // 1
-  {"achName": "Worlds Best Boss 1",
+  {"achName": "Worlds Best Boss - Level 1",
   "achImage": plainBronzeTrophyImg,
-  "achDesc": "THIS IS THE PLACEHOLDER"},
+  "achDesc": 'Send 5 messages to "Professional" relationships'},
 // 2
-  {"achName": "Worlds Best Boss 2",
+  {"achName": "Worlds Best Boss - Level 2",
   "achImage": plainSilverTrophyImg,
-  "achDesc": "THIS IS THE PLACEHOLDER"},
+  "achDesc": 'Send 25 messages to "Professional" relationships'},
 // 3
-  {"achName": "Worlds Best Boss 3",
+  {"achName": "Worlds Best Boss - Level 3",
   "achImage": plainGoldTrophyImg,
-  "achDesc": "THIS IS THE PLACEHOLDER"},
+  "achDesc": 'Send 100 messages to "Professional" relationships'},
 
 // 4
-  {"achName": "Cassanova 1",
+  {"achName": "Cassanova - Level 1",
   "achImage": plainBronzeTrophyImg,
-  "achDesc": "THIS IS THE PLACEHOLDER"},
+  "achDesc": 'Send 5 messages to "Personal" relationships'},
   
   // 5
-  {"achName": "Cassanova 2",
+  {"achName": "Cassanova - Level 2",
   "achImage": plainSilverTrophyImg,
-  "achDesc": "THIS IS THE PLACEHOLDER"},
+  "achDesc": 'Send 25 messages to "Personal" relationships'},
 
   // 6
-  {"achName": "Cassanova 3",
+  {"achName": "Cassanova - Level 3",
   "achImage": plainGoldTrophyImg,
-  "achDesc": "THIS IS THE PLACEHOLDER"},
+  "achDesc": 'Send 100 messages to "Personal" relationships'},
 
   // 7
-    {"achName": "short and sweet",
+    {"achName": "Short & Sweet",
   "achImage": shortSweetShortImg,
-  "achDesc": "THIS IS THE PLACEHOLDER"},
+  "achDesc": "Send a message with 10 characters or fewer"},
 
   // 8
-  {"achName": "dickens",
+  {"achName": "Dickens",
   "achImage": blueTrophy,
-  "achDesc": "THIS IS THE PLACEHOLDER"},
+  "achDesc": "Send a message with > 500 characters"},
 
   // 9
-  {"achName": "it takes committment 1",
+  {"achName": "It Takes Committment - Level 1",
   "achImage": plainBronzeTrophyImg,
-  "achDesc": "THIS IS THE PLACEHOLDER"},
+  "achDesc": "Send at least 1 message/week for 5 consecutive weeks"},
 
   // 10
-  {"achName": "it takes committment 2",
+  {"achName": "It Takes Committment - Level 2",
   "achImage": plainSilverTrophyImg,
-  "achDesc": "THIS IS THE PLACEHOLDER"},
+  "achDesc": "Send at least 1 message/week for 5 consecutive weeks"},
 
   // 11
-  {"achName": "it takes committment 3",
+  {"achName": "It Takes Committment - Level 3",
   "achImage": plainGoldTrophyImg,
-  "achDesc": "THIS IS THE PLACEHOLDER"},
+  "achDesc": "Send at least 1 message/week for 5 consecutive weeks"},
 
   // 12
-  {"achName": "sleep mode",
+  {"achName": "Hope Their Phone is in Sleep Mode",
  " achImage":  blueTrophy,
-  "achDesc": "THIS IS THE PLACEHOLDER"},
+  "achDesc": "Send a message between 12:00 am and 5:00 am"},
 
   // 13
-  {"achName": "lunch break",
+  {"achName": "Lunch Break",
   "achImage":  blueTrophy,
-  "achDesc": "THIS IS THE PLACEHOLDER"},
+  "achDesc": "Send a message between 11:00 am and 1:00 pm"},
 
   // 14
-  {"achName": "forget me not",
+  {"achName": "Forget-Me-Not",
   "achImage":  blueTrophy,
-  "achDesc": "THIS IS THE PLACEHOLDER"},
+  "achDesc": 'Send a message to a "Personal" recipient after >2 weeks of ghosting them'},
 
   // 15
-  {"achName": "networking 1",
+  {"achName": "Networking- Level 1",
   "achImage": plainBronzeTrophyImg,
-  "achDesc": "THIS IS THE PLACEHOLDER"},
+  "achDesc": 'Create 1 "Professional" recipient'
+},
 
   // 16
-  {"achName": "networking 2",
+  {"achName": "Networking - Level 2",
   "achImage": plainSilverTrophyImg,
-  "achDesc": "THIS IS THE PLACEHOLDER"},
+  "achDesc": 'Create 10 "Professional" recipient'},
 
   // 17
-  {"achName": "networking 3",
+  {"achName": "Networking - Level 3",
   "achImage": plainGoldTrophyImg,
-  "achDesc": "THIS IS THE PLACEHOLDER"},
+  "achDesc": 'Create 100 "Professional" recipient'},
 
   // 18
-  {"achName": "sentimental",
+  {"achName": "Sentimental",
   "achImage":  blueTrophy,
-  "achDesc": "THIS IS THE PLACEHOLDER"},
+  "achDesc": "Visit the message history page"},
 
   // 19
-  {"achName": "what year is it",
+  {"achName": "What Year Is It?!?",
   "achImage":  blueTrophy,
-  "achDesc": "THIS IS THE PLACEHOLDER"},
+  "achDesc": 'Send a message to an "@aol.com" or "@yahoo.com" email address'},
 
   // 20
-  {"achName": "nerd",
+  {"achName": "Haha - NERD!!!",
   "achImage":  blueTrophy,
-  "achDesc": "THIS IS THE PLACEHOLDER"},
+  "achDesc": "Check the analytics page"},
 
   // 21
-  {"achName": "old school",
+  {"achName": "Old School",
   "achImage":  blueTrophy,
-  "achDesc": "THIS IS THE PLACEHOLDER"}
+  "achDesc": 'Send a message with the ": )" emoji'}
 ]
 
   export default trophyObjsArray
