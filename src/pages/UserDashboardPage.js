@@ -8,7 +8,6 @@ import { fetchMessagesByUser } from "../api/messageCalls";
 import { RecipientsList } from "../components/Recipients/RecipientList";
 import { RecentRecipients } from "../components/Recipients/RecentRecipients.js";
 import { UserMessages } from "../components/Messages/AllMessagesList.js";
-import ActionTabs from "../components/UserDashboard/ActionTabs";
 
 const UserDashboardPage = () => {
   return (
