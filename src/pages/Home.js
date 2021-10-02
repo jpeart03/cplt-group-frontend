@@ -4,6 +4,7 @@ import "./Home.scss";
 import HomeChart from "../components/HomeChart/HomeChart";
 import mobileDemoImg from "../images/mobile-demo.svg";
 import webDemoImg from "../images/web-demo.svg";
+import WordCloud from "../components/WordCloud/WordCloud"
 
 const Home = () => {
   return (
@@ -74,6 +75,15 @@ const Home = () => {
               aggregated data allow our users to see how their stats compare to
               the larger AppreciationNotes community!
             </p>
+          </Col>
+        </Row>
+      </section>
+      <section className="section section-data">
+        <Row>
+          <Col lg={6} className="cloud">
+          </Col>
+          <Col lg={6} className="cloud">
+            <WordCloud />
           </Col>
         </Row>
       </section>
