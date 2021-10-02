@@ -25,11 +25,7 @@ const RegistrationForm = () => {
         .required("Required"),
     }),
     onSubmit: (values) => {
-      register(
-        values.email,
-        values.password,
-        values.confirmPassword,
-      );
+      register(values.email, values.password, values.confirmPassword);
       setIsSubmitted(true);
     },
   });

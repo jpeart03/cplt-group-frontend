@@ -13,38 +13,31 @@ const HomeChart = () => {
   const data = [
     {
       day: "Mon",
-      pos: 120,
-      neg: 110,
+      count: 120,
     },
     {
       day: "Tue",
-      pos: 98,
-      neg: 90,
+      count: 98,
     },
     {
       day: "Wed",
-      pos: 86,
-      neg: 70,
+      count: 86,
     },
     {
       day: "Thu",
-      pos: 99,
-      neg: 70,
+      count: 99,
     },
     {
       day: "Fri",
-      pos: 85,
-      neg: 50,
+      count: 85,
     },
     {
       day: "Sat",
-      pos: 65,
-      neg: 40,
+      count: 65,
     },
     {
       day: "Sun",
-      pos: 150,
-      neg: 70,
+      count: 150,
     },
   ];
 
@@ -58,17 +51,10 @@ const HomeChart = () => {
         <PolarGrid />
         <PolarAngleAxis dataKey="day" />
         <Radar
-          name="Positive"
-          dataKey="pos"
+          name="Message Count"
+          dataKey="count"
           stroke="#0d6efd"
           fill="#0d6efd"
-          fillOpacity={0.6}
-        />
-        <Radar
-          name="Negative"
-          dataKey="neg"
-          stroke="#20c997"
-          fill="#20c997"
           fillOpacity={0.6}
         />
         <Legend />
