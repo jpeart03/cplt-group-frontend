@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Alert, Form } from "react-bootstrap";
@@ -25,11 +25,7 @@ const RegistrationForm = () => {
         .required("Required"),
     }),
     onSubmit: (values) => {
-      register(
-        values.email,
-        values.password,
-        values.confirmPassword,
-      );
+      register(values.email, values.password, values.confirmPassword);
       setIsSubmitted(true);
     },
   });
@@ -37,7 +33,7 @@ const RegistrationForm = () => {
   return (
     <Form onSubmit={formik.handleSubmit}>
       <Form.Group className="mb-3" controlId="email">
-        <Form.Label>Email address *</Form.Label>
+        <Form.Label>Email address</Form.Label>
         <Form.Control
           name="email"
           type="text"
@@ -53,7 +49,7 @@ const RegistrationForm = () => {
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="password">
-        <Form.Label>Password *</Form.Label>
+        <Form.Label>Password</Form.Label>
         <Form.Control
           name="password"
           type="password"
@@ -69,7 +65,7 @@ const RegistrationForm = () => {
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="confirmPassword">
-        <Form.Label>Confirm Password *</Form.Label>
+        <Form.Label>Confirm Password</Form.Label>
         <Form.Control
           name="confirmPassword"
           type="password"

@@ -20,7 +20,7 @@ const UserDashboardPage = () => {
       <RecentMessagesList/>
       <TrophyCase/>
     </div>
-  )
-}
+  );
+};
 
-export default UserDashboardPage
+export default UserDashboardPage;
