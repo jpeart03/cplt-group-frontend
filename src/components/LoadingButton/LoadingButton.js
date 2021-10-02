@@ -1,10 +1,17 @@
 import { Button, Spinner } from "react-bootstrap";
 import "./LoadingButton.scss";
 
-const LoadingButton = ({ isLoading, type, text, variant, onClick }) => {
+const LoadingButton = ({
+  isLoading,
+  type,
+  text,
+  variant,
+  onClick,
+  className,
+}) => {
   if (isLoading) {
     return (
-      <Button variant={variant} disabled>
+      <Button variant={variant} disabled className={className}>
         <Spinner
           as="span"
           size="sm"
@@ -18,8 +25,13 @@ const LoadingButton = ({ isLoading, type, text, variant, onClick }) => {
     );
   } else {
     return (
-      <Button variant={variant} onClick={onClick} type={type}>
-        {text} 
+      <Button
+        variant={variant}
+        onClick={onClick}
+        type={type}
+        className={className}
+      >
+        {text}
       </Button>
     );
   }
