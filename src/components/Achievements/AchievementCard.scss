@@ -1,0 +1,30 @@
+.one-card {
+  border-color: white;
+  max-width:8em;
+  margin: 1em;
+  padding: 10px;
+}
+.one-card img{
+  max-width: 3rem;
+  margin: 1rem auto;
+}
+.trophy-grid {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.achievement-title {
+  color:#0d6efd;
+  text-align: center;
+  font-size: 1rem !important;
+}
+
+
+.achievement-desc {
+  color: rgb(66, 66, 66);
+  font-size: .7rem;
+  text-align: center;
+}
