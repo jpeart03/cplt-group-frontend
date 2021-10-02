@@ -12,7 +12,7 @@ import { UserMessages } from "../components/Messages/AllMessagesList.js"
 
 const UserDashboardPage = () => {
   return (
-    <div style={{maxWidth:'75%',  margin:'auto'}}>
+    <div style={{maxWidth:'75%',  margin:'0 auto 100px auto'}}>
       <SignedInAs/>
       <RecentRecipients />
       <ActionsSection/>

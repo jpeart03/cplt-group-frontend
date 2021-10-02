@@ -43,8 +43,9 @@ const RecentMessagesList = () => {
 
   return(
     <div style={{display: 'flex', flexDirection:'column', justifyContent: 'center'}}>
-      <Button as={Link} to={'/allmessages'}>View All Messages</Button>
-      <h4>Recent Messages</h4>
+      <div id="recent-messages-header" style={{display: 'flex', flexDirection: 'row', margin:'5% 0'}}>
+      <h4>Recent Messages</h4><Button as={Link} to={'/allmessages'} style={{margin: '0 5%'}}>View All Messages</Button>
+      </div>
       <Messages />
     </div>
 
