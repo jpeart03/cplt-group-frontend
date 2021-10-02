@@ -16,24 +16,26 @@ const WordCloud = () => {
     { value: 'appreciate', count: 30 },
     { value: 'helpful', count: 28 },
     { value: 'love', count: 25 },
-    { value: 'indebted', count: 33 },
-    { value: 'inspiration', count: 18 },
+    { value: 'indebted', count: 19 },
+    { value: 'inspiration', count: 33 },
     { value: 'blessing', count: 20 },
     { value: 'great', count: 18 },
     { value: 'sincere', count: 15 },
-    { value: 'happy', count: 12 },
-    { value: 'generous', count: 10 },
+    { value: 'happy', count: 15 },
+    { value: 'generous', count: 16 },
     { value: 'support', count: 10 },
     { value: 'wonderful', count: 8 },
     { value: 'grateful', count: 4 },
     { value: 'best', count: 6 },
     { value: 'friend', count: 2 },
+    { value: 'delightful', count: 22 },
+    { value: 'amazing', count: 12 },
   ]
 
   const SimpleCloud = () => (
     <TagCloud
-    minSize={30}
-    maxSize={95}
+    minSize={25}
+    maxSize={100}
     tags={data}
     className="simple-cloud"
     style={{ width: 800, textAlign: 'center' }}

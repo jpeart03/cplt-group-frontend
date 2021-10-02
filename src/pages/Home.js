@@ -59,7 +59,7 @@ const Home = () => {
           </Col>
         </Row>
       </section>
-      <section className="section section-data">
+      <section className="section section-cloud">
         <Row>
           <Col lg={6} className="chart">
             <HomeChart />
@@ -78,14 +78,10 @@ const Home = () => {
           </Col>
         </Row>
       </section>
-      <section className="section section-data">
-        <Row>
-          <Col lg={6} className="cloud">
-          </Col>
-          <Col lg={6} className="cloud">
-            <WordCloud />
-          </Col>
-        </Row>
+      <section className="section section-cloud">
+        <center>
+          <WordCloud />
+        </center>
       </section>
     </>
   );
