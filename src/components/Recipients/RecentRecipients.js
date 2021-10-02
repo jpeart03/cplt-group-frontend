@@ -15,7 +15,6 @@ const RecentRecipients = () => {
   const findRecentRecipients = async (messages) => {
     const unique = [...new Set(messages.map(item => item.recipient))]
     const slicedIDArray = unique.slice(0, 4)
-    console.log("SLICED", slicedIDArray)
     setRecipientIDs(slicedIDArray)
     // get the user objects by id
 
