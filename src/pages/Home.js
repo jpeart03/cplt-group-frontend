@@ -4,6 +4,7 @@ import "./Home.scss";
 import HomeChart from "../components/HomeChart/HomeChart";
 import mobileDemoImg from "../images/mobile-demo.svg";
 import webDemoImg from "../images/web-demo.svg";
+import WordCloud from "../components/WordCloud/WordCloud"
 
 const Home = () => {
   return (
@@ -76,6 +77,11 @@ const Home = () => {
             </p>
           </Col>
         </Row>
+      </section>
+      <section className="section section-cloud">
+        <center>
+          <WordCloud />
+        </center>
       </section>
     </>
   );
