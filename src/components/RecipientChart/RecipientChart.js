@@ -12,9 +12,8 @@ const RecipientChart = () => {
 
   useEffect( () => {
     const getUserMessages = async ( authToken ) => {
-      let userRecipients = await fetchMessagesByUser(authToken)
-
-      setMessageArray(userRecipients)
+      let userMessages = await fetchMessagesByUser(authToken)
+      setMessageArray(userMessages)
     }
     if(authToken){
       getUserMessages(authToken)
@@ -24,10 +23,11 @@ const RecipientChart = () => {
       let userRecipients = await fetchRecipientsByUser(authToken);
       setRecipients(userRecipients);
       
-    };
+    }
     if (authToken) {
       getUserRecipients();
     }
+
   }, [authToken]);
 
 
