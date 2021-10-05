@@ -12,12 +12,17 @@ export const AuthProvider = ({ children }) => {
   const [authLoading, setAuthLoading] = useState(false);
   const [authToken, setAuthToken] = useState();
   const [currentUser, setCurrentUser] = useState();
+  const [refreshUserData, setRefreshUserData] = useState(false);
 
   const getStorageToken = () => {
     const tokenString = localStorage.getItem(storageKey)
       ? `Token ${localStorage.getItem(storageKey)}`
       : null;
     setAuthToken(tokenString);
+  };
+
+  const refreshUser = () => {
+    setRefreshUserData(!refreshUserData);
   };
 
   // Adding useEffect to grab token from localstorage & set AuthProvider state
@@ -37,7 +42,7 @@ export const AuthProvider = ({ children }) => {
       setAuthLoading(false);
     };
     getUserData();
-  }, [authToken]);
+  }, [authToken, refreshUserData]);
 
   /**
    * Function to register a new user
@@ -47,11 +52,7 @@ export const AuthProvider = ({ children }) => {
    */
 
   // email, password1, password2
-  const register = (
-    email,
-    password1,
-    password2,
-  ) => {
+  const register = (email, password1, password2) => {
     setAuthLoading(true);
     axios
       .post(`${apiUrl}/users/auth/register/`, {
@@ -149,7 +150,7 @@ export const AuthProvider = ({ children }) => {
 
   const editUser = async (userValues) => {
     let options = {
-      method: "PUT",
+      method: "PATCH",
       headers: {
         "Content-Type": "application/json",
         Authorization: authToken,
@@ -175,6 +176,7 @@ export const AuthProvider = ({ children }) => {
     deactivate,
     register,
     editUser,
+    refreshUser,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
