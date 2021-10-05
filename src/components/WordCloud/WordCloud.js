@@ -36,7 +36,7 @@ const WordCloud = () => {
     <TagCloud
     minSize={25}
     maxSize={100}
-    tags={data}
+    tags={words}
     className="simple-cloud"
     style={{ width: 1000, textAlign: 'center' }}
   />
