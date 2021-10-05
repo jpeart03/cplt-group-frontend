@@ -34,6 +34,7 @@ const sendNewMessage = async (token, messageValues) => {
     let response = await fetch(`${apiUrl}/users/messages/`, options);
     let data = await response.json();
     console.log(data);
+    
     return data;
   } catch (error) {
     console.log(error);
