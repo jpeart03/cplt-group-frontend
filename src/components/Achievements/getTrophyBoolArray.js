@@ -19,9 +19,9 @@ let getTrophyBoolArray= (currentUser) => {
     "networking_1",
     "networking_2",
     "networking_3",
-    "sentimental",
+    // "sentimental",
     "what_year_is_it",
-    "nerd",
+    // "nerd",
     "old_school"
     ]
   
@@ -29,6 +29,7 @@ let getTrophyBoolArray= (currentUser) => {
     trophyBoolArray.push(currentUser[key])
   })
   console.log(xboolarr)
+  console.log(currentUser)
 
   console.log(trophyBoolArray)
   return trophyBoolArray

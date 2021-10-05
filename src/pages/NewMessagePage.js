@@ -7,7 +7,7 @@ import NewMessageForm from "../components/NewMessageForm/NewMessageForm";
 import "./NewMessagePage.scss";
 
 const NewMessagePage = () => {
-  const { authToken, currentUser } = useAuth();
+  const { authToken, currentUser, refreshUser } = useAuth();
   const location = useLocation();
   const historyStateRecipient = location.state?.recipient;
 
@@ -43,6 +43,7 @@ const NewMessagePage = () => {
       })
       .finally(() => {
         setIsLoading(false);
+        refreshUser()
         // maybe redirect here
       });
   };
