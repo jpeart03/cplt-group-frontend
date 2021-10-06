@@ -1,12 +1,13 @@
 
 
-import { Card } from "react-bootstrap"
+import { Card, Button, Modal  } from "react-bootstrap"
 import AchievementCard from "./AchievementCard"
 import "./TrophyCase.scss"
 import trophyObjsArray from "./trophyObjs"
 import { useAuth } from "../../contexts/AuthContext"
 import getTrophyBoolArray from "./getTrophyBoolArray"
 import { useEffect, useState } from "react"
+import TrophyInfo from "./TrophyInfo.js"
 
 
 // grid of achievement trophies
@@ -15,6 +16,7 @@ import { useEffect, useState } from "react"
   let Trophies = () => {
     const { currentUser } = useAuth();
     const[userAchBoolArray, setUserAchBoolArray] = useState();
+    
 
     useEffect( () =>{
       setUserAchBoolArray(getTrophyBoolArray(currentUser))
@@ -58,13 +60,33 @@ import { useEffect, useState } from "react"
 }
 
 const TrophyCase = () => {
+  const [infoModalShow, setInfoModalShow] = useState(false);
   const { currentUser } = useAuth();
+  const handleClose = () => setInfoModalShow(false);
+  const handleShow = () => setInfoModalShow(true);
+
   if (currentUser){
     return (
       <>
         <div className="trophy-case-box">
           <UserAchievements/>
         </div>
+        <Button variant="primary" onClick={handleShow} style={{marginTop:"1.5rem"}}>
+        See All Available Trophies
+      </Button>
+
+      <Modal show={infoModalShow} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Available Trophies:</Modal.Title>
+        </Modal.Header>
+        <Modal.Body><TrophyInfo/></Modal.Body>
+        <Modal.Footer>
+          <Button variant="success" onClick={handleClose}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
+        
       </>
     )
   }
