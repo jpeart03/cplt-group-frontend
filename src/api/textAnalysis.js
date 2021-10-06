@@ -15,7 +15,7 @@ import {
 /**
  * Function to analyze text input and return Sentiment object
  * @param {string} text
- * @returns {Sentiment} sentiment Object that contains analysis output
+ * @returns {Promise<Sentiment>} sentiment Object that contains analysis output
  */
 const getSentimentAnalysis = async (text) => {
   const endpoint = process.env.REACT_APP_TEXT_ENDPOINT;
@@ -50,6 +50,7 @@ const getSentimentAnalysis = async (text) => {
       return errorSentimentObj;
     }
   }
+  return sentimentObj;
 };
 
 export { getSentimentAnalysis };
