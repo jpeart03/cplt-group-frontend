@@ -52,6 +52,7 @@ export const AuthProvider = ({ children }) => {
     password1,
     password2,
   ) => {
+    console.log("$$$$$", `${apiUrl}`)
     setAuthLoading(true);
     axios
       .post(`${apiUrl}/users/auth/register/`, {
