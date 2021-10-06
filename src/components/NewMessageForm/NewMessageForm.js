@@ -1,8 +1,11 @@
-import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { Form } from "react-bootstrap";
+import { Badge, Form, Spinner } from "react-bootstrap";
+import debounce from "lodash.debounce";
+import { useState, useMemo } from "react";
+import { getSentimentAnalysis } from "../../api/textAnalysis";
 import LoadingButton from "../LoadingButton/LoadingButton";
+import "./NewMessageForm.scss";
 
 const NewMessageForm = ({
   recipients,
@@ -10,6 +13,9 @@ const NewMessageForm = ({
   handleSubmit,
   isLoading,
 }) => {
+  const [sentiment, setSentiment] = useState();
+  const [sentimentLoading, setSentimentLoading] = useState(false);
+
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
@@ -44,6 +50,54 @@ const NewMessageForm = ({
       );
     },
   });
+
+  const analyzeText = (event) => {
+    if (event.target.value.trim().length > 1) {
+      getSentimentAnalysis(event.target.value).then((sentimentResult) => {
+        setSentiment(sentimentResult.overallSentiment);
+        setSentimentLoading(false);
+      });
+    } else {
+      setSentiment(null);
+      setSentimentLoading(false);
+    }
+  };
+
+  const debouncedTextAnalysis = useMemo(() => debounce(analyzeText, 700), []);
+
+  const generateSentimentElement = () => {
+    if (sentiment === "positive") {
+      return (
+        <Badge pill className="sentiment-pill" bg="success">
+          {sentiment && !sentimentLoading ? (
+            sentiment
+          ) : (
+            <Spinner as="span" animation="grow" size="sm" />
+          )}
+        </Badge>
+      );
+    } else if (sentiment === "negative") {
+      return (
+        <Badge pill className="sentiment-pill" bg="danger">
+          {sentiment && !sentimentLoading ? (
+            sentiment
+          ) : (
+            <Spinner as="span" animation="grow" size="sm" />
+          )}
+        </Badge>
+      );
+    } else {
+      return (
+        <Badge pill className="sentiment-pill" bg="secondary">
+          {sentiment && !sentimentLoading ? (
+            sentiment
+          ) : (
+            <Spinner as="span" animation="grow" size="sm" />
+          )}
+        </Badge>
+      );
+    }
+  };
 
   return (
     <Form onSubmit={formik.handleSubmit}>
@@ -96,13 +150,17 @@ const NewMessageForm = ({
         />
       </Form.Group>
       {/* Message */}
-      <Form.Group className="mb-3" controlId="message">
+      <Form.Group className="mb-3 sentiment-group" controlId="message">
         <Form.Label>Write your Appreciation Message</Form.Label>
         <Form.Control
           name="message"
           as="textarea"
-          rows={3}
-          onChange={formik.handleChange}
+          rows={5}
+          onChange={(e) => {
+            formik.handleChange(e);
+            setSentimentLoading(true);
+            debouncedTextAnalysis(e);
+          }}
           onBlur={formik.handleBlur}
           value={formik.values.message}
           isInvalid={!!formik.errors.message && formik.touched.message}
@@ -110,7 +168,9 @@ const NewMessageForm = ({
         <Form.Control.Feedback type="invalid">
           {formik.errors.message}
         </Form.Control.Feedback>
+        {sentiment && generateSentimentElement()}
       </Form.Group>
+
       <LoadingButton
         variant="primary"
         type="submit"
