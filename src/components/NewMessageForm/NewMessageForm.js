@@ -13,7 +13,7 @@ const NewMessageForm = ({
   handleSubmit,
   isLoading,
 }) => {
-  const [sentiment, setSentiment] = useState();
+  const [sentiment, setSentiment] = useState("neutral");
   const [sentimentLoading, setSentimentLoading] = useState(false);
 
   const formik = useFormik({
@@ -58,7 +58,7 @@ const NewMessageForm = ({
         setSentimentLoading(false);
       });
     } else {
-      setSentiment(null);
+      setSentiment("neutral");
       setSentimentLoading(false);
     }
   };
