@@ -10,7 +10,7 @@ const SignedInAs = () => {
   // let currentUser = dummyUser
 
   if (currentUser) {
-    console.log(currentUser);
+    // console.log(currentUser);
     if (currentUser.first_name !== "") {
       let userFirstname = currentUser.first_name;
       return (

@@ -3,7 +3,7 @@ import EditProfileForm from "../components/EditProfileForm/EditProfileForm.js";
 const EditMyAccountPage = () => {
   return (
     <div>
-      <h5>Edit Profile</h5>
+      <h3 style={{marginTop:"2rem"}}>Edit Profile</h3>
       <EditProfileForm />
     </div>
   );

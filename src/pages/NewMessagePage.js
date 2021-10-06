@@ -50,7 +50,7 @@ const NewMessagePage = () => {
 
   return (
     <div className="message">
-      <h1>Send an Appreciation Message</h1>
+      <h3>Send an Appreciation Message</h3>
       <NewMessageForm
         recipients={recipients}
         historyStateRecipientId={historyStateRecipientId}

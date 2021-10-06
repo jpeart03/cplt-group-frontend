@@ -9,6 +9,7 @@ import { RecipientsList } from "../components/Recipients/RecipientList";
 import { RecentRecipients } from "../components/Recipients/RecentRecipients.js"
 import { UserMessages } from "../components/Messages/AllMessagesList.js"
 import TrophyCase from "../components/Achievements/TrophyCase";
+import DashTabs from "../components/UserDashboard/DashTabs";
 
 
 const UserDashboardPage = () => {
@@ -16,7 +17,8 @@ const UserDashboardPage = () => {
     <div style={{maxWidth:'75%',  margin:'0 auto 200px auto'}}>
       <SignedInAs/>
       <RecentRecipients />
-      <ActionsSection/>
+      <DashTabs />
+      {/* <ActionsSection/> */}
       <RecentMessagesList/>
       <TrophyCase/>
     </div>

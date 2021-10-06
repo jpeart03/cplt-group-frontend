@@ -45,8 +45,8 @@ const RecentRecipients = () => {
 
   if (recRecObjs) {
     return (
-      <div>
-        <h5>Recently Messaged Recipients: </h5>
+      <div style={{marginBottom:"3rem"}}>
+        <h3>Recently Messaged Recipients: </h3>
         <ListGroup variant="flush">
           {recRecObjs.map((recipient) => {
             const newRecipientMessage = {

@@ -52,8 +52,9 @@ const RecipientsPage = () => {
 
   return (
     <div>
-      <h1>Recipients</h1>
-      <Accordion defaultActiveKey="0">
+      <h3 style={{marginTop:"2rem"}}>Recipients</h3>
+      {/* <Accordion defaultActiveKey="0"> */}
+      <Accordion>
         <Accordion.Item eventKey="0">
           <Accordion.Header>Create a new recipient</Accordion.Header>
           <Accordion.Body>

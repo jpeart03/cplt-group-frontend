@@ -28,10 +28,10 @@ let getTrophyBoolArray= (currentUser) => {
   let xboolarr= achievementKeys.map((key, index) => {
     trophyBoolArray.push(currentUser[key])
   })
-  console.log(xboolarr)
-  console.log(currentUser)
+  // console.log(xboolarr)
+  // console.log(currentUser)
 
-  console.log(trophyBoolArray)
+  // console.log(trophyBoolArray)
   return trophyBoolArray
 }
 
