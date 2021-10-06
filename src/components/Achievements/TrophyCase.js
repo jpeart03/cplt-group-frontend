@@ -23,7 +23,7 @@ import TrophyInfo from "./TrophyInfo.js"
     }, [currentUser])
 
     if (userAchBoolArray){
-      console.log(currentUser)
+      // console.log(currentUser)
       return (
         userAchBoolArray.map((boolValue, index) => {
           if (boolValue){
