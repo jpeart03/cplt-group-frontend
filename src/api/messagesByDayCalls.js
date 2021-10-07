@@ -11,7 +11,7 @@ const fetchMessagesByDay = async (token) => {
 
   let date = new Date()
   let start_date = new Date()
-  start_date.setDate(start_date.getDate()-7);
+  start_date.setDate(start_date.getDate()-17);
 
   let dd = date.getDate();
   let mm = date.getMonth()+1;
@@ -28,9 +28,9 @@ const fetchMessagesByDay = async (token) => {
   if(mm<10) mm='0'+mm;
 
   let start = `${start_yyyy}${start_mm}${start_dd}`
-  // console.log("START", start)
+  console.log("START", start)
   let end = `${yyyy}${mm}${dd}`
-  // console.log("END", end)
+  console.log("END", end)
 
   try {
     let response = await fetch(`${apiUrl}/message_count/?start=${start}&stop=${end}`, options);
