@@ -52,6 +52,7 @@ export const AuthProvider = ({ children }) => {
    */
 
   // email, password1, password2
+
   const register = (email, password1, password2) => {
     setAuthLoading(true);
     axios

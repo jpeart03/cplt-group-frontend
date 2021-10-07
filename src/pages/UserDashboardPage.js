@@ -9,7 +9,9 @@ import { RecipientsList } from "../components/Recipients/RecipientList";
 import { RecentRecipients } from "../components/Recipients/RecentRecipients.js"
 import { UserMessages } from "../components/Messages/AllMessagesList.js"
 import TrophyCase from "../components/Achievements/TrophyCase";
+import MessagesByDayChart from "../components/MessagesByDayChart/MessagesByDayChart.js";
 import DashTabs from "../components/UserDashboard/DashTabs";
+
 
 
 const UserDashboardPage = () => {
@@ -21,6 +23,7 @@ const UserDashboardPage = () => {
       {/* <ActionsSection/> */}
       <RecentMessagesList/>
       <TrophyCase/>
+      <MessagesByDayChart/>
     </div>
   );
 };
