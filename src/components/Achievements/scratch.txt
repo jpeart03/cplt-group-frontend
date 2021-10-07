@@ -1,3 +1,3 @@
-#20c997
-#00aced
-#0d6efd
+#20c997 green
+#00aced light blue
+#0d6efd dark blue
