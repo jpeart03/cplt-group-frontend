@@ -7,7 +7,7 @@ import LoadingButton from "../LoadingButton/LoadingButton";
 import { useAuth } from "../../contexts/AuthContext";
 
 const EditProfileForm = () => {
-  const { currentUser, deactivate, editUser } = useAuth();
+  const { currentUser, deactivate, editUser, refreshUser } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   let history = useHistory();
 
@@ -34,6 +34,8 @@ const EditProfileForm = () => {
     onSubmit: (values) => {
       setIsLoading(true);
       editUser(values);
+      // added refreshUser so that on the dashboard the Profile changes will be reflected immediately without refreshing the page
+      refreshUser();
       setIsLoading(false);
     },
   });

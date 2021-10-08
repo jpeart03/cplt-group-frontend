@@ -6,6 +6,7 @@ import { useState, useMemo } from "react";
 import { getSentimentAnalysis } from "../../api/textAnalysis";
 import LoadingButton from "../LoadingButton/LoadingButton";
 import "./NewMessageForm.scss";
+import { useAuth } from "../../contexts/AuthContext";
 
 const NewMessageForm = ({
   recipients,
@@ -15,6 +16,7 @@ const NewMessageForm = ({
 }) => {
   const [sentiment, setSentiment] = useState("neutral");
   const [sentimentLoading, setSentimentLoading] = useState(false);
+  const { refreshUser } = useAuth();
 
   const formik = useFormik({
     enableReinitialize: true,
