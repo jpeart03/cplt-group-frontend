@@ -1,10 +1,32 @@
 .section {
   margin: 7rem 0;
+
+  h2 {
+    font-size: 2.25rem;
+  }
+  p {
+    font-size: 1.25rem;
+  }
   &:not(:first-of-type) {
     margin: 10rem 0;
   }
-  &-hero {
+  &:last-of-type {
+    margin-bottom: 15rem;
   }
+
+  &-hero {
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+    }
+    p {
+      margin-bottom: 1.5rem;
+    }
+    .btn.btn-primary {
+      font-size: 1.25rem;
+    }
+  }
+
   &-demo {
     .graphic {
       background-image: url("/images/chat-bubble.svg");
@@ -19,6 +41,7 @@
       max-width: 318px;
     }
   }
+
   &-data {
     .text {
       display: flex;
@@ -27,6 +50,24 @@
       justify-content: flex-start;
       margin-top: 2rem;
     }
+  }
+}
+
+.color {
+  &__green {
+    color: #198754;
+  }
+  &__indigo {
+    color: #6610f2;
+  }
+  &__purple {
+    color: #6f42c1;
+  }
+  &__teal {
+    color: #20c997;
+  }
+  &__cyan {
+    color: #0dcaf0;
   }
 }
 

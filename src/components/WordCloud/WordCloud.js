@@ -1,6 +1,7 @@
 import { wordCloudAPI, wordList } from "../../api/wordCloudAPI";
 import { useState, useEffect } from "react";
 import { TagCloud } from "react-tagcloud";
+import "./WordCloud.scss";
 
 const WordCloud = () => {
   const [words, setWords] = useState([]);
@@ -43,7 +44,7 @@ const WordCloud = () => {
       colorOptions={colorOptions}
       tags={data}
       className="simple-cloud"
-      style={{ width: 1000, textAlign: "center" }}
+      style={{ width: "100%", textAlign: "center" }}
     />
   );
 
@@ -51,12 +52,7 @@ const WordCloud = () => {
     getWords();
   }, []);
 
-  return (
-    <div>
-      <h2> Most Used Words of Appreciation </h2>
-      <SimpleCloud />
-    </div>
-  );
+  return <SimpleCloud />;
 };
 
 export default WordCloud;
