@@ -35,7 +35,7 @@ const EditProfileForm = () => {
       setIsLoading(true);
       editUser(values);
       // added refreshUser so that on the dashboard the Profile changes will be reflected immediately without refreshing the page
-      refreshUser();
+      // refreshUser();
       setIsLoading(false);
     },
   });
