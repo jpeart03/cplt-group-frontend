@@ -4,7 +4,7 @@ import "./Home.scss";
 import HomeChart from "../components/HomeChart/HomeChart";
 import mobileDemoImg from "../images/mobile-demo.svg";
 import webDemoImg from "../images/web-demo.svg";
-import WordCloud from "../components/WordCloud/WordCloud"
+import WordCloud from "../components/WordCloud/WordCloud";
 
 const Home = () => {
   return (
@@ -12,21 +12,21 @@ const Home = () => {
       <section className="section section-hero">
         <Row>
           <Col lg={12}>
-            <h1>Appreciation App</h1>
+            <h1>Show your appreciation 😊</h1>
             <p>
-              We want to help individuals share their gratitude! Studies show
-              that people who deliberately practice appreciation through acts of
-              kindness, daily reflection, and expressions of gratitude rate
-              their lives as more enjoyable than average. At AppreciationNotes,
-              we know that busy lives can cause moments of thanks to get lost in
-              the shuffle. Our app allows users to jot down notes and share them
-              with those they care about. From a coworker doing a great job, to
-              a significant other who makes your day brighter, we want to help
-              people connect with those they appreciate and share in their
-              thanks.
+              Studies show that people who deliberately practice appreciation
+              through acts of kindness, daily reflection and
+              <span className="color__indigo">
+                {" "}
+                expressions of gratitude
+              </span>{" "}
+              rate their lives as more enjoyable than average. From a coworker
+              doing a great job, to a significant other who makes your day
+              brighter, we want to help people connect with those they
+              appreciate and share in their thanks!
             </p>
             <Link to="/register" className="btn btn-primary">
-              Sign up
+              Sign up now
             </Link>
           </Col>
         </Row>
@@ -39,12 +39,7 @@ const Home = () => {
               Users can create their personal profile and a list of recipients
               with whom they want to share notes. As moments of gratitude pop up
               throughout the day, the user can jot down a quick note and deliver
-              it to their counterparts via email and/or text message. We know
-              that hectic schedules can make remembering to express gratitude
-              fall to the back-burner, so we also include reminders to ensure
-              you always remember to express thanks! If you get stuck, our app
-              can supply suggestions and prompts to help get your creativity
-              flowing!
+              it to their counterparts via email and/or text message.
             </p>
           </Col>
           <Col lg={6} className="graphic">
@@ -71,17 +66,18 @@ const Home = () => {
               allow users to track their individual analytics so they can keep
               on top of their own peronalized progress. Each individual has
               access to a customized dashboard so they can track how expressing
-              gratitude has improved their lives. Additionally, anonymized and
-              aggregated data allow our users to see how their stats compare to
-              the larger AppreciationNotes community!
+              gratitude has improved their lives.
             </p>
           </Col>
         </Row>
       </section>
       <section className="section section-cloud">
-        <center>
-          <WordCloud />
-        </center>
+        <Row>
+          <Col lg={12} className="text-center">
+            <h2>What our users are saying...</h2>
+            <WordCloud />
+          </Col>
+        </Row>
       </section>
     </>
   );
