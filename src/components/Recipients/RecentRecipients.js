@@ -12,7 +12,7 @@ const RecentRecipients = () => {
   const [recipientIDs, setRecipientIDs] = useState();
   // RECent RECipient Objects (truncated list)
   const [recRecObjs, setRecRecObjs] = useState();
-  const { authToken } = useAuth();
+  const { authToken, currentUser } = useAuth();
 
   const findRecentRecipients = async (messages) => {
 
@@ -41,7 +41,7 @@ const RecentRecipients = () => {
     if (authToken) {
       getUserRecords();
     }
-  }, [authToken]);
+  }, [authToken, , currentUser]);
 
   if (recRecObjs) {
     return (

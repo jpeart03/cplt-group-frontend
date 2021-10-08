@@ -7,7 +7,7 @@ import { useAuth } from "../../contexts/AuthContext.js"
 
 const RecentMessagesList = () => {
   const [messageArray, setMessageArray] = useState();
-  const { authToken } = useAuth();
+  const { authToken, currentUser } = useAuth();
   
   useEffect( () => {
     const getUserRecords = async ( authToken ) => {
@@ -19,7 +19,7 @@ const RecentMessagesList = () => {
       getUserRecords(authToken)
     }
 
-  }, [authToken])
+  }, [authToken, currentUser])
 
   const Messages = () => {
     if (messageArray){

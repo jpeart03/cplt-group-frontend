@@ -7,7 +7,7 @@ import { createNewRecipient, editRecipient } from "../../api/recipientCalls";
 import LoadingButton from "../LoadingButton/LoadingButton";
 
 const RecipientForm = ({ recipient, onRefresh, onDeleteRecipient }) => {
-  const { authToken, currentUser } = useAuth();
+  const { authToken, currentUser, refreshUser} = useAuth();
   const [isLoading, setIsLoading] = useState(false);
 
   const initialRecipientValues = recipient
@@ -50,6 +50,8 @@ const RecipientForm = ({ recipient, onRefresh, onDeleteRecipient }) => {
         await editRecipient(recipientValues, authToken);
       } else await createNewRecipient(recipientValues, authToken);
       onRefresh();
+      // added refreshUser so that on the dashboard the new Recipient will now show up in the dropdown without refreshing the page
+      refreshUser();
       setIsLoading(false);
     },
   });
