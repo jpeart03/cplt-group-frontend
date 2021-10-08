@@ -6,46 +6,73 @@ import { UserMessages } from "../../components/Messages/AllMessagesList.js"
 import { RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, Legend, ResponsiveContainer, Tooltip, } from "recharts";
 
 const RecipientChart = () => {
-  const [messageArray, setMessageArray] = useState();
-  const [recipients, setRecipients] = useState();
+  const [messageArray, setMessageArray] = useState([]);
+  const [recipients, setRecipients] = useState([]);
+  const [dataSet, setDataSet] = useState([]);
+
   const { authToken } = useAuth();
 
   useEffect( () => {
-    const getUserMessages = async ( authToken ) => {
+    const getUserMessages = async () => {
       let userMessages = await fetchMessagesByUser(authToken)
+      userMessages.map((message) => {
+        setMessageArray(...userMessages)
+      })
       setMessageArray(userMessages)
-    }
-    if(authToken){
-      getUserMessages(authToken)
     }
 
     const getUserRecipients = async () => {
-      let userRecipients = await fetchRecipientsByUser(authToken);
-      setRecipients(userRecipients);
-      
-    }
-    if (authToken) {
-      getUserRecipients();
+      let userRecipients = await fetchRecipientsByUser(authToken)
+      setRecipients(userRecipients)
     }
 
+    if (authToken) {
+      getUserMessages(authToken)
+      getUserRecipients();
+      setDataSet(finalData);
+      }
   }, [authToken]);
 
 
+  const buildDataArray = () => {
+    const dataArray = []
 
-  const Messages = () => {
-    if (messageArray){
-      console.log('messageArray', messageArray)
-      return messageArray.map((message, recipient) => {
-      })
+    const getRecipientName = (recipientArray) => {
+      let userArray = []
+      for (var u = 0; u <= recipientArray.length - 1; u++) {
+        userArray.push([recipientArray[u].id, recipientArray[u].first_name])
+      }
+      return userArray
+    }
+  
+    const getRecipientMsgCount = (messages) => {
+      let userMsgCount = []
+      for (var u = 0; u <= messages.length - 1; u++) {
+        if (messages[u].recipient in userMsgCount) {
+          userMsgCount[messages[u].recipient] += 1 
+        } else {
+          userMsgCount[messages[u].recipient] = 1
         }
-    else return null
+      }
+      return userMsgCount;
+    }
+
+    const getCountByName = () => {
+      const idMsgCount = getRecipientMsgCount(messageArray)
+      const messagedRecipients = getRecipientName(recipients)
+
+      for (var u = 0; u <= messagedRecipients.length - 1; u++) {
+        dataArray.push({count: idMsgCount[messagedRecipients[u][0]], recipient: messagedRecipients[u][1]})
+      }
+      console.log("DATA", dataArray)
+      return dataArray;
+    }
+    getCountByName()
   }
 
+  const finalData = buildDataArray()
 
-
-
-
-  const data = [
+  const dataTest = [
     {
       recipient: "Bob",
       count: 12,
@@ -82,7 +109,7 @@ const RecipientChart = () => {
     <ResponsiveContainer height={500} width="100%">
       <RadarChart
         outerRadius="80%"
-        data={data}
+        data={dataSet}
         margin={{ top: 0, right: 10, bottom: 0, left: 10 }}
       >
         <PolarGrid />
