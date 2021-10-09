@@ -5,9 +5,12 @@ import * as Yup from "yup";
 import { Form, Button } from "react-bootstrap";
 import LoadingButton from "../LoadingButton/LoadingButton";
 import { useAuth } from "../../contexts/AuthContext";
+import { useToast } from "../../hooks/AppHooks";
+import AppToast from "../AppToast/AppToast";
 
 const EditProfileForm = () => {
   const { currentUser, deactivate, editUser, refreshUser } = useAuth();
+  const { toastMessages, handleToastShow, handleNewToast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
   let history = useHistory();
 
@@ -33,108 +36,123 @@ const EditProfileForm = () => {
     }),
     onSubmit: (values) => {
       setIsLoading(true);
-      editUser(values);
-      // added refreshUser so that on the dashboard the Profile changes will be reflected immediately without refreshing the page
-      // refreshUser();
+      // getting object with values that arent empty
+      const filteredValues = Object.keys(values)
+        .filter((key) => values[key]) // returning only keys that have truthy value
+        .reduce((obj, key) => {
+          obj[key] = values[key];
+          return obj;
+        }, {});
+
+      editUser(filteredValues);
       setIsLoading(false);
+
+      // In the future, we would want this to display an error message, too.
+      handleNewToast("Success", "You've updated your profile.");
     },
   });
   return (
     // using the currentUser attribute names from DRF backend
-    <Form onSubmit={formik.handleSubmit}>
-      <Form.Group className="mb-3" controlId="first_name">
-        <Form.Label>First Name</Form.Label>
-        <Form.Control
-          name="first_name"
-          type="text"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.first_name}
-          isInvalid={!!formik.errors.first_name && formik.touched.first_name}
-        />
-        <Form.Control.Feedback type="invalid">
-          {formik.errors.first_name}
-        </Form.Control.Feedback>
-      </Form.Group>
+    <>
+      <Form onSubmit={formik.handleSubmit}>
+        <Form.Group className="mb-3" controlId="first_name">
+          <Form.Label>First Name</Form.Label>
+          <Form.Control
+            name="first_name"
+            type="text"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.first_name}
+            isInvalid={!!formik.errors.first_name && formik.touched.first_name}
+          />
+          <Form.Control.Feedback type="invalid">
+            {formik.errors.first_name}
+          </Form.Control.Feedback>
+        </Form.Group>
 
-      <Form.Group className="mb-3" controlId="last_name">
-        <Form.Label>Last Name</Form.Label>
-        <Form.Control
-          name="last_name"
-          type="text"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.last_name}
-          isInvalid={!!formik.errors.last_name && formik.touched.last_name}
-        />
-        <Form.Control.Feedback type="invalid">
-          {formik.errors.last_name}
-        </Form.Control.Feedback>
-      </Form.Group>
+        <Form.Group className="mb-3" controlId="last_name">
+          <Form.Label>Last Name</Form.Label>
+          <Form.Control
+            name="last_name"
+            type="text"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.last_name}
+            isInvalid={!!formik.errors.last_name && formik.touched.last_name}
+          />
+          <Form.Control.Feedback type="invalid">
+            {formik.errors.last_name}
+          </Form.Control.Feedback>
+        </Form.Group>
 
-      <Form.Group className="mb-3" controlId="username">
-        <Form.Label>User Name</Form.Label>
-        <Form.Control
-          name="username"
-          type="text"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.username}
-          isInvalid={!!formik.errors.username && formik.touched.username}
-        />
-        <Form.Control.Feedback type="invalid">
-          {formik.errors.username}
-        </Form.Control.Feedback>
-      </Form.Group>
+        <Form.Group className="mb-3" controlId="username">
+          <Form.Label>User Name</Form.Label>
+          <Form.Control
+            name="username"
+            type="text"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.username}
+            isInvalid={!!formik.errors.username && formik.touched.username}
+          />
+          <Form.Control.Feedback type="invalid">
+            {formik.errors.username}
+          </Form.Control.Feedback>
+        </Form.Group>
 
-      <Form.Group className="mb-3" controlId="email">
-        <Form.Label>Email address</Form.Label>
-        <Form.Control
-          name="email"
-          type="email"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.email}
-          isInvalid={!!formik.errors.email && formik.touched.email}
-        />
-        <Form.Control.Feedback type="invalid">
-          {formik.errors.email}
-        </Form.Control.Feedback>
-      </Form.Group>
+        <Form.Group className="mb-3" controlId="email">
+          <Form.Label>Email address</Form.Label>
+          <Form.Control
+            name="email"
+            type="email"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.email}
+            isInvalid={!!formik.errors.email && formik.touched.email}
+          />
+          <Form.Control.Feedback type="invalid">
+            {formik.errors.email}
+          </Form.Control.Feedback>
+        </Form.Group>
 
-      <Form.Group className="mb-3" controlId="phone">
-        <Form.Label>Phone Number</Form.Label>
-        <Form.Control
-          name="phone"
-          type="text"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.phone}
-          isInvalid={!!formik.errors.phone && formik.touched.phone}
-        />
-        <Form.Control.Feedback type="invalid">
-          {formik.errors.phone}
-        </Form.Control.Feedback>
-      </Form.Group>
+        <Form.Group className="mb-3" controlId="phone">
+          <Form.Label>Phone Number</Form.Label>
+          <Form.Control
+            name="phone"
+            type="text"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.phone}
+            isInvalid={!!formik.errors.phone && formik.touched.phone}
+          />
+          <Form.Control.Feedback type="invalid">
+            {formik.errors.phone}
+          </Form.Control.Feedback>
+        </Form.Group>
 
-      <LoadingButton
-        variant="primary"
-        type="submit"
-        className="me-2"
-        text="Update"
-        isLoading={isLoading}
+        <LoadingButton
+          variant="primary"
+          type="submit"
+          className="me-2"
+          text="Update"
+          isLoading={isLoading}
+        />
+
+        <Button
+          variant="danger"
+          onClick={() => {
+            deactivate();
+            history.push("/");
+          }}
+        >
+          Delete My Account
+        </Button>
+      </Form>
+      <AppToast
+        toastMessages={toastMessages}
+        handleToastShow={handleToastShow}
       />
-
-      <Button
-        variant="danger"
-        onClick={() => {
-          deactivate();
-          history.push("/");
-        }}
-      >
-        Delete My Account
-      </Button>
-    </Form>
+    </>
   );
 };
 
