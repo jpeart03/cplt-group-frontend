@@ -20,18 +20,36 @@ const RecipientChart = () => {
       })
       setMessageArray(userMessages)
     }
+    if (authToken) {
+      if (messageArray.length == 0) {
+        getUserMessages()
+      }
+    }
+  }, []);
 
+  useEffect( () => {
     const getUserRecipients = async () => {
       let userRecipients = await fetchRecipientsByUser(authToken)
       setRecipients(userRecipients)
     }
-
     if (authToken) {
-      getUserMessages(authToken)
-      getUserRecipients();
-      setDataSet(finalData);
+      if (recipients.length == 0) {
+        getUserRecipients()
       }
-  }, [authToken]);
+    }
+  }, []);
+
+  useEffect( () => {
+    const getData = async () => {
+      const finalData = await buildDataArray()
+      setDataSet(finalData)
+    }
+    if (authToken) {
+      if (dataSet.length == 0) {
+        getData()
+      }
+    }
+  }, [dataSet]);
 
 
   const buildDataArray = () => {
@@ -62,15 +80,13 @@ const RecipientChart = () => {
       const messagedRecipients = getRecipientName(recipients)
 
       for (var u = 0; u <= messagedRecipients.length - 1; u++) {
-        dataArray.push({count: idMsgCount[messagedRecipients[u][0]], recipient: messagedRecipients[u][1]})
+        dataArray.push({recipient: messagedRecipients[u][1], count: idMsgCount[messagedRecipients[u][0]] })
       }
-      console.log("DATA", dataArray)
-      return dataArray;
+      return dataArray
     }
-    getCountByName()
+    const userDataArray = getCountByName()
+    return userDataArray
   }
-
-  const finalData = buildDataArray()
 
   const dataTest = [
     {
@@ -102,8 +118,6 @@ const RecipientChart = () => {
       count: 15,
     },
   ];
-
-
 
   return (
     <ResponsiveContainer height={500} width="100%">
