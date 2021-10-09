@@ -30,15 +30,23 @@ const GeneratePrompt = () => {
 
 
   return (
-    <>
+    <div style={{backgroundColor:"#eefdf7", padding:".5rem", marginBottom:"1rem"}}>
       <PromptBox/>
-      <Button style={{margin:'1rem'}} variant="success" onClick={() => {handleSubmit('Personal')}}>
+      <Button style={{
+        margin:'1rem', 
+        backgroundColor:'#3fc997',
+        borderColor:'#3fc997'}} 
+        variant="success" onClick={() => {handleSubmit('Personal')}}>
         Generate a Personal Prompt
       </Button>
-      <Button style={{margin:'1rem'}} variant="success" onClick={() => {handleSubmit('Professional')}}>
+      <Button style={{
+        margin:'1rem', 
+        backgroundColor:'#3fc997',
+        borderColor:'#3fc997'}}
+        variant="success" onClick={() => {handleSubmit('Professional')}}>
         Generate a Professional Prompt
       </Button>
-    </>
+    </div>
   )
   
 }
