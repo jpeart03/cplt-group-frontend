@@ -7,6 +7,7 @@ import { getSentimentAnalysis } from "../../api/textAnalysis";
 import LoadingButton from "../LoadingButton/LoadingButton";
 import "./NewMessageForm.scss";
 import { useAuth } from "../../contexts/AuthContext";
+import GeneratePrompt from "../Messages/GeneratePrompt";
 
 const NewMessageForm = ({
   recipients,
@@ -167,6 +168,7 @@ const NewMessageForm = ({
         />
       </Form.Group>
       {/* Message */}
+      <GeneratePrompt/>
       <Form.Group className="mb-3 sentiment-group" controlId="message">
         <Form.Label>Write your Appreciation Message</Form.Label>
         <Form.Control
@@ -193,6 +195,7 @@ const NewMessageForm = ({
         type="submit"
         loading={isLoading}
         text="Send"
+        style={{backgroundColor:'#00aced', borderColor:'#00aced'}}
       />
     </Form>
   );

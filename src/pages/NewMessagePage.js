@@ -61,13 +61,12 @@ const NewMessagePage = () => {
   return (
     <div className="message">
       <h3>Send an Appreciation Message</h3>
-      <GeneratePrompt/>
       <NewMessageForm
         recipients={recipients}
         historyStateRecipientId={historyStateRecipientId}
         handleSubmit={handleSubmit}
         isLoading={isLoading}
-      />
+        />
       <AppToast
         toastMessages={toastMessages}
         handleToastShow={handleToastShow}
