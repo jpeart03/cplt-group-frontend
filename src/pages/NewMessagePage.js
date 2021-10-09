@@ -10,7 +10,7 @@ import "./NewMessagePage.scss";
 import GeneratePrompt from "../components/Messages/GeneratePrompt.js"
 
 const NewMessagePage = () => {
-  const { authToken, currentUser, refreshUser } = useAuth();
+  const { authToken, currentUser, refreshUser, refreshUserData } = useAuth();
   const { toastMessages, handleToastShow, handleNewToast } = useToast();
   const location = useLocation();
   const historyStateRecipient = location.state?.recipient;
@@ -54,6 +54,8 @@ const NewMessagePage = () => {
       .finally(() => {
         setIsLoading(false);
         refreshUser();
+        console.log("REFRESHUSERDATA: ", refreshUserData)
+        console.log("authToken:: ", authToken)
         // maybe redirect here
       });
   };
@@ -61,13 +63,12 @@ const NewMessagePage = () => {
   return (
     <div className="message">
       <h3>Send an Appreciation Message</h3>
-      <GeneratePrompt/>
       <NewMessageForm
         recipients={recipients}
         historyStateRecipientId={historyStateRecipientId}
         handleSubmit={handleSubmit}
         isLoading={isLoading}
-      />
+        />
       <AppToast
         toastMessages={toastMessages}
         handleToastShow={handleToastShow}
