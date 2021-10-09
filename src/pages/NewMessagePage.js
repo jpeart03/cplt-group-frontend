@@ -7,6 +7,7 @@ import NewMessageForm from "../components/NewMessageForm/NewMessageForm";
 import AppToast from "../components/AppToast/AppToast";
 import { useToast } from "../hooks/AppHooks";
 import "./NewMessagePage.scss";
+import GeneratePrompt from "../components/Messages/GeneratePrompt.js"
 
 const NewMessagePage = () => {
   const { authToken, currentUser, refreshUser } = useAuth();
@@ -60,6 +61,7 @@ const NewMessagePage = () => {
   return (
     <div className="message">
       <h3>Send an Appreciation Message</h3>
+      <GeneratePrompt/>
       <NewMessageForm
         recipients={recipients}
         historyStateRecipientId={historyStateRecipientId}
