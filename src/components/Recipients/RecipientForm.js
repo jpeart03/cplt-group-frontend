@@ -3,11 +3,14 @@ import { Form } from "react-bootstrap";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useAuth } from "../../contexts/AuthContext";
+import { useToast } from "../../hooks/AppHooks";
 import { createNewRecipient, editRecipient } from "../../api/recipientCalls";
 import LoadingButton from "../LoadingButton/LoadingButton";
+import AppToast from "../AppToast/AppToast";
 
 const RecipientForm = ({ recipient, onRefresh, onDeleteRecipient }) => {
-  const { authToken, currentUser, refreshUser} = useAuth();
+  const { authToken, currentUser, refreshUser } = useAuth();
+  const { toastMessages, handleToastShow, handleNewToast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
 
   const initialRecipientValues = recipient
@@ -53,99 +56,107 @@ const RecipientForm = ({ recipient, onRefresh, onDeleteRecipient }) => {
       // added refreshUser so that on the dashboard the new Recipient will now show up in the dropdown without refreshing the page
       refreshUser();
       setIsLoading(false);
+      handleNewToast("Success", "Your recipient data was updated.");
     },
   });
 
   return (
-    <Form id="newRecForm" onSubmit={formik.handleSubmit}>
-      <Form.Group className="mb-3" controlId="email">
-        <Form.Label>Email address *</Form.Label>
-        <Form.Control
-          name="email"
-          type="email"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.email}
-          isInvalid={!!formik.errors.email && formik.touched.email}
-        />
-        <Form.Text className="text-muted">
-          We'll never share your recipient's email with anyone else.
-        </Form.Text>
-        <Form.Control.Feedback type="invalid">
-          {formik.errors.email}
-        </Form.Control.Feedback>
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="phone">
-        <Form.Label>Phone Number *</Form.Label>
-        <Form.Control
-          name="phone"
-          type="text"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.phone}
-          isInvalid={!!formik.errors.phone && formik.touched.phone}
-        />
-        <Form.Text className="text-muted">
-          We'll never share your recipient's phone number with anyone else.
-        </Form.Text>
-        <Form.Control.Feedback type="invalid">
-          {formik.errors.phone}
-        </Form.Control.Feedback>
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="firstName">
-        <Form.Label>First Name</Form.Label>
-        <Form.Control
-          name="firstName"
-          type="text"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.firstName}
-          isInvalid={!!formik.errors.firstName && formik.touched.firstName}
-        />
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="lastName">
-        <Form.Label>Last Name</Form.Label>
-        <Form.Control
-          name="lastName"
-          type="text"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.lastName}
-          isInvalid={!!formik.errors.lastName && formik.touched.lastName}
-        />
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="relationshipType">
-        <Form.Label>Relationship Type</Form.Label>
-        <Form.Select
-          name="relationshipType"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.relationshipType}
-          isInvalid={
-            !!formik.errors.relationshipType && formik.touched.relationshipType
-          }
-        >
-          <option value="Personal">Personal</option>
-          <option value="Professional">Professional</option>
-        </Form.Select>
-      </Form.Group>
-      <LoadingButton
-        className="me-2"
-        variant="primary"
-        type="submit"
-        text="Submit"
-        isLoading={isLoading}
-      />
-      {!!recipient && (
+    <>
+      <Form id="newRecForm" onSubmit={formik.handleSubmit}>
+        <Form.Group className="mb-3" controlId="email">
+          <Form.Label>Email address *</Form.Label>
+          <Form.Control
+            name="email"
+            type="email"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.email}
+            isInvalid={!!formik.errors.email && formik.touched.email}
+          />
+          <Form.Text className="text-muted">
+            We'll never share your recipient's email with anyone else.
+          </Form.Text>
+          <Form.Control.Feedback type="invalid">
+            {formik.errors.email}
+          </Form.Control.Feedback>
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="phone">
+          <Form.Label>Phone Number *</Form.Label>
+          <Form.Control
+            name="phone"
+            type="text"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.phone}
+            isInvalid={!!formik.errors.phone && formik.touched.phone}
+          />
+          <Form.Text className="text-muted">
+            We'll never share your recipient's phone number with anyone else.
+          </Form.Text>
+          <Form.Control.Feedback type="invalid">
+            {formik.errors.phone}
+          </Form.Control.Feedback>
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="firstName">
+          <Form.Label>First Name</Form.Label>
+          <Form.Control
+            name="firstName"
+            type="text"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.firstName}
+            isInvalid={!!formik.errors.firstName && formik.touched.firstName}
+          />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="lastName">
+          <Form.Label>Last Name</Form.Label>
+          <Form.Control
+            name="lastName"
+            type="text"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.lastName}
+            isInvalid={!!formik.errors.lastName && formik.touched.lastName}
+          />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="relationshipType">
+          <Form.Label>Relationship Type</Form.Label>
+          <Form.Select
+            name="relationshipType"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.relationshipType}
+            isInvalid={
+              !!formik.errors.relationshipType &&
+              formik.touched.relationshipType
+            }
+          >
+            <option value="Personal">Personal</option>
+            <option value="Professional">Professional</option>
+          </Form.Select>
+        </Form.Group>
         <LoadingButton
-          variant="danger"
-          type="button"
-          text="Delete Recipient"
-          onClick={onDeleteRecipient}
+          className="me-2"
+          variant="primary"
+          type="submit"
+          text="Submit"
           isLoading={isLoading}
         />
-      )}
-    </Form>
+        {!!recipient && (
+          <LoadingButton
+            variant="danger"
+            type="button"
+            text="Delete Recipient"
+            onClick={onDeleteRecipient}
+            isLoading={isLoading}
+          />
+        )}
+      </Form>
+      <AppToast
+        toastMessages={toastMessages}
+        handleToastShow={handleToastShow}
+      />
+    </>
   );
 };
 

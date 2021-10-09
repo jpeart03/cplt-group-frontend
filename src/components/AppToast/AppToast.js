@@ -1,11 +1,10 @@
 import { ToastContainer, Toast } from "react-bootstrap";
-import { useToast } from "../../hooks/AppHooks";
+import "./AppToast.scss";
 
-const AppToast = () => {
-  const { toastMessages, handleToastShow } = useToast();
+const AppToast = ({ toastMessages, handleToastShow }) => {
   return (
-    <ToastContainer position="top-end" className="p-3 mt-5">
-      {toastMessages &&
+    <ToastContainer className="app-toast">
+      {!!toastMessages &&
         toastMessages.map((toast, idx) => (
           <Toast
             key={idx}
@@ -14,12 +13,16 @@ const AppToast = () => {
             delay={3000}
             autohide
           >
-            <Toast.Header>
-              <strong>{toast.status}</strong>
+            <Toast.Header
+              className={
+                toast.status === "Success"
+                  ? "app-toast-header__green"
+                  : "app-toast-header__red"
+              }
+            >
+              <strong className="me-auto">{toast.status}</strong>
             </Toast.Header>
-            <Toast.Body>
-              {toast.message} {idx}
-            </Toast.Body>
+            <Toast.Body className="app-toast-body">{toast.message}</Toast.Body>
           </Toast>
         ))}
     </ToastContainer>
