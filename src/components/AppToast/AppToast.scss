@@ -1,0 +1,13 @@
+.app-toast {
+  position: fixed;
+  top: 5rem;
+  right: 1rem;
+  &-header {
+    &__green {
+      color: #198754 !important;
+    }
+    &__red {
+      color: #dc3545 !important;
+    }
+  }
+}

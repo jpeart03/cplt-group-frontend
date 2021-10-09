@@ -4,11 +4,14 @@ import { useAuth } from "../contexts/AuthContext";
 import { fetchRecipientsByUser } from "../api/recipientCalls";
 import { sendNewMessage } from "../api/messageCalls";
 import NewMessageForm from "../components/NewMessageForm/NewMessageForm";
+import AppToast from "../components/AppToast/AppToast";
+import { useToast } from "../hooks/AppHooks";
 import "./NewMessagePage.scss";
 import GeneratePrompt from "../components/Messages/GeneratePrompt.js"
 
 const NewMessagePage = () => {
   const { authToken, currentUser, refreshUser } = useAuth();
+  const { toastMessages, handleToastShow, handleNewToast } = useToast();
   const location = useLocation();
   const historyStateRecipient = location.state?.recipient;
 
@@ -39,12 +42,18 @@ const NewMessagePage = () => {
       send_sms: false, // CHANGE THIS TO STATE VALUE TO SEND
       user: currentUser.id,
     })
+      .then((msg) => {
+        handleNewToast("Success", "Your message was sent.");
+      })
       .catch((error) => {
-        console.log(error);
+        handleNewToast(
+          "Failed",
+          "Your message failed to send. Please try again later."
+        );
       })
       .finally(() => {
         setIsLoading(false);
-        refreshUser()
+        refreshUser();
         // maybe redirect here
       });
   };
@@ -58,6 +67,10 @@ const NewMessagePage = () => {
         historyStateRecipientId={historyStateRecipientId}
         handleSubmit={handleSubmit}
         isLoading={isLoading}
+      />
+      <AppToast
+        toastMessages={toastMessages}
+        handleToastShow={handleToastShow}
       />
     </div>
   );

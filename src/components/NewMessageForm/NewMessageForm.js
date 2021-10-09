@@ -16,7 +16,6 @@ const NewMessageForm = ({
 }) => {
   const [sentiment, setSentiment] = useState("neutral");
   const [sentimentLoading, setSentimentLoading] = useState(false);
-  const { refreshUser } = useAuth();
 
   const formik = useFormik({
     enableReinitialize: true,
@@ -27,7 +26,13 @@ const NewMessageForm = ({
       message: "",
     },
     validationSchema: Yup.object({
-      recipientId: Yup.number().required("You must choose a recipient"),
+      recipientId: Yup.number()
+        .required("You must choose a recipient")
+        .test(
+          "Is positive?",
+          "You must choose a recipient",
+          (value) => value > 0
+        ),
       email: Yup.boolean(),
       sms: Yup.boolean(),
       message: Yup.string()
@@ -43,13 +48,21 @@ const NewMessageForm = ({
             "sms"
           );
     }),
-    onSubmit: (values) => {
+    onSubmit: (values, { resetForm }) => {
       handleSubmit(
         values.recipientId,
         values.message,
         values.email,
         values.sms
       );
+      resetForm({
+        initialValues: {
+          recipientId: historyStateRecipientId,
+          email: false,
+          sms: false,
+          message: "",
+        },
+      });
     },
   });
 
@@ -110,10 +123,10 @@ const NewMessageForm = ({
           name="recipientId"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          value={formik.values.recipientId}
+          value={formik.values.recipientId || 0}
           isInvalid={!!formik.errors.recipientId && formik.touched.recipientId}
         >
-          <option value="">Select a message recipient</option>
+          <option value={0}>Select a message recipient</option>
           {recipients &&
             recipients.map((recipient) => (
               <option key={recipient.id} value={recipient.id}>
@@ -133,6 +146,7 @@ const NewMessageForm = ({
           label="Email"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
+          checked={formik.values.email}
           isInvalid={
             // checking for custom sms error logic defined by "oneChecked" Yup test
             !!formik.errors.sms && (formik.touched.sms || formik.touched.email)
@@ -144,6 +158,7 @@ const NewMessageForm = ({
           label="Text Message"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
+          checked={formik.values.sms}
           feedback={formik.errors.sms}
           isInvalid={
             // checking for custom sms error logic defined by "oneChecked" Yup test
