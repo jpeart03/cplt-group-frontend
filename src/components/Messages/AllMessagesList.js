@@ -25,9 +25,9 @@ const AllMessagesList = ({messages}) => {
 
   const Messages = () => {
     if (messageArray){
-      // sort the message array by date (not including time):
-      // messageArray.sort((a,b) => Date.parse(b.send_date.split(' ')[0]) - Date.parse(a.send_date.split(' ')[0]))
-
+      if (messageArray.length === 0){
+        return <h6>No Messages to Display</h6>
+      } else {
       // Sort message Array by ID, decending
       messageArray.sort((a,b) => b.id - a.id)
     
@@ -37,7 +37,8 @@ const AllMessagesList = ({messages}) => {
             <MessageDetail key={`recent-mess-${index}`} messageObj={message}/>
           )})
         }
-    else return null
+        }
+    else return <h6>Loading...</h6>
   }
 
   return(

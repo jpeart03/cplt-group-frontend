@@ -26,7 +26,7 @@ const NewMessagePage = () => {
     if (authToken) {
       getRecipients();
     }
-  }, [authToken, historyStateRecipient]);
+  }, [authToken, historyStateRecipient, currentUser]);
 
   const handleSubmit = (recipientId, message, email, sms) => {
     setIsLoading(true);

@@ -41,42 +41,46 @@ const RecentRecipients = () => {
     if (authToken) {
       getUserRecords();
     }
-  }, [authToken, , currentUser]);
+  }, [authToken, currentUser]);
 
   if (recRecObjs) {
-    return (
-      <div style={{marginBottom:"3rem"}}>
-        <h3>Recently Messaged Recipients: </h3>
-        <ListGroup variant="flush">
-          {recRecObjs.map((recipient) => {
-            const newRecipientMessage = {
-              pathname: "/newmessage",
-              state: { recipient: recipient },
-            };
-            return (
-              // <div style={{display:"flex",  alignItems:"center"}}>
-              <ListGroup.Item
-                key={recipient.id}
-                style={{ display: "flex", alignItems: "center" }}
-              >
-                <h6 style={{ width: "20%" }}>
-                  {recipient.first_name} {recipient.last_name}{" "}
-                </h6>
-                <Button
-                  size="sm"
-                  variant="primary"
-                  as={Link}
-                  to={newRecipientMessage}
+    if (recRecObjs.length === 0){
+      return null
+    } else {
+      return (
+        <div style={{marginBottom:"3rem"}}>
+          <h3>Recently Messaged Recipients: </h3>
+          <ListGroup variant="flush">
+            {recRecObjs.map((recipient) => {
+              const newRecipientMessage = {
+                pathname: "/newmessage",
+                state: { recipient: recipient },
+              };
+              return (
+                // <div style={{display:"flex",  alignItems:"center"}}>
+                <ListGroup.Item
+                  key={recipient.id}
+                  style={{ display: "flex", alignItems: "center" }}
                 >
-                  Write {recipient.first_name} a new Message
-                </Button>
-              </ListGroup.Item>
-              // </div>
-            );
-          })}
-        </ListGroup>
-      </div>
-    );
+                  <h6 style={{ width: "20%" }}>
+                    {recipient.first_name} {recipient.last_name}{" "}
+                  </h6>
+                  <Button
+                    size="sm"
+                    variant="primary"
+                    as={Link}
+                    to={newRecipientMessage}
+                  >
+                    Write {recipient.first_name} a new Message
+                  </Button>
+                </ListGroup.Item>
+                // </div>
+              );
+            })}
+          </ListGroup>
+        </div>
+      );
+    }
   } else {
     return (
       <div>

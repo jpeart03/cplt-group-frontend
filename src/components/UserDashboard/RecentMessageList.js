@@ -23,22 +23,23 @@ const RecentMessagesList = () => {
 
   const Messages = () => {
     if (messageArray){
-      // sort the message array by date (not including time):
-      // messageArray.sort((a,b) =>  
-      //   Date.parse(b.send_date.split(' ')[0]) - Date.parse(a.send_date.split(' ')[0])
-      // )
-
-      // Sort message Array by ID, decending
-      messageArray.sort((a,b) => b.id - a.id)
-
-      // truncate the array to the most recent 4 messages
-      const slicedArray = messageArray.slice(0, 4)
-      return slicedArray.map((message, index) => {
-        return (
-            <MessageDetail key={`recent-mess-${index}`} messageObj={message}/>
-          )})
+      if (messageArray.length === 0){
+        return <h6>No Messages to Display</h6>
+      } else {
+        // Sort message Array by ID, decending
+        messageArray.sort((a,b) => b.id - a.id)
+  
+        // truncate the array to the most recent 4 messages
+        const slicedArray = messageArray.slice(0, 4)
+        return slicedArray.map((message, index) => {
+          return (
+              <MessageDetail key={`recent-mess-${index}`} messageObj={message}/>
+            )})
+      }
         }
-    else return null
+    else {
+      return <h6>Loading ...</h6>}
+    
   }
 
   return(
