@@ -24,26 +24,30 @@ import TrophyInfo from "./TrophyInfo.js"
 
     if (userAchBoolArray){
       // console.log(currentUser)
-      return (
-        userAchBoolArray.map((boolValue, index) => {
-          if (boolValue){
-            let xTrophy = trophyObjsArray[index]
-            // let xImage= trophyObjects[index]["achImage"]
-            let xImage = xTrophy.achImage
-            let xName = xTrophy.achName
-            let xDesc = xTrophy.achDesc
-            return (
-              <AchievementCard achImage={xImage} achName={xName} achDesc={xDesc}/>
-              )
+      if (userAchBoolArray.includes(true)){
+        return (
+          userAchBoolArray.map((boolValue, index) => {
+            if (boolValue){
+              let xTrophy = trophyObjsArray[index]
+              // let xImage= trophyObjects[index]["achImage"]
+              let xImage = xTrophy.achImage
+              let xName = xTrophy.achName
+              let xDesc = xTrophy.achDesc
+              return (
+                <AchievementCard achImage={xImage} achName={xName} achDesc={xDesc}/>
+                )
+              }
+              else return null
             }
-            else return null
-          }
-          )
-          )
-    }
-    else return(<p>Loading...</p>)
-        
+            )
+            )
+        }
+      else {
+        return <h6>You have not earned any trophies yet</h6>
       }
+    } 
+  else return(<p>Loading...</p>)
+  }
       
   const UserAchievements = () => {
 
@@ -70,10 +74,10 @@ const TrophyCase = () => {
       <>
         <div className="trophy-case-box">
           <UserAchievements/>
-        </div>
-        <Button variant="primary" onClick={handleShow} style={{marginTop:"1.5rem"}}>
+        <Button variant="secondary" onClick={handleShow} style={{margin:"1.5rem auto 1rem auto", display:"flex"}}>
         See All Available Trophies
       </Button>
+        </div>
 
       <Modal show={infoModalShow} onHide={handleClose}>
         <Modal.Header closeButton>
