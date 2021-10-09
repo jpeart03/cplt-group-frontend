@@ -63,7 +63,7 @@ let trophyObjsArray = [
 
   // 12
   {"achName": "Hope Their Phone is in Sleep Mode",
- " achImage":  blueTrophy,
+  "achImage":  darkblueTrophy,
   "achDesc": "Send a message between 12:00 am and 5:00 am"},
 
   // 13
@@ -92,20 +92,20 @@ let trophyObjsArray = [
   "achImage": plainGoldTrophyImg,
   "achDesc": 'Create 100 "Professional" recipient'},
 
-  // 18
-  {"achName": "Sentimental",
-  "achImage":  darkblueTrophy,
-  "achDesc": "Visit the message history page"},
+  // // 18
+  // {"achName": "Sentimental",
+  // "achImage":  darkblueTrophy,
+  // "achDesc": "Visit the message history page"},
 
   // 19
   {"achName": "What Year Is It?!?",
   "achImage":  blueTrophy,
-  "achDesc": 'Send a message to an "@aol.com" or "@yahoo.com" email address'},
+  "achDesc": 'Send a message to an "@aol.com", "@hotmail", or "@yahoo.com" email address'},
 
-  // 20
-  {"achName": "Haha - NERD!!!",
-  "achImage":  blueTrophy,
-  "achDesc": "Check the analytics page"},
+  // // 20
+  // {"achName": "Haha - NERD!!!",
+  // "achImage":  blueTrophy,
+  // "achDesc": "Check the analytics page"},
 
   // 21
   {"achName": "Old School",

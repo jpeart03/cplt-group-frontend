@@ -3,6 +3,12 @@ import { Link } from "react-router-dom";
 import LoadingButton from "../LoadingButton/LoadingButton";
 import { useHistory } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faComment,
+  faUser,
+  faTachometerAlt,
+} from "@fortawesome/free-solid-svg-icons";
 import "./AppNav.scss";
 
 const AppNav = () => {
@@ -10,7 +16,6 @@ const AppNav = () => {
   let history = useHistory();
 
   const handleLogout = () => {
-    // TODO: consider adding a dialog box to prevent accidentally logging out
     logout();
     history.push("/");
   };
@@ -21,18 +26,18 @@ const AppNav = () => {
         <>
           <Nav className="me-auto">
             <Nav.Link as={Link} to="/dashboard">
+              <FontAwesomeIcon icon={faTachometerAlt} className="me-2" />
               My Dashboard
             </Nav.Link>
-            <Nav.Link as={Link} to="/recipients">
-              My Recipients
-            </Nav.Link>
             <Nav.Link as={Link} to="/newmessage">
+              <FontAwesomeIcon icon={faComment} className="me-2" />
               New Message
             </Nav.Link>
           </Nav>
           <Nav>
             <Navbar.Text className="me-3">
-              Welcome, {currentUser.email}
+              <FontAwesomeIcon icon={faUser} className="me-2" />
+              {currentUser.email}
             </Navbar.Text>
             <LoadingButton
               text="Log out"
@@ -78,7 +83,7 @@ const AppNav = () => {
       >
         <Container>
           <Navbar.Brand as={Link} to="/">
-            Appreciation
+            Appreciation Notes
           </Navbar.Brand>
           <Navbar.Toggle />
           <Navbar.Collapse

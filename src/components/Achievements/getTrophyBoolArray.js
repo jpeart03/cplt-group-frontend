@@ -19,18 +19,19 @@ let getTrophyBoolArray= (currentUser) => {
     "networking_1",
     "networking_2",
     "networking_3",
-    "sentimental",
+    // "sentimental",
     "what_year_is_it",
-    "nerd",
+    // "nerd",
     "old_school"
     ]
   
   let xboolarr= achievementKeys.map((key, index) => {
     trophyBoolArray.push(currentUser[key])
   })
-  console.log(xboolarr)
+  // console.log(xboolarr)
+  // console.log(currentUser)
 
-  console.log(trophyBoolArray)
+  // console.log(trophyBoolArray)
   return trophyBoolArray
 }
 
