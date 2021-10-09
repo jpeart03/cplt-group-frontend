@@ -1,6 +1,7 @@
 import fetchPrompt from "../../api/prompts";
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Button } from 'react-bootstrap'
+
 
 const GeneratePrompt = () => {
   const [prompt, setPrompt] = useState();
@@ -27,7 +28,7 @@ const GeneratePrompt = () => {
     else return (<p>Need Some Inspiration?</p>)
   }
 
-
+  
 
   return (
     <div style={{backgroundColor:"#eefdf7", padding:".5rem", marginBottom:"1rem"}}>
