@@ -53,6 +53,8 @@ const RecipientForm = ({ recipient, onRefresh, onDeleteRecipient }) => {
       // added refreshUser so that on the dashboard the new Recipient will now show up in the dropdown without refreshing the page
       refreshUser();
       setIsLoading(false);
+      
+      // clear the form ***
     },
   });
 
