@@ -1,0 +1,87 @@
+.section {
+  margin: 7rem 0;
+
+  h2 {
+    font-size: 2.25rem;
+  }
+  p {
+    font-size: 1.25rem;
+  }
+  &:not(:first-of-type) {
+    margin: 10rem 0;
+  }
+  &:last-of-type {
+    margin-bottom: 15rem;
+  }
+
+  &-hero {
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+    }
+    p {
+      margin-bottom: 1.5rem;
+    }
+    .btn.btn-primary {
+      font-size: 1.25rem;
+    }
+  }
+
+  &-demo {
+    .graphic {
+      background-image: url("/images/chat-bubble.svg");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+    }
+    img {
+      width: 100%;
+      display: block;
+      margin: 0 auto;
+      max-width: 318px;
+    }
+  }
+
+  &-data {
+    .text {
+      display: flex;
+      flex-wrap: wrap;
+      align-content: center;
+      justify-content: flex-start;
+      margin-top: 2rem;
+    }
+  }
+}
+
+.color {
+  &__green {
+    color: #198754;
+  }
+  &__indigo {
+    color: #6610f2;
+  }
+  &__purple {
+    color: #6f42c1;
+  }
+  &__teal {
+    color: #20c997;
+  }
+  &__cyan {
+    color: #0dcaf0;
+  }
+}
+
+@media (min-width: 992px) {
+  .section {
+    &-data {
+      .text {
+        margin-top: 0;
+      }
+    }
+    &-demo {
+      img {
+        max-width: 546px;
+      }
+    }
+  }
+}
