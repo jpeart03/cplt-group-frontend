@@ -74,7 +74,7 @@ const Home = () => {
       <section className="section section-cloud">
         <Row>
           <Col lg={12} className="text-center">
-            <h2>What our users are saying...</h2>
+            <h2>What our users are saying!</h2>
             <WordCloud />
           </Col>
         </Row>

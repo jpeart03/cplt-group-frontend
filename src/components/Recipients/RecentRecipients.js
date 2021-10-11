@@ -15,11 +15,10 @@ const RecentRecipients = () => {
   const { authToken, currentUser } = useAuth();
 
   const findRecentRecipients = async (messages) => {
+    const unique = [...new Set(messages.map((item) => item.recipient))];
+    const slicedIDArray = unique.slice(0, 4);
+    setRecipientIDs(slicedIDArray);
 
-    const unique = [...new Set(messages.map(item => item.recipient))]
-    const slicedIDArray = unique.slice(0, 4)
-    setRecipientIDs(slicedIDArray)
-    
     // get the user objects by id
 
     let recentRecipientObjs = await fetchRecipientsByIDs(
@@ -44,12 +43,12 @@ const RecentRecipients = () => {
   }, [authToken, currentUser]);
 
   if (recRecObjs) {
-    if (recRecObjs.length === 0){
-      return null
+    if (recRecObjs.length === 0) {
+      return null;
     } else {
       return (
-        <div style={{marginBottom:"3rem"}}>
-          <h3>Recently Messaged Recipients: </h3>
+        <div style={{ marginBottom: "3rem" }}>
+          <h3>Recent Recipients: </h3>
           <ListGroup variant="flush">
             {recRecObjs.map((recipient) => {
               const newRecipientMessage = {
@@ -67,7 +66,7 @@ const RecentRecipients = () => {
                   </h6>
                   <Button
                     size="sm"
-                    variant="primary"
+                    variant="link"
                     as={Link}
                     to={newRecipientMessage}
                   >

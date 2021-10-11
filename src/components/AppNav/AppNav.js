@@ -9,6 +9,7 @@ import {
   faUser,
   faTachometerAlt,
 } from "@fortawesome/free-solid-svg-icons";
+import noteLogo from "../../images/note-logo.svg";
 import "./AppNav.scss";
 
 const AppNav = () => {
@@ -83,6 +84,13 @@ const AppNav = () => {
       >
         <Container>
           <Navbar.Brand as={Link} to="/">
+            <img
+              alt="Logo"
+              src={noteLogo}
+              width="30"
+              height="30"
+              className="me-2"
+            />{" "}
             Appreciation Notes
           </Navbar.Brand>
           <Navbar.Toggle />

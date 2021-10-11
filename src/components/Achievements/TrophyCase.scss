@@ -1,18 +1,37 @@
 .trophy-case-box {
-  border: ridge 6px #9c7550;
-  padding: 3em 0;
-  background-color:rgb(219, 216, 212);
-  // display: flex;
-  // flex-direction: row;
-  // justify-content: space-around;
-  // padding: 1em auto;
-  // flex-wrap: wrap;
-  // justify-content: flex-start;
+  position: relative;
+  padding: 3rem;
 
+  box-shadow: 0 2px 4px rgba(70, 80, 87, 0.3);
+  &:before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: "";
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    border-radius: 0.25rem;
+    background-color: rgba(255, 255, 255, 0.8);
+    -webkit-backdrop-filter: blur(1rem); /* Safari 9+ */
+    backdrop-filter: blur(1rem); /* Chrome and Opera */
+  }
+  &:after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: "";
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    border-radius: 0.25rem;
+    background-image: url("../../images/note-logo.svg");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
 }
 
 .trophy-case-headline {
-  color: rgb(56, 56, 54);
   text-align: center;
-  // font-family: fantasy;
 }

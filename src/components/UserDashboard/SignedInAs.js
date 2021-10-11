@@ -13,18 +13,10 @@ const SignedInAs = () => {
     // console.log(currentUser);
     if (currentUser.first_name !== "") {
       let userFirstname = currentUser.first_name;
-      return (
-        <div style={{ display: "flex", justifyContent: "center", marginTop:"1.5rem", marginBottom:"1.5rem"}}>
-          <h3>Signed in as {userFirstname}</h3>
-        </div>
-      );
+      return <h1>Signed in as {userFirstname}</h1>;
     } else {
       let userEmail = currentUser.email;
-      return (
-        <div style={{ display: "flex", justifyContent: "center" }}>
-          <h3>Signed in as {userEmail}</h3>
-        </div>
-      );
+      return <h1>Signed in as {userEmail}</h1>;
     }
   } else {
     return <p>No User Signed In</p>;
