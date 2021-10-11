@@ -1,4 +1,11 @@
-import { LineChart, Line, CartesianGrid, XAxis, YAxis } from "recharts";
+import {
+  LineChart,
+  Line,
+  CartesianGrid,
+  XAxis,
+  YAxis,
+  ResponsiveContainer,
+} from "recharts";
 import { useState, useEffect } from "react";
 import { fetchMessagesByDay } from "../../api/messagesByDayCalls.js";
 import { useAuth } from "../../contexts/AuthContext.js";
@@ -18,20 +25,6 @@ const MessagesByDayChart = () => {
     }
   }, [authToken]);
 
-  const renderLineChart = (
-    <LineChart
-      width={600}
-      height={300}
-      data={messagesByDayData}
-      margin={{ top: 5, right: 20, bottom: 5, left: 0 }}
-    >
-      <Line type="monotone" dataKey="value" stroke="#00aced" />
-      <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-      <XAxis dataKey="name" />
-      <YAxis />
-    </LineChart>
-  );
-
   if (messagesByDayData) {
     // console.log("start MBDD", messagesByDayData)
 
@@ -50,8 +43,18 @@ const MessagesByDayChart = () => {
 
   return (
     <div>
-      <h2>Recent Message Activity</h2>
-      {renderLineChart}
+      <h3>Messages by day</h3>
+      <ResponsiveContainer width="100%" height={300}>
+        <LineChart
+          data={messagesByDayData}
+          margin={{ top: 5, right: 20, bottom: 5, left: 0 }}
+        >
+          <Line type="monotone" dataKey="value" stroke="#0d6efd" />
+          <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
+          <XAxis dataKey="name" />
+          <YAxis />
+        </LineChart>
+      </ResponsiveContainer>
     </div>
   );
 };

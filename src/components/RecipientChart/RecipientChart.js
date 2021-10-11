@@ -1,10 +1,19 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from "react";
 import { useAuth } from "../../contexts/AuthContext.js";
 import { fetchRecipientsByUser } from "../../api/recipientCalls";
 import { fetchMessagesByUser } from "../../api/messageCalls";
-import { UserMessages } from "../../components/Messages/AllMessagesList.js"
-import { RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, Legend, ResponsiveContainer, Tooltip, } from "recharts";
-import { messagesPerRecipient } from '../../api/messageCalls';
+import { UserMessages } from "../../components/Messages/AllMessagesList.js";
+import {
+  RadarChart,
+  PolarGrid,
+  PolarAngleAxis,
+  PolarRadiusAxis,
+  Radar,
+  Legend,
+  ResponsiveContainer,
+  Tooltip,
+} from "recharts";
+import { messagesPerRecipient } from "../../api/messageCalls";
 
 const RecipientChart = () => {
   const [messageArray, setMessageArray] = useState([]);
@@ -12,12 +21,12 @@ const RecipientChart = () => {
   const [dataSet, setDataSet] = useState([]);
   const { authToken, refreshUserData } = useAuth();
 
-  useEffect( () => {
-    const getDataset = async() => {
-      setDataSet(await messagesPerRecipient(authToken))
-    }
-    getDataset()
-  }, [authToken, refreshUserData])
+  useEffect(() => {
+    const getDataset = async () => {
+      setDataSet(await messagesPerRecipient(authToken));
+    };
+    getDataset();
+  }, [authToken, refreshUserData]);
 
   // useEffect( () => {
   //   console.log("RUN useEffect #1", refreshUserData)
@@ -61,7 +70,6 @@ const RecipientChart = () => {
   //   }
   // }, [dataSet]);
 
-
   // const buildDataArray = () => {
   //   const dataArray = []
 
@@ -72,12 +80,12 @@ const RecipientChart = () => {
   //     }
   //     return userArray
   //   }
-  
+
   //   const getRecipientMsgCount = (messages) => {
   //     let userMsgCount = []
   //     for (var u = 0; u <= messages.length - 1; u++) {
   //       if (messages[u].recipient in userMsgCount) {
-  //         userMsgCount[messages[u].recipient] += 1 
+  //         userMsgCount[messages[u].recipient] += 1
   //       } else {
   //         userMsgCount[messages[u].recipient] = 1
   //       }
@@ -130,25 +138,28 @@ const RecipientChart = () => {
   // ];
 
   return (
-    <ResponsiveContainer height={500} width="100%">
-      <RadarChart
-        outerRadius="80%"
-        data={dataSet}
-        margin={{ top: 0, right: 10, bottom: 0, left: 10 }}
-      >
-        <PolarGrid />
-        <PolarAngleAxis dataKey="recipient" />
-        <Radar
-          name="Message Count"
-          dataKey="count"
-          stroke="#0d6efd"
-          fill="#0d6efd"
-          fillOpacity={0.6}
-        />
-        <Legend />
-        <Tooltip />
-      </RadarChart>
-    </ResponsiveContainer>
+    <div>
+      <h3>Messages by recipient</h3>
+      <ResponsiveContainer height={300} width="100%">
+        <RadarChart
+          outerRadius="90%"
+          data={dataSet}
+          margin={{ top: 0, right: 10, bottom: 0, left: 10 }}
+        >
+          <PolarGrid />
+          <PolarAngleAxis dataKey="recipient" />
+          <Radar
+            name="Message Count"
+            dataKey="count"
+            stroke="#0d6efd"
+            fill="#0d6efd"
+            fillOpacity={0.6}
+          />
+          <Legend />
+          <Tooltip />
+        </RadarChart>
+      </ResponsiveContainer>
+    </div>
   );
 };
 
