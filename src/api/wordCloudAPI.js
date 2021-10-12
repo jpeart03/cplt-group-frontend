@@ -4,8 +4,15 @@ const wordCloudAPI = (words) => {
   return fetch(`https://quickchart.io/wordcloud?text=${words}`, {});
 };
 
-const wordList = () => {
-  return fetch(`${apiUrl}/word_count/`).then((response) => response.json());
+const wordList = async () => {
+  try {
+    return await fetch(`${apiUrl}/word_count/`).then((response) =>
+      response.json()
+    );
+  } catch (error) {
+    console.log(error);
+    return [];
+  }
 };
 
 export { wordCloudAPI, wordList };
