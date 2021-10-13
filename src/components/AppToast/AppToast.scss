@@ -2,6 +2,7 @@
   position: fixed;
   top: 5rem;
   right: 1rem;
+  z-index: 1000;
   &-header {
     &__green {
       color: #198754 !important;

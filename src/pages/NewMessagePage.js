@@ -7,7 +7,7 @@ import NewMessageForm from "../components/NewMessageForm/NewMessageForm";
 import AppToast from "../components/AppToast/AppToast";
 import { useToast } from "../hooks/AppHooks";
 import "./NewMessagePage.scss";
-import GeneratePrompt from "../components/Messages/GeneratePrompt.js"
+import GeneratePrompt from "../components/Messages/GeneratePrompt.js";
 
 const NewMessagePage = () => {
   const { authToken, currentUser, refreshUser, refreshUserData } = useAuth();
@@ -38,8 +38,8 @@ const NewMessagePage = () => {
     sendNewMessage(authToken, {
       recipient: recipientId,
       content: message,
-      send_email: false, // CHANGE THIS TO STATE VALUE TO SEND
-      send_sms: false, // CHANGE THIS TO STATE VALUE TO SEND
+      send_email: email,
+      send_sms: sms,
       user: currentUser.id,
     })
       .then((msg) => {
@@ -54,8 +54,8 @@ const NewMessagePage = () => {
       .finally(() => {
         setIsLoading(false);
         refreshUser();
-        console.log("REFRESHUSERDATA: ", refreshUserData)
-        console.log("authToken:: ", authToken)
+        console.log("REFRESHUSERDATA: ", refreshUserData);
+        console.log("authToken:: ", authToken);
         // maybe redirect here
       });
   };
@@ -68,7 +68,7 @@ const NewMessagePage = () => {
         historyStateRecipientId={historyStateRecipientId}
         handleSubmit={handleSubmit}
         isLoading={isLoading}
-        />
+      />
       <AppToast
         toastMessages={toastMessages}
         handleToastShow={handleToastShow}
